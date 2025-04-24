@@ -1,0 +1,73 @@
+##############
+# Build output
+##############
+bin/
+obj/
+out/
+build/
+dist/
+
+###############
+# User-specific files
+###############
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+###################
+# OS junk files
+###################
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+###################
+# Log files
+###################
+*.log
+
+##############################
+# .NET Core / ASP.NET Core
+##############################
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nuget.props
+*.nuget.targets
+*.nupkg
+*.snupkg
+
+###################
+# Entity Framework
+###################
+**/Migrations/*.Designer.cs
+**/Migrations/*.csproj
+**/Migrations/obj/
+
+###################
+# Node.js / Angular
+###################
+Client/node_modules/
+Client/dist/
+Client/.angular/
+Client/.cache/
+Client/package-lock.json
+Client/npm-debug.log
+Client/yarn-error.log
+
+#####################
+# Environment Secrets
+#####################
+.env
+.env.local
+secrets.json
+
+#####################
+# Rider / VSCode
+#####################
+.idea/
+.vscode/
