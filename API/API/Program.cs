@@ -55,7 +55,7 @@ namespace API
                    {
                        var secretKey = builder.Configuration["JwtSettings:Key"] ?? throw new Exception("JWT Key not found!");
                        var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-                        Console.WriteLine($"Key is: {secretKey}");
+
                        options.TokenValidationParameters = new TokenValidationParameters
                        {
                            ValidateIssuer = true,
