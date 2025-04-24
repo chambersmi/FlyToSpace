@@ -1,0 +1,492 @@
+2025-04-24 12:20:22.448 -04:00 [INF] Starting up application...
+2025-04-24 12:20:23.011 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 38
+2025-04-24 12:20:26.545 -04:00 [INF] Starting up application...
+2025-04-24 12:20:26.658 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 38
+2025-04-24 12:20:54.061 -04:00 [INF] Starting up application...
+2025-04-24 12:20:54.156 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 38
+2025-04-24 12:21:01.888 -04:00 [INF] Starting up application...
+2025-04-24 12:21:02.003 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 38
+2025-04-24 12:21:14.787 -04:00 [INF] Starting up application...
+2025-04-24 12:21:14.887 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 38
+2025-04-24 12:21:22.388 -04:00 [INF] Starting up application...
+2025-04-24 12:29:24.224 -04:00 [INF] Starting up application...
+2025-04-24 12:29:24.558 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: AddEntityFrameworkStores can only be called with a user that derives from IdentityUser<TKey>.
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddStores(IServiceCollection services, Type userType, Type roleType, Type contextType)
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores[TContext](IdentityBuilder builder)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 39
+2025-04-24 12:30:30.249 -04:00 [INF] Starting up application...
+2025-04-24 12:30:30.614 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: AddEntityFrameworkStores can only be called with a user that derives from IdentityUser<TKey>.
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddStores(IServiceCollection services, Type userType, Type roleType, Type contextType)
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores[TContext](IdentityBuilder builder)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 39
+2025-04-24 12:35:16.490 -04:00 [INF] Starting up application...
+2025-04-24 12:35:16.565 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: AddEntityFrameworkStores can only be called with a user that derives from IdentityUser<TKey>.
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddStores(IServiceCollection services, Type userType, Type roleType, Type contextType)
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores[TContext](IdentityBuilder builder)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 40
+2025-04-24 12:35:53.129 -04:00 [INF] Starting up application...
+2025-04-24 12:35:53.208 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: AddEntityFrameworkStores can only be called with a user that derives from IdentityUser<TKey>.
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddStores(IServiceCollection services, Type userType, Type roleType, Type contextType)
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores[TContext](IdentityBuilder builder)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 40
+2025-04-24 12:36:12.617 -04:00 [INF] Starting up application...
+2025-04-24 12:36:12.693 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: AddEntityFrameworkStores can only be called with a user that derives from IdentityUser<TKey>.
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddStores(IServiceCollection services, Type userType, Type roleType, Type contextType)
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores[TContext](IdentityBuilder builder)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 40
+2025-04-24 12:38:42.559 -04:00 [INF] Starting up application...
+2025-04-24 12:38:42.629 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: AddEntityFrameworkStores can only be called with a user that derives from IdentityUser<TKey>.
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddStores(IServiceCollection services, Type userType, Type roleType, Type contextType)
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores[TContext](IdentityBuilder builder)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 43
+2025-04-24 12:45:38.449 -04:00 [INF] Starting up application...
+2025-04-24 12:45:38.520 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: AddEntityFrameworkStores can only be called with a role that derives from IdentityRole<TKey>.
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddStores(IServiceCollection services, Type userType, Type roleType, Type contextType)
+   at Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores[TContext](IdentityBuilder builder)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 43
+2025-04-24 12:47:20.860 -04:00 [INF] Starting up application...
+2025-04-24 12:47:20.965 -04:00 [FTL] Application failed on startup.
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: API.Application.Services.IAuthService Lifetime: Scoped ImplementationType: API.Application.Services.AuthService': Unable to resolve service for type 'API.Application.Services.ITokenService' while attempting to activate 'API.Application.Services.AuthService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: API.Application.Services.IAuthService Lifetime: Scoped ImplementationType: API.Application.Services.AuthService': Unable to resolve service for type 'API.Application.Services.ITokenService' while attempting to activate 'API.Application.Services.AuthService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'API.Application.Services.ITokenService' while attempting to activate 'API.Application.Services.AuthService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 50
+2025-04-24 12:48:18.017 -04:00 [INF] Starting up application...
+2025-04-24 12:48:18.122 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 51
+2025-04-24 12:48:59.265 -04:00 [INF] Starting up application...
+2025-04-24 12:48:59.385 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 51
+2025-04-24 12:49:06.548 -04:00 [INF] Starting up application...
+2025-04-24 12:49:07.047 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: The service collection cannot be modified because it is read-only.
+   at Microsoft.Extensions.DependencyInjection.ServiceCollection.ThrowReadOnlyException()
+   at Microsoft.Extensions.DependencyInjection.ServiceCollection.System.Collections.Generic.ICollection<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>.Add(ServiceDescriptor item)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(IServiceCollection services, Type serviceType, Object implementationInstance)
+   at Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure[TOptions](IServiceCollection services, String name, Action`1 configureOptions)
+   at Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication(IServiceCollection services, Action`1 configureOptions)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 61
+2025-04-24 12:49:32.956 -04:00 [INF] Starting up application...
+2025-04-24 12:49:33.592 -04:00 [FTL] Application failed on startup.
+System.InvalidOperationException: The service collection cannot be modified because it is read-only.
+   at Microsoft.Extensions.DependencyInjection.ServiceCollection.ThrowReadOnlyException()
+   at Microsoft.Extensions.DependencyInjection.ServiceCollection.System.Collections.Generic.ICollection<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>.Add(ServiceDescriptor item)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(IServiceCollection services, Type serviceType, Object implementationInstance)
+   at Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure[TOptions](IServiceCollection services, String name, Action`1 configureOptions)
+   at Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication(IServiceCollection services, Action`1 configureOptions)
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 61
+2025-04-24 12:52:04.597 -04:00 [INF] Starting up application...
+2025-04-24 12:52:04.710 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 66
+2025-04-24 12:52:09.404 -04:00 [INF] Starting up application...
+2025-04-24 12:52:09.504 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 66
+2025-04-24 12:52:14.427 -04:00 [INF] Starting up application...
+2025-04-24 12:52:14.528 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 66
+2025-04-24 12:52:20.730 -04:00 [INF] Starting up application...
+2025-04-24 12:52:20.831 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 66
+2025-04-24 12:52:39.721 -04:00 [INF] Starting up application...
+2025-04-24 12:52:39.840 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 66
+2025-04-24 12:57:48.571 -04:00 [INF] Starting up application...
+2025-04-24 12:57:48.880 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 66
+2025-04-24 13:02:07.884 -04:00 [INF] Starting up application...
+2025-04-24 13:02:21.011 -04:00 [INF] Starting up application...
+2025-04-24 13:02:21.128 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:02:36.638 -04:00 [INF] Starting up application...
+2025-04-24 13:02:36.742 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:02:42.227 -04:00 [INF] Starting up application...
+2025-04-24 13:02:42.347 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:02:52.522 -04:00 [INF] Starting up application...
+2025-04-24 13:06:21.803 -04:00 [INF] Starting up application...
+2025-04-24 13:07:07.358 -04:00 [INF] Starting up application...
+2025-04-24 13:07:07.462 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:07:11.583 -04:00 [INF] Starting up application...
+2025-04-24 13:07:11.706 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:07:24.113 -04:00 [INF] Starting up application...
+2025-04-24 13:07:24.216 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:07:27.974 -04:00 [INF] Starting up application...
+2025-04-24 13:07:28.078 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:07:39.403 -04:00 [INF] Starting up application...
+2025-04-24 13:07:39.509 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:07:46.065 -04:00 [INF] Starting up application...
+2025-04-24 13:07:46.176 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:07:52.083 -04:00 [INF] Starting up application...
+2025-04-24 13:10:56.646 -04:00 [INF] Starting up application...
+2025-04-24 13:10:56.750 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:11:04.016 -04:00 [INF] Starting up application...
+2025-04-24 13:11:04.123 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:11:09.938 -04:00 [INF] Starting up application...
+2025-04-24 13:12:32.724 -04:00 [INF] Starting up application...
+2025-04-24 13:12:53.635 -04:00 [INF] Starting up application...
+2025-04-24 13:12:53.742 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:12:58.891 -04:00 [INF] Starting up application...
+2025-04-24 13:12:58.993 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:13:51.474 -04:00 [INF] Starting up application...
+2025-04-24 13:13:51.577 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:13:57.511 -04:00 [INF] Starting up application...
+2025-04-24 13:13:57.622 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:15:16.985 -04:00 [INF] Starting up application...
+2025-04-24 13:15:17.093 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:15:24.634 -04:00 [INF] Starting up application...
+2025-04-24 13:15:24.766 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 13:15:33.154 -04:00 [INF] Starting up application...
+2025-04-24 14:28:53.990 -04:00 [INF] Starting up application...
+2025-04-24 14:42:57.752 -04:00 [INF] Starting up application...
+2025-04-24 14:45:52.678 -04:00 [INF] Starting up application...
+2025-04-24 14:45:52.809 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 69
+2025-04-24 14:54:46.667 -04:00 [INF] Starting up application...
+2025-04-24 14:54:46.779 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 77
+2025-04-24 14:55:07.018 -04:00 [INF] Starting up application...
+2025-04-24 14:55:07.131 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 78
+2025-04-24 14:55:14.492 -04:00 [INF] Starting up application...
+2025-04-24 14:55:14.617 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 78
+2025-04-24 14:55:22.762 -04:00 [INF] Starting up application...
+2025-04-24 14:55:22.878 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 78
+2025-04-24 14:56:36.488 -04:00 [INF] Starting up application...
+2025-04-24 14:57:54.236 -04:00 [INF] Starting up application...
+2025-04-24 15:04:23.617 -04:00 [INF] Starting up application...
+2025-04-24 15:04:24.038 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 74
+2025-04-24 15:04:25.662 -04:00 [INF] Starting up application...
+2025-04-24 15:04:25.795 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 74
+2025-04-24 15:04:29.907 -04:00 [INF] Starting up application...
+2025-04-24 15:04:30.025 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 74
+2025-04-24 15:04:42.620 -04:00 [INF] Starting up application...
+2025-04-24 15:04:42.722 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 74
+2025-04-24 15:04:48.041 -04:00 [INF] Starting up application...
+2025-04-24 15:04:48.149 -04:00 [FTL] Application failed on startup.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at API.Program.Main(String[] args) in U:\Development\FlyToSpace\API\API\Program.cs:line 74
+2025-04-24 15:04:56.326 -04:00 [INF] Starting up application...
