@@ -49,7 +49,7 @@ namespace API.Application.Services
             var result = await _userManager.CreateAsync(user, dto.Password);
             if(!result.Succeeded)
             {
-                _logger.LogError("Error: AuthService");
+                _logger.LogError($"Error occured during registration for user {dto.Email}\nErrors: {result.Errors.Select(e => e.Description)}");
                 return AuthResponseDto.Failure(result.Errors.Select(e => e.Description));
             }
 
@@ -64,18 +64,17 @@ namespace API.Application.Services
             var user = await _userManager.FindByEmailAsync(dto.Email);
             if(user == null)
             {
-                _logger.LogInformation($"Invalid email or password: {dto.Email}");
                 return AuthResponseDto.Failure("Invalid email or password.");
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
             if(!result.Succeeded)
-            {
-                _logger.LogInformation($"Invalid email or password: {dto.Email}");
+            {               
                 return AuthResponseDto.Failure("Invalid email or password.");
             }
 
             var token = _tokenService.CreateToken(user);
+            _logger.LogInformation($"User successfully created: {dto.Email}");
             return AuthResponseDto.Success(user, token);
         }
 

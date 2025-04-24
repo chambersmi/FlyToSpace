@@ -2,6 +2,7 @@
 using API.Application.Services;
 using API.Domains.Models;
 using API.Infrastructure;
+using API.Infrastructure.Data.Repositories;
 using API.Infrastructure.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -35,6 +36,9 @@ namespace API
                 // Add services to the container.
                 builder.Services.AddScoped<IAuthService, AuthService>();
                 builder.Services.AddScoped<ITokenService, TokenService>();
+                builder.Services.AddScoped<IUserRepository, UserRepository>();
+                builder.Services.AddScoped<IUserService, UserService>();
+                
 
                 // SQLite
                 builder.Services.AddDbContext<FTSDbContext>(options =>

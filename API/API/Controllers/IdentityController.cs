@@ -29,7 +29,7 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto dto)
+        public async Task<IActionResult> RegisterAsync(RegisterDto dto)
         {
             var result = await _authService.RegisterAsync(dto);
             if(result.isSuccessful)
@@ -42,7 +42,7 @@ namespace API.Controllers
 
         [Authorize]
         [HttpGet("currentUser")]
-        public async Task<IActionResult> GetCurrentUser()
+        public async Task<IActionResult> GetCurrentUserAsync()
         {
             var result = await _authService.GetCurrentUserAsync(User);
             if(result.isSuccessful)
