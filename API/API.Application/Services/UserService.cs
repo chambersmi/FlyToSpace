@@ -42,5 +42,24 @@ namespace API.Application.Services
 
             return userDTO;
         }
+
+        public async Task<UserRequestDto> GetUserByIdAsync(string id)
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+
+            var userDTO = new UserRequestDto
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Birthdate = user.Birthdate,
+                City = user.City,
+                State = user.State,
+                ZipCode = user.ZipCode,
+                PhoneNumber = user.PhoneNumber
+            };
+
+            return userDTO;
+        }
     }
 }

@@ -50,9 +50,6 @@ namespace API
                     .AddEntityFrameworkStores<FTSDbContext>()
                     .AddDefaultTokenProviders();
              
-
-                
-
                 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                    .AddJwtBearer(options =>
                    {

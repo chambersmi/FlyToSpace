@@ -20,11 +20,24 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        [HttpPost("GetAllUsers")]
+        [HttpGet("GetAllUsers")]
         public async Task<ActionResult<List<UserRequestDto>>> GetAllUsersAsync()
         {
             var users = await _userService.GetAllUsersAsync();
             return Ok(users);
+        }
+
+        [HttpGet("UserById/{id}")]
+        public async Task<ActionResult<UserRequestDto>> GetUserByIdAsync(string id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
     }
 }
