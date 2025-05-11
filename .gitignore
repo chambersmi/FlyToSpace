@@ -1,0 +1,9 @@
+# Ignore Visual Studio files
+.vs/
+*.vscode/
+bin/
+obj/
+node_modules/
+dist/
+tmp/
+package-lock.json
