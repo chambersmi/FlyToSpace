@@ -1,4 +1,7 @@
 
+using API.Infrastructure;
+using FastEndpoints;
+
 namespace API
 {
     public class Program
@@ -9,16 +12,27 @@ namespace API
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            // Add services and repositories
+            builder.Services.AddInfrastructure(builder.Configuration);
+
+            // Add Fast Endpoints
+            //builder.Services.AddFastEndpoints();
+
+            // Add Swagger
+            builder.Services.AddSwaggerDocument();
+
+            //builder.Services.AddControllers();
+
 
             var app = builder.Build();
+
+            //app.UseFastEndpoints();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                //app.MapOpenApi();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
@@ -26,7 +40,7 @@ namespace API
             app.UseAuthorization();
 
 
-            app.MapControllers();
+            //app.MapControllers();
 
             app.Run();
         }
