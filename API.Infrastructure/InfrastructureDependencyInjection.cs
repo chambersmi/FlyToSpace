@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Infrastructure
@@ -15,6 +16,11 @@ namespace API.Infrastructure
         /// <returns></returns>
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            // Add AppDbContext
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+            
+
             // Add Services and Repositories
 
             // AutoMapper

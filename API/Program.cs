@@ -1,6 +1,8 @@
 
+using API.Application.Mapping;
+using API.Domain.Entities;
 using API.Infrastructure;
-using FastEndpoints;
+using Microsoft.AspNetCore.Identity;
 
 namespace API
 {
@@ -15,34 +17,47 @@ namespace API
             // Add services and repositories
             builder.Services.AddInfrastructure(builder.Configuration);
 
-            // Add Fast Endpoints
-            //builder.Services.AddFastEndpoints();
+            // Add Authorization
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
-            // Add Swagger
-            builder.Services.AddSwaggerDocument();
-
-            //builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+            builder.Services.AddControllers();
+            
+            builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 
             var app = builder.Build();
-
-            //app.UseFastEndpoints();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 //app.MapOpenApi();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(s =>
+                {
+                    s.SwaggerEndpoint("/swagger/v1/swagger.json", "FlyToSpace API V1");
+                    s.RoutePrefix = string.Empty;
+                });
+
+                app.UseSwagger();
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.MapControllers();
 
-
-            //app.MapControllers();
-
-            app.Run();
+            try
+            {
+                app.Run();
+            } catch(Exception ex)
+            {
+                Console.WriteLine("\n\n\nERROR!!!!!!!!!!!!!!!!!");
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 }
