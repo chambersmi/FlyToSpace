@@ -10,6 +10,7 @@ namespace API.Controllers
     [Route("api/[controller]")]    
     public class AuthController : Controller
     {
+        private readonly ILogger<AuthController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMapper _mapper;
@@ -21,11 +22,12 @@ namespace API.Controllers
         /// <param name="signInManager">Microsoft Identity</param>
         /// <param name="mapper">AutoMapper</param>
         public AuthController(
+            ILogger<AuthController> logger,
             UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
+            _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
