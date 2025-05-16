@@ -11,7 +11,7 @@ namespace API.Application.Interfaces
     {
         Task<ApplicationUser?> GetUserByIdAsync(string id);
         Task<IEnumerable<ApplicationUser>> GetAllUsersAsync();
-        Task UpdateAsync(ApplicationUser user);
-        Task<bool> DeleteAsync(string id);
+        Task UpdateUserAsync(ApplicationUser user);
+        Task<bool> DeleteUserAsync(string id);
     }
 }

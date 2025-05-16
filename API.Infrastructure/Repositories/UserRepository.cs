@@ -28,24 +28,34 @@ namespace API.Infrastructure.Repositories
             
         }
 
-        public Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteUserAsync(string id)
         {
-            throw new NotImplementedException();
+            var userToDelete = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (userToDelete == null) return false;
+
+            _context.Users.Remove(userToDelete);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
+            
 
         public async Task<IEnumerable<ApplicationUser>> GetAllUsersAsync()
         {
             return await _userManager.Users.ToListAsync();
         }
 
-        public Task<ApplicationUser?> GetUserByIdAsync(string id)
+        public async Task<ApplicationUser?> GetUserByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);            
         }
 
-        public Task UpdateAsync(ApplicationUser user)
+        public async Task UpdateUserAsync(ApplicationUser user)
         {
-            throw new NotImplementedException();
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
         }
     }
 }

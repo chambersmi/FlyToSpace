@@ -17,8 +17,7 @@
       "applicationUrl": "https://localhost:7149;http://localhost:5121",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "launchUrl": "swagger"
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ using API.Application.Settings;
 using API.Domain.Entities;
 using API.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using System.Reflection;
 
 namespace API
 {
@@ -31,7 +32,14 @@ namespace API
 
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(s =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = $"{Path.Combine(AppContext.BaseDirectory, xmlFile)}";
+                s.IncludeXmlComments(xmlPath);
+            });
+            
+
             builder.Services.AddControllers();
 
             // CORS Policy

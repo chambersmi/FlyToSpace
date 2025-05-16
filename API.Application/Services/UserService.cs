@@ -1,13 +1,7 @@
 ﻿using API.Application.DTOs;
 using API.Application.Interfaces;
-using API.Domain.Entities;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace API.Application.Services
 {
@@ -27,10 +21,43 @@ namespace API.Application.Services
             _mapper = mapper;
         }
 
+        public async Task<bool> DeleteUserAsync(string id)
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+            if (user == null)
+                return false;
+
+            await _userRepository.DeleteUserAsync(user.Id);
+
+            return true;
+        }
+
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetAllUsersAsync();
             return _mapper.Map<IEnumerable<UserDto>>(users);
+        }
+
+        public async Task<UserDto?> GetUserByIdAsync(string id)
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+
+            return _mapper.Map<UserDto>(user);
+        }
+
+        public async Task<bool> UpdateUserAsync(string id, UpdateUserDto dto)
+        {
+            var userToUpdate = await _userRepository.GetUserByIdAsync(id);
+            if(userToUpdate == null)
+            {
+                return false;
+            }
+
+            _mapper.Map(dto, userToUpdate);
+
+            await _userRepository.UpdateUserAsync(userToUpdate);
+
+            return true;
         }
     }
 }
