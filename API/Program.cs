@@ -26,7 +26,22 @@ namespace API
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers();
             
+            // AutoMapper
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+
+            // CORS Policy
+            var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AngularApp", policy =>
+                {
+                    policy.WithOrigins(allowedOrigins!)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin();
+                });
+            });
 
 
             var app = builder.Build();
@@ -45,6 +60,7 @@ namespace API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AngularApp");
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
@@ -54,7 +70,6 @@ namespace API
                 app.Run();
             } catch(Exception ex)
             {
-                Console.WriteLine("\n\n\nERROR!!!!!!!!!!!!!!!!!");
                 Console.WriteLine(ex.Message);
             }
             

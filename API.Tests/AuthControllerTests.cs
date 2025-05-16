@@ -1,6 +1,7 @@
 ﻿using API.Application.DTOs;
 using API.Controllers;
 using API.Domain.Entities;
+using API.Tests.MockHelpers;
 using AutoMapper;
 using Castle.Core.Logging;
 using Microsoft.AspNetCore.Http;
@@ -28,57 +29,32 @@ namespace API.Tests
         public async Task RegisterUser_ReturnsOk_WhenUserIsCreated()
         {
             // Arrange
-            var mockUserManager = MockUserManager<ApplicationUser>();
-            var mockSignInManager = new Mock<SignInManager<ApplicationUser>>(
-                mockUserManager.Object,
-                Mock.Of<IHttpContextAccessor>(),
-                Mock.Of<IUserClaimsPrincipalFactory<ApplicationUser>>(),
-                null, null, null, null);
-
+            var mockUserManager = MockUserManagerAndSignInWithDTOConversion.MockUserManager<ApplicationUser>();
+            var mockSignInManager = MockUserManagerAndSignInWithDTOConversion.MockSignInManager(mockUserManager.Object);
             var mockLogger = new Mock<ILogger<AuthController>>();
-
             var mockMapper = new Mock<IMapper>();
 
-            var registerDto = new RegisterUserDto
-            {
-                Email = "testuser@example.com",
-                Password = "Test123!",
-                FirstName = "Test",
-                MiddleName = "",
-                LastName = "McTesterton",
-                DateOfBirth = DateTime.UtcNow.AddYears(-30),
-                StreetAddress1 = "123 Main St.",
-                City = "McTesterTown",
-                State = Domain.Enums.StateEnum.MI,
-                ZipCode = "55527"
-            };
+            var registerValidDto = MockUserManagerAndSignInWithDTOConversion.GetValidRegisterUserDto();
 
             var user = new ApplicationUser
             {
-                Email = registerDto.Email,
-                UserName = registerDto.Email
+                Email = registerValidDto.Email,
+                UserName = registerValidDto.Email
             };
 
-            mockMapper.Setup(m => m.Map<ApplicationUser>(registerDto)).Returns(user);
-            mockUserManager.Setup(mum => mum.CreateAsync(user, registerDto.Password))
-                .ReturnsAsync(IdentityResult.Success);
+            mockMapper.Setup(m => m.Map<ApplicationUser>(registerValidDto)).Returns(user);
+            mockUserManager.Setup(m => m.CreateAsync(user, registerValidDto.Password)).ReturnsAsync(IdentityResult.Success);
 
             var controller = new AuthController(mockLogger.Object, mockUserManager.Object, mockSignInManager.Object, mockMapper.Object);
 
             // Act
-            var result = await controller.RegisterUser(registerDto);
+            var result = await controller.RegisterUser(registerValidDto);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
-            mockUserManager.Verify(mum => mum.CreateAsync(user, registerDto.Password), Times.Once);
+            mockUserManager.Verify(mum => mum.CreateAsync(user, registerValidDto.Password), Times.Once);
         }
 
-        private static Mock<UserManager<TUser>> MockUserManager<TUser>() where TUser : class
-        {
-            var store = new Mock<IUserStore<TUser>>();
-            return new Mock<UserManager<TUser>>(
-                store.Object, null, null, null, null, null, null, null, null);
-        }
     }
 }
