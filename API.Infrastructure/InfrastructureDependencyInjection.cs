@@ -1,6 +1,7 @@
 ﻿using API.Application.Interfaces;
 using API.Application.Mapping;
 using API.Infrastructure.Auth;
+using API.Infrastructure.Repositories;
 using API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,7 @@ namespace API.Infrastructure
             // Add Services and Repositories
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             // AutoMapper
             services.AddAutoMapper(typeof(MappingProfile).Assembly);

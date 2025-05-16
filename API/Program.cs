@@ -1,5 +1,7 @@
 
+using API.Application.Interfaces;
 using API.Application.Mapping;
+using API.Application.Services;
 using API.Application.Settings;
 using API.Domain.Entities;
 using API.Infrastructure;
@@ -27,6 +29,7 @@ namespace API
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers();
