@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using API.Application.Interfaces;
+using API.Application.Mapping;
+using API.Infrastructure.Auth;
+using API.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,14 +23,16 @@ namespace API.Infrastructure
             // Add AppDbContext
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
-            
+
 
             // Add Services and Repositories
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
             // AutoMapper
-            //services.AddAutoMapper(typeof(MappingProfile).Assembly);
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
-            // FluentValidation
+                        
 
             return services;
         }

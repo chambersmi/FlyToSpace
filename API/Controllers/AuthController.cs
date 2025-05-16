@@ -1,5 +1,7 @@
 ﻿using API.Application.DTOs;
+using API.Application.Interfaces;
 using API.Domain.Entities;
+using API.Infrastructure.Auth;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,36 +13,58 @@ namespace API.Controllers
     public class AuthController : Controller
     {
         private readonly ILogger<AuthController> _logger;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IMapper _mapper;
+        private readonly IAuthService _authService;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-        /// <summary>
-        /// Used for registering user
-        /// </summary>
-        /// <param name="userManager">Microsoft Identity</param>
-        /// <param name="signInManager">Microsoft Identity</param>
-        /// <param name="mapper">AutoMapper</param>
-        public AuthController(
-            ILogger<AuthController> logger,
-            UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager,
-            IMapper mapper)
+        public AuthController(ILogger<AuthController> logger,
+            IAuthService authService,
+            IJwtTokenGenerator jwtTokenGenerator
+            )
         {
             _logger = logger;
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _mapper = mapper;
+            _authService = authService;
+            _jwtTokenGenerator = jwtTokenGenerator;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto model)
         {
-            var user = _mapper.Map<ApplicationUser>(model);
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _authService.RegisterAsync(model);
 
-            return Ok(result);
+            if(!result.Succeeded)
+            {
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                return BadRequest(result.Errors);
+            }
+
+            return Ok("User successfully created.");
+
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto model)
+        {
+            var (success, user) = await _authService.AuthenticateUserAsync(model);
+
+            if(!success || user == null)
+            {
+                return Unauthorized("Invalid Credentials.");
+            }
+
+            var token = _jwtTokenGenerator.GenerateToken(user);
+            return Ok(new
+            {
+                token
+            });
         }
     }
 }

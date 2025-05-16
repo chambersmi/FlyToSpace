@@ -1,5 +1,6 @@
 
 using API.Application.Mapping;
+using API.Application.Settings;
 using API.Domain.Entities;
 using API.Infrastructure;
 using Microsoft.AspNetCore.Identity;
@@ -14,10 +15,14 @@ namespace API
 
             // Add services to the container.
 
-            // Add services and repositories
+            // Register JwtSettings from configuration
+            builder.Services.Configure<JwtSettings>(
+                builder.Configuration.GetSection("JwtSettings"));
+
+            // Register services and repositories
             builder.Services.AddInfrastructure(builder.Configuration);
 
-            // Add Authorization
+            // Register Authorization
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
@@ -25,9 +30,6 @@ namespace API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers();
-            
-            // AutoMapper
-            builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
             // CORS Policy
             var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();

@@ -4,3 +4,17 @@ GET {{API_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+{
+  "email": "test@test.com",
+  "password": "Test123!",
+  "firstName": "Test",
+  "middleName": "string",
+  "lastName": "McTesterson",
+  "dateOfBirth": "1983-05-16T18:31:48.369Z",
+  "streetAddress1": "123 Main St",
+  "streetAddress2": "string",
+  "city": "Eaton Rapids",
+  "state": 0,
+  "zipCode": "48827"
+}
