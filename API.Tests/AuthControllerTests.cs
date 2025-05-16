@@ -53,7 +53,7 @@ namespace API.Tests
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
-            mockUserManager.Verify(mum => mum.CreateAsync(user, registerValidDto.Password), Times.Once);
+            mockUserManager.Verify(m => m.CreateAsync(user, registerValidDto.Password), Times.Once);
         }
 
         [Fact]
@@ -84,7 +84,38 @@ namespace API.Tests
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
-            mockUserManager.Verify(mum => mum.CreateAsync(user, registerValidDto.Password), Times.Once);
+            mockUserManager.Verify(m => m.CreateAsync(user, registerValidDto.Password), Times.Once);
+        }
+
+        [Fact]
+        public async Task RegisterUser_ReturnsFail_WhenBirthdayIsTomorrow()
+        {
+            // Arrange
+            var mockUserManager = MockUserManagerAndSignInWithDTOConversion.MockUserManager<ApplicationUser>();
+            var mockSignInManager = MockUserManagerAndSignInWithDTOConversion.MockSignInManager(mockUserManager.Object);
+            var mockLogger = new Mock<ILogger<AuthController>>();
+            var mockMapper = new Mock<IMapper>();
+
+            var registerValidDto = MockUserManagerAndSignInWithDTOConversion.GetInvalidRegisterUserDtoBirthdayIsTomorrow();
+
+            var user = new ApplicationUser
+            {
+                Email = registerValidDto.Email,
+                UserName = registerValidDto.Email
+            };
+
+            mockMapper.Setup(m => m.Map<ApplicationUser>(registerValidDto)).Returns(user);
+            mockUserManager.Setup(m => m.CreateAsync(user, registerValidDto.Password)).ReturnsAsync(IdentityResult.Failed());
+
+            var controller = new AuthController(mockLogger.Object, mockUserManager.Object, mockSignInManager.Object, mockMapper.Object);
+
+            // Act
+            var result = await controller.RegisterUser(registerValidDto);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(200, okResult.StatusCode);
+            mockUserManager.Verify(m => m.CreateAsync(user, registerValidDto.Password), Times.Once);
         }
 
     }

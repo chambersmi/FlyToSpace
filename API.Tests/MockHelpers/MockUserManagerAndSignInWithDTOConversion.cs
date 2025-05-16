@@ -64,6 +64,23 @@ namespace API.Tests.MockHelpers
             };
         }
 
+        public static RegisterUserDto GetInvalidRegisterUserDtoBirthdayIsTomorrow()
+        {
+            return new RegisterUserDto
+            {
+                Email = "testemail.com",
+                Password = "Test123!",
+                FirstName = "Test",
+                MiddleName = "",
+                LastName = "McTesterton",
+                DateOfBirth = DateTime.UtcNow.AddDays(1),
+                StreetAddress1 = "123 Main St.",
+                City = "McTesterTown",
+                State = Domain.Enums.StateEnum.MI,
+                ZipCode = "55527"
+            };
+        }
+
         public static ApplicationUser MapFromRegisterDto(RegisterUserDto dto)
         {
             return new ApplicationUser
@@ -81,5 +98,6 @@ namespace API.Tests.MockHelpers
                 ZipCode = dto.ZipCode
             };
         }
+
     }
 }
