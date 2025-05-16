@@ -14,16 +14,13 @@ namespace API.Infrastructure.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly ILogger<UserRepository> _logger;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly AppDbContext _context;
 
         public UserRepository(ILogger<UserRepository> logger,
-            UserManager<ApplicationUser> userManager,
             AppDbContext context
             )
         {
             _logger = logger;
-            _userManager = userManager;
             _context = context;
             
         }
@@ -43,7 +40,7 @@ namespace API.Infrastructure.Repositories
 
         public async Task<IEnumerable<ApplicationUser>> GetAllUsersAsync()
         {
-            return await _userManager.Users.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
         public async Task<ApplicationUser?> GetUserByIdAsync(string id)

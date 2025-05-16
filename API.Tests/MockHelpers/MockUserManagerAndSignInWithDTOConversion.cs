@@ -33,6 +33,23 @@ namespace API.Tests.MockHelpers
         public static RegisterUserDto GetValidRegisterUserDto()
         {
             return new RegisterUserDto
+            {                
+                Email = "testuser@example.com",
+                Password = "Test123!",
+                FirstName = "Test",
+                MiddleName = "",
+                LastName = "McTesterton",
+                DateOfBirth = DateTime.UtcNow.AddYears(-30),
+                StreetAddress1 = "123 Main St.",
+                City = "McTesterTown",
+                State = Domain.Enums.StateEnum.MI,
+                ZipCode = "55527"
+            };
+        }
+
+        public static RegisterUserDto GetValidRegisterUserDto_2()
+        {
+            return new RegisterUserDto
             {
                 Email = "testuser@example.com",
                 Password = "Test123!",
@@ -45,6 +62,27 @@ namespace API.Tests.MockHelpers
                 State = Domain.Enums.StateEnum.MI,
                 ZipCode = "55527"
             };
+        }
+
+        public static ApplicationUser GetValidRegisterUserDto_WithId()
+        {
+            var registerDto = GetValidRegisterUserDto();
+
+            // Create application user with an Id to simulate that it's saved in database
+            var user = new ApplicationUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                Email = registerDto.Email,
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                DateOfBirth = registerDto.DateOfBirth,
+                StreetAddress1 = registerDto.StreetAddress1,
+                City = registerDto.City,
+                State = registerDto.State,
+                ZipCode = registerDto.ZipCode
+            };
+
+            return user;
         }
 
         public static RegisterUserDto GetInvalidRegisterUserDtoBadEmail()

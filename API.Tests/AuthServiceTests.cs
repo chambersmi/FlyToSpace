@@ -2,6 +2,7 @@
 using API.Domain.Entities;
 using API.Infrastructure.Auth;
 using API.Infrastructure.Services;
+using API.Tests.MockHelpers;
 using AutoMapper;
 using Castle.Core.Logging;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.Tests.MockHelpers
+namespace API.Tests
 {
     public class AuthServiceTests
     {
