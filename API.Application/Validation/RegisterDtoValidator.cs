@@ -14,6 +14,7 @@ namespace API.Application.Validation
         {
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
             RuleFor(x => x.Password).NotEmpty().MinimumLength(6);
+            RuleFor(x => x.ConfirmPassword).NotEmpty().Equal(model => model.Password).WithMessage("Your passwords do not match.");
             RuleFor(x => x.FirstName).NotEmpty().MaximumLength(50);
             RuleFor(x => x.MiddleName).NotEmpty().MaximumLength(50);
             RuleFor(x => x.LastName).NotEmpty().MaximumLength(50);

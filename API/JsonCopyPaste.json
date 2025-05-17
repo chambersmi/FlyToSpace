@@ -1,0 +1,15 @@
+﻿{
+  "email": "test@test.com",
+  "password": "Test123!",
+  "confirmPassword": "Test123!",
+  "firstName": "Test",
+  "middleName": "Joseph",
+  "lastName": "McTesterson",
+  "dateOfBirth": "1941-05-16T18:31:48.369Z",
+  "streetAddress1": "123 Main St",
+  "streetAddress2": "string",
+  "city": "Eaton Rapids",
+  "state": 5,
+  "zipCode": "48827"
+}
+

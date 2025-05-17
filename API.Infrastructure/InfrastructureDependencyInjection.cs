@@ -1,4 +1,5 @@
-﻿using API.Application.Interfaces;
+﻿using API.Application.Interfaces.IRepositories;
+using API.Application.Interfaces.IServices;
 using API.Application.Mapping;
 using API.Infrastructure.Auth;
 using API.Infrastructure.Repositories;
@@ -27,7 +28,7 @@ namespace API.Infrastructure
 
 
             // Add Services and Repositories
-            services.AddScoped<IAuthService, AuthService>();
+
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IUserRepository, UserRepository>();
 

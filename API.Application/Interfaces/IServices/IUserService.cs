@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.Application.Interfaces
+namespace API.Application.Interfaces.IServices
 {
     public interface IUserService
     {

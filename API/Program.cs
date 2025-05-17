@@ -1,46 +1,69 @@
-
-using API.Application.Interfaces;
-using API.Application.Mapping;
+using API.Application.Interfaces.IServices;
 using API.Application.Services;
 using API.Application.Settings;
+using API.Data;
 using API.Domain.Entities;
 using API.Infrastructure;
+using API.Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
+using System.Text.Unicode;
+using System.Threading.Tasks;
 
 namespace API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
 
-            // Register JwtSettings from configuration
-            builder.Services.Configure<JwtSettings>(
-                builder.Configuration.GetSection("JwtSettings"));
-
             // Register services and repositories
             builder.Services.AddInfrastructure(builder.Configuration);
-
-            // Register Authorization
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
-
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(s =>
-            {
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = $"{Path.Combine(AppContext.BaseDirectory, xmlFile)}";
-                s.IncludeXmlComments(xmlPath);
-            });
             
 
-            builder.Services.AddControllers();
+
+            // Register authentication
+            var jwtSection = builder.Configuration.GetSection("Jwt");
+            var jwtSettings = jwtSection.Get<JwtSettings>();
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    if (jwtSettings == null || string.IsNullOrWhiteSpace(jwtSettings.Key)
+                        || string.IsNullOrWhiteSpace(jwtSettings.Issuer) || string.IsNullOrWhiteSpace(jwtSettings.Audience))
+                    {
+                        throw new InvalidOperationException("JWT Settings are not configured properly for this application.");
+                    }
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true, 
+                        ValidateLifetime = true, 
+                        ValidateIssuerSigningKey = true, 
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidAudience = jwtSettings.Audience, // 
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+                    };
+                });
+
+
+
+            // Non-Infrastructure Services
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
+
+            // Swagger
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+            
+            builder.Services.AddControllers();                                
 
             // CORS Policy
             var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
@@ -56,8 +79,23 @@ namespace API
                 });
             });
 
+            // Register Authorization
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            // Allowing username characters so email can be used as a username
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+            });
 
             var app = builder.Build();
+
+            // Initialize database and seed data (if applicable)
+            await DbInitializer.InitDb(app);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -74,7 +112,9 @@ namespace API
 
             app.UseHttpsRedirection();
             app.UseCors("AngularApp");
+            
             app.UseAuthentication();
+
             app.UseAuthorization();
             app.MapControllers();
 

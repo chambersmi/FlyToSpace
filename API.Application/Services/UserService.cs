@@ -1,5 +1,6 @@
 ﻿using API.Application.DTOs;
-using API.Application.Interfaces;
+using API.Application.Interfaces.IRepositories;
+using API.Application.Interfaces.IServices;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 

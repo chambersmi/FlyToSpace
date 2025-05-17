@@ -1,4 +1,4 @@
-﻿using API.Application.Interfaces;
+﻿using API.Application.Interfaces.IRepositories;
 using API.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

@@ -24,6 +24,10 @@ namespace API.Infrastructure
             builder.Entity<ApplicationUser>()
                 .Property(u => u.State)
                 .HasConversion<string>();
+
+            builder.Entity<ApplicationUser>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
         }
     }
 }
