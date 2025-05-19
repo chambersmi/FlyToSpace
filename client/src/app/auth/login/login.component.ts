@@ -23,10 +23,21 @@ export class LoginComponent implements OnInit {
   ) {}    
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
+        this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+
+    // If user is coming from registration, prefill email
+    this.route.queryParams.subscribe(params => {
+      const paramEmail = params['email'];
+      if(paramEmail) {
+        this.loginForm.patchValue({
+          email: paramEmail
+        });
+      }
+    });
+    
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   
@@ -39,12 +50,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(dto).subscribe({
      next: (response: LoginResponse) => {
       localStorage.setItem('authToken', response.token);
-      alert("Login sucessful!");
       this.router.navigateByUrl(this.returnUrl);
      },
      error: (err) => {
       console.error(err);
-      alert("Something went wrong with the login process.");
      }
     });
   }

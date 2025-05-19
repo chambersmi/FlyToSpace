@@ -4,8 +4,8 @@ import { AuthService } from '../../services/auth/auth.service';
 import { StateService } from '../../services/states/state.service';
 import { RegisterUserDto } from '../../models/auth/register-user-dto.model';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -24,8 +24,7 @@ export class RegisterComponent implements OnInit {
   constructor(private fb:FormBuilder, 
     private authService: AuthService,
     private stateService: StateService,
-    private router: Router,
-    private route: ActivatedRoute) {}
+    private router: Router) {}
 
  ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -57,12 +56,19 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(dto).subscribe({
       next: (data) => {
-        alert("Registeration Successful!");
-        this.router.navigateByUrl(`${this.apiUrl}/login`);
+        this.router.navigate(['/login'], {
+          queryParams: {
+            email: dto.email
+          }
+        });
       },
       error: (err) => {
         console.error("Registration Failed:\n" + err);
-        alert("Something went wrong with registration.");
+        if (err.error && typeof err.error === 'object') {
+        alert('Error:\n' + JSON.stringify(err.error));
+      } else {
+        alert("Something went wrong.");
+      }
       }
     });
   }
