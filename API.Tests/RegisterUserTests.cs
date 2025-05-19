@@ -48,6 +48,11 @@ namespace API.Tests
             Assert.Equal("User successfully created.", result.Value);
         }
 
+        /// <summary>
+        /// This test will try registering a user using mismatched password/confirm password
+        /// Should return 400.
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task RegisterUser_ShouldReturnFailed_WhenPasswordsDoNotMatch()
         {
@@ -71,6 +76,36 @@ namespace API.Tests
 
             var errResponse = Assert.IsType<List<IdentityError>>(result.Value);
             Assert.Contains(errResponse, e => e.Code == "PasswordMismatch");
+        }
+
+        /// <summary>
+        /// This test will try registering a user that already exists.
+        /// Should return 400
+        /// </summary>
+        /// <returns></returns>
+        [Fact]
+        public async Task RegisterUser_ShouldReturnFailed_WhenUserAlreadyExists()
+        {
+            // Arrange
+            var registerDto = MockUserManagerAndSignInWithDTOConversion.GetInvalidRegisterUserDto_PasswordsDoNotMatch();
+            var identityResult = IdentityResult.Failed(new IdentityError
+            {
+                Code = "DuplicateEmail",
+                Description = "null" // not used
+            });
+
+            // Set up mock AuthService to return successful registration result
+            _mockAuthService.Setup(x => x.RegisterAsync(registerDto)).ReturnsAsync(identityResult);
+
+            // Act
+            var actionResult = await _authController.RegisterUser(registerDto);
+
+            //Assert
+            var result = Assert.IsType<BadRequestObjectResult>(actionResult);
+            Assert.Equal(400, result.StatusCode);
+
+            var errResponse = Assert.IsType<List<IdentityError>>(result.Value);
+            Assert.Contains(errResponse, e => e.Code == "DuplicateEmail");
         }
     }
 }
