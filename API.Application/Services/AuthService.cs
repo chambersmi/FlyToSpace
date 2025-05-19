@@ -46,6 +46,15 @@ namespace API.Infrastructure.Services
 
         public async Task<IdentityResult> RegisterAsync(RegisterUserDto dto)
         {
+            if(dto.Password != dto.ConfirmPassword)
+            {
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Code = "PasswordMismatch",
+                    Description = "Passwords must match."
+                });
+            }
+
             var user = _mapper.Map<ApplicationUser>(dto);
 
             var result = await _userManager.CreateAsync(user, dto.Password);

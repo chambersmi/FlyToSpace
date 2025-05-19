@@ -1,6 +1,7 @@
 using API.Application.Interfaces.IServices;
 using API.Application.Services;
 using API.Application.Settings;
+using API.Application.Validation;
 using API.Data;
 using API.Domain.Entities;
 using API.Infrastructure;
@@ -58,6 +59,10 @@ namespace API
             // Non-Infrastructure Services
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+
+            // Fluent Validation
+            
+
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();

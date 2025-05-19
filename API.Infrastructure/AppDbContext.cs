@@ -20,7 +20,7 @@ namespace API.Infrastructure
         {
             base.OnModelCreating(builder);
 
-            // Sets "MI" into the database instead of numerical enum.
+            // Maps Enum to the abbreviation in the database (IE: 
             builder.Entity<ApplicationUser>()
                 .Property(u => u.State)
                 .HasConversion<string>();

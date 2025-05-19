@@ -36,6 +36,7 @@ namespace API.Tests.MockHelpers
             {                
                 Email = "testuser@example.com",
                 Password = "Test123!",
+                ConfirmPassword = "Test123!",
                 FirstName = "Test",
                 MiddleName = "",
                 LastName = "McTesterton",
@@ -53,6 +54,7 @@ namespace API.Tests.MockHelpers
             {
                 Email = "testuser@example.com",
                 Password = "Test123!",
+                ConfirmPassword = "Test123!",
                 FirstName = "Test",
                 MiddleName = "",
                 LastName = "McTesterton",
@@ -85,12 +87,13 @@ namespace API.Tests.MockHelpers
             return user;
         }
 
-        public static RegisterUserDto GetInvalidRegisterUserDtoBadEmail()
+        public static RegisterUserDto GetInvalidRegisterUserDto_BadEmail()
         {
             return new RegisterUserDto
             {
                 Email = "testemail.com",
                 Password = "Test123!",
+                ConfirmPassword = "Test123!",
                 FirstName = "Test",
                 MiddleName = "",
                 LastName = "McTesterton",
@@ -102,12 +105,31 @@ namespace API.Tests.MockHelpers
             };
         }
 
-        public static RegisterUserDto GetInvalidRegisterUserDtoBirthdayIsTomorrow()
+        public static RegisterUserDto GetInvalidRegisterUserDto_PasswordsDoNotMatch()
         {
             return new RegisterUserDto
             {
                 Email = "testemail.com",
                 Password = "Test123!",
+                ConfirmPassword = "Iamabadpassword!",
+                FirstName = "Test",
+                MiddleName = "",
+                LastName = "McTesterton",
+                DateOfBirth = DateTime.UtcNow.AddYears(-30),
+                StreetAddress1 = "123 Main St.",
+                City = "McTesterTown",
+                State = Domain.Enums.StateEnum.MI,
+                ZipCode = "55527"
+            };
+        }
+
+        public static RegisterUserDto GetInvalidRegisterUserDto_BirthdayIsTomorrow()
+        {
+            return new RegisterUserDto
+            {
+                Email = "testemail.com",
+                Password = "Test123!",
+                ConfirmPassword = "Test123!",
                 FirstName = "Test",
                 MiddleName = "",
                 LastName = "McTesterton",

@@ -4,15 +4,9 @@ using API.Infrastructure.Auth;
 using API.Infrastructure.Services;
 using API.Tests.MockHelpers;
 using AutoMapper;
-using Castle.Core.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace API.Tests
 {
@@ -89,7 +83,7 @@ namespace API.Tests
         {
 
             // Arrange
-            var registerDto = MockUserManagerAndSignInWithDTOConversion.GetInvalidRegisterUserDtoBadEmail();
+            var registerDto = MockUserManagerAndSignInWithDTOConversion.GetInvalidRegisterUserDto_BadEmail();
 
             var dto = new LoginDto
             {
@@ -118,7 +112,7 @@ namespace API.Tests
 
         /// <summary>
         /// TEST:
-        /// This is sending invalid user credentials (Birthday is tomorrow) via the method .GetInvalidRegisterUserDtoBirthdayIsTomorrow();
+        /// This is sending invalid user credentials (Birthday is tomorrow) via the method .GetInvalidRegisterUserDto_BirthdayIsTomorrow();
         /// </summary>
         /// <returns></returns>
         [Fact]
@@ -126,7 +120,7 @@ namespace API.Tests
         {
 
             // Arrange
-            var registerDto = MockUserManagerAndSignInWithDTOConversion.GetInvalidRegisterUserDtoBirthdayIsTomorrow();
+            var registerDto = MockUserManagerAndSignInWithDTOConversion.GetInvalidRegisterUserDto_BirthdayIsTomorrow();
 
             var dto = new LoginDto
             {

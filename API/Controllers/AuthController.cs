@@ -33,7 +33,7 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+          
             var result = await _authService.RegisterAsync(model);
 
             if(!result.Succeeded)
