@@ -5,6 +5,7 @@ using API.Application.Validation;
 using API.Data;
 using API.Domain.Entities;
 using API.Infrastructure;
+using API.Infrastructure.Auth;
 using API.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -26,11 +27,10 @@ namespace API
 
             // Register services and repositories
             builder.Services.AddInfrastructure(builder.Configuration);
-            
 
 
-            // Register authentication
-            var jwtSection = builder.Configuration.GetSection("Jwt");
+            // Configure JWT
+            var jwtSection = builder.Configuration.GetSection("JwtSettings");
             var jwtSettings = jwtSection.Get<JwtSettings>();
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -45,20 +45,23 @@ namespace API
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidateAudience = true, 
-                        ValidateLifetime = true, 
-                        ValidateIssuerSigningKey = true, 
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtSettings.Issuer,
                         ValidAudience = jwtSettings.Audience, // 
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+                        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(jwtSettings.Key))
                     };
                 });
+
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
 
 
             // Non-Infrastructure Services
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<GetStatesService>();
 
             // Fluent Validation
             
@@ -79,8 +82,7 @@ namespace API
                 {
                     policy.WithOrigins(allowedOrigins!)
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowAnyOrigin();
+                    .AllowAnyMethod();
                 });
             });
 

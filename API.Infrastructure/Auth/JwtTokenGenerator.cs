@@ -35,7 +35,7 @@ namespace API.Infrastructure.Auth
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return tokenString;
         }
     }
 }

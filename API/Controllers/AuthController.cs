@@ -3,6 +3,7 @@ using API.Application.Interfaces.IServices;
 using API.Domain.Entities;
 using API.Infrastructure.Auth;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,7 @@ namespace API.Controllers
             _jwtTokenGenerator = jwtTokenGenerator;
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto model)
         {
@@ -50,21 +52,29 @@ namespace API.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
-            var (success, user) = await _authService.AuthenticateUserAsync(model);
-
-            if(!success || user == null)
+            try
             {
-                return Unauthorized("Invalid Credentials.");
+                var (success, user) = await _authService.AuthenticateUserAsync(model);
+
+                if (!success || user == null)
+                {
+                    return Unauthorized("Invalid Credentials.");
+                }
+
+                var token = _jwtTokenGenerator.GenerateToken(user);
+                return Ok(new
+                {
+                    token
+                });
+            } catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error:\n{ex.Message}");
             }
 
-            var token = _jwtTokenGenerator.GenerateToken(user);
-            return Ok(new
-            {
-                token
-            });
-        }
+        }        
     }
 }

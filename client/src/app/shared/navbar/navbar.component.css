@@ -1,0 +1,14 @@
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+/* styles.css or scoped to your navbar component */
+.navbar .nav-link {
+  color: #f8f9fa !important; /* Light gray */
+  cursor: pointer;
+}
+
+.navbar .nav-link:hover {
+  color: #ffffff !important;
+}
