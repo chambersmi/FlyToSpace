@@ -1,0 +1,1 @@
+﻿[ ] App crashing when a user selects anything besides MI on the state dropdown

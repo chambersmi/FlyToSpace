@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
       streetAddress1: ['', Validators.required],
       streetAddress2: [''],
       city: ['', Validators.required],
-      state: [21, Validators.required], // defaults to MI
+      state: [0, Validators.required], // defaults to MI
       zipCode: ['', Validators.required]
     });
 
