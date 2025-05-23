@@ -1,5 +1,5 @@
 ﻿{
-  "email": "test@test.com",
+  "email": "test@test99.com",
   "password": "Test123!",
   "confirmPassword": "Test123!",
   "firstName": "Test",
@@ -9,7 +9,7 @@
   "streetAddress1": "123 Main St",
   "streetAddress2": "string",
   "city": "Eaton Rapids",
-  "state": 5,
+  "state": 18,
   "zipCode": "48827"
 }
 

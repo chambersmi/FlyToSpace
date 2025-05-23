@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
       streetAddress1: ['', Validators.required],
       streetAddress2: [''],
       city: ['', Validators.required],
-      state: [0, Validators.required], // defaults to MI
+      state: [21, Validators.required], // defaults to MI
       zipCode: ['', Validators.required]
     });
 
@@ -52,7 +52,13 @@ export class RegisterComponent implements OnInit {
     if(this.registerForm.invalid)
       return;
 
-    const dto: RegisterUserDto = this.registerForm.value;
+    const formValue = this.registerForm.value;
+
+    //const dto: RegisterUserDto = this.registerForm.value;
+    const dto: RegisterUserDto = {
+      ...formValue,
+      state: Number(formValue.state)
+    };
 
     this.authService.register(dto).subscribe({
       next: (data) => {
@@ -63,7 +69,7 @@ export class RegisterComponent implements OnInit {
         });
       },
       error: (err) => {
-        console.error("Registration Failed:\n" + err);
+        console.error("Registration Failed:\n", err);
         if (err.error && typeof err.error === 'object') {
         alert('Error:\n' + JSON.stringify(err.error));
       } else {
