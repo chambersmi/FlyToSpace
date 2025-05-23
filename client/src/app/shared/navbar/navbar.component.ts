@@ -1,12 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
+import { TokenUserDto } from '../../models/auth/token-dto.model';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  isLoggedIn = false;
+  userEmail: string | null = null;
+
+  constructor(private authService:AuthService) {}
+
+  ngOnInit(): void {
+    this.authService.isAuthenticated().subscribe((status) => {
+      this.isLoggedIn = status;
+      const user = this.authService.getUserFromToken();
+      this.userEmail = status && user ? user.email : null;      
+      console.log(this.userEmail);
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 
 }

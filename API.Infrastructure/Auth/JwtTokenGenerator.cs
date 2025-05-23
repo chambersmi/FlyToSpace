@@ -20,8 +20,10 @@ namespace API.Infrastructure.Auth
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Email, user.Email)
+                //new Claim(ClaimTypes.NameIdentifier, user.Id),
+                //new Claim(ClaimTypes.Email, user.Email)
+                new Claim("id", user.Id),
+                new Claim("email", user.Email ?? string.Empty)
             };
 
             var key = new SymmetricSecurityKey(Convert.FromBase64String(_jwtSettings.Key));

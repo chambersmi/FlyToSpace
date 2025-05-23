@@ -24,12 +24,24 @@
             </ul>
 
             <ul class="navbar-nav ms-auto">
+                <ng-container *ngIf="!isLoggedIn; else loggedInTemplate">
+                    <li class="nav-item">
+                        <a class="nav-link me-3" routerLink="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/login">Login</a>
+                    </li>
+                </ng-container>
+
+            <ng-template #loggedInTemplate>
                 <li class="nav-item">
-                    <a class="nav-link me-3" routerLink="/register">Register</a>
+                    <span class="nav-link text-light">{{userEmail}}</span>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/login">Login</a>
+                    <button class="btn btn-sm btn-outline-light" (click)="logout()">Logout</button>
                 </li>
+            </ng-template>
             </ul>
         </div>
     </div>
