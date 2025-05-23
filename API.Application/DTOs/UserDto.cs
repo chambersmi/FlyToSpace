@@ -1,9 +1,5 @@
 ﻿using API.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace API.Application.DTOs
 {
@@ -15,6 +11,9 @@ namespace API.Application.DTOs
         public string FirstName { get; set; } = null!;
         public string? MiddleName { get; set; }
         public string LastName { get; set; } = null!;
+        [JsonPropertyName("dateOfBirth")]
+        public string DateOfBirthFormatted => DateOfBirth.ToString("yyyy-MM-dd");
+        [JsonIgnore]
         public DateTime DateOfBirth { get; set; }
 
         public string StreetAddress1 { get; set; } = null!;

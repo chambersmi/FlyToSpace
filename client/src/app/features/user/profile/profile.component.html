@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-center mt-5">
+  <div class="card w-50">
+    <div class="card-body bg-dark">
+      <h4 class="card-title mb-4">Register</h4>
+
+      <form *ngIf="profileForm" [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+        <div class="mb-3 row align-items-center">
+          <label for="email" class="col-sm-3 col-form-label">Email</label>
+          <div class="col-sm-9">
+            <input id="email" formControlName="email" type="email" class="form-control" />
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="firstName" class="col-sm-3 col-form-label">First Name</label>
+          <div class="col-sm-9">
+            <input id="firstName" formControlName="firstName" class="form-control" />
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="middleName" class="col-sm-3 col-form-label">Middle Name</label>
+          <div class="col-sm-9">
+            <input id="middleName" formControlName="middleName" class="form-control" />
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="lastName" class="col-sm-3 col-form-label">Last Name</label>
+          <div class="col-sm-9">
+            <input id="lastName" formControlName="lastName" class="form-control" />
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="dateOfBirth" class="col-sm-3 col-form-label">Date of Birth</label>
+          <div class="col-sm-9">
+            <input id="dateOfBirth" formControlName="dateOfBirth" type="date" class="form-control" />
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="streetAddress1" class="col-sm-3 col-form-label">Street Address 1</label>
+          <div class="col-sm-9">
+            <input id="streetAddress1" formControlName="streetAddress1" class="form-control" />
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="streetAddress2" class="col-sm-3 col-form-label">Street Address 2</label>
+          <div class="col-sm-9">
+            <input id="streetAddress2" formControlName="streetAddress2" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+          <label for="city" class="col-sm-3 col-form-label">City</label>
+          <div class="col-sm-9 col-md-5">
+            <input id="city" formControlName="city" class="form-control" />
+          </div>
+
+          <label for="state" class="col-auto col-form-label mt-3 mt-md-0 text-end pe-1">State</label>
+          <div class="col-auto mt-3 mt-md-0">
+            <select id="state" formControlName="state" class="form-select form-select-sm">
+              <option [value]="0" disabled>Select State</option>
+              <option *ngFor="let key of stateKeys" [value]="key">{{ states[key] }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="zipCode" class="col-sm-3 col-form-label">Zip Code</label>
+          <div class="col-sm-9">
+            <input id="zipCode" formControlName="zipCode" class="form-control" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" [disabled]="profileForm.invalid">Update Profile</button>
+      </form>

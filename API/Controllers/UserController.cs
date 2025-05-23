@@ -1,9 +1,12 @@
 ﻿using API.Application.DTOs;
 using API.Application.Interfaces.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
@@ -31,7 +34,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("user/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByIdAsync(string id)
         {
             var users = await _userService.GetUserByIdAsync(id);
@@ -44,7 +47,7 @@ namespace API.Controllers
         /// <param name="id">UserID (string)</param>
         /// <param name="dto">[FromBody] json</param>
         /// <returns></returns>
-        [HttpPut("update/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUserAsync(string id, [FromBody] UpdateUserDto dto)
         {
             var isSuccess = await _userService.UpdateUserAsync(id, dto);
@@ -62,7 +65,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserAsync(string id)
         {
             var isSuccess = await _userService.DeleteUserAsync(id);

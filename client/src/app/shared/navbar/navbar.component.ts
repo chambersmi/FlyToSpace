@@ -12,7 +12,7 @@ import { TokenUserDto } from '../../models/auth/token-dto.model';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn = false;
-  userEmail: string | null = null;
+  userEmail: string  | null = null;
 
   constructor(private authService:AuthService) {}
 

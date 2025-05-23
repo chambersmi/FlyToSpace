@@ -35,7 +35,7 @@
 
             <ng-template #loggedInTemplate>
                 <li class="nav-item">
-                    <span class="nav-link text-light">{{userEmail}}</span>
+                    <span class="nav-link text-light" [routerLink]="['/profile']">{{userEmail}}</span>
                 </li>
 
                 <li class="nav-item">
