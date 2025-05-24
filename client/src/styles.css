@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; font-family: Arial, Helvetica, sans-serif; }
+
 
 
 /* Notifications / Snackbar */
@@ -15,4 +15,50 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .error-snackbar {
   background-color: red !important;
   color: white !important;
+}
+
+.card-styling {
+    background: linear-gradient(to bottom, #130124, #5c36ad) !important;
+}
+
+.card {
+    animation: slideUp 0.6s ease forwards;
+}
+
+.card-body.card-styling input {
+  border-radius: 12px;
+  background-color: #5c36ad;
+  color: rgb(224, 217, 217);
+  font-family:Arial, Helvetica, sans-serif;
+  border: 3px solid black;
+}
+
+.card-title {
+  text-align: center;
+  color: rgb(224, 217, 217);
+  letter-spacing: 3px;
+}
+
+.card-body {
+  border-radius: 12px;
+}
+
+.btn-styling {
+  background-color: #130124;
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.page-content {
+  padding-top: 60px;
 }

@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center mt-5">
     <div class="card w-50">
-        <div class="card-body bg-dark">
+        <div class="card-body card-styling">
             <h4 class="card-title mb-4">Login</h4>
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -14,7 +14,9 @@
                     <input formControlName="password" type="password" class="form-control" />
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">Log In</button>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary auto" [disabled]="loginForm.invalid">Log In</button>
+                </div>
             </form>
         </div>
     </div>

@@ -1,13 +1,13 @@
 <div class="d-flex justify-content-center mt-5">
   <div class="card w-50">
     <div class="card-body bg-dark">
-      <h4 class="card-title mb-4">Register</h4>
+      <h4 class="card-title mb-4">Edit Profile</h4>
 
       <form *ngIf="profileForm" [formGroup]="profileForm" (ngSubmit)="updateProfile()">
         <div class="mb-3 row align-items-center">
           <label for="email" class="col-sm-3 col-form-label">Email</label>
           <div class="col-sm-9">
-            <input id="email" formControlName="email" type="email" class="form-control" />
+            <input id="email" formControlName="email" type="email" class="form-control" readonly/>
           </div>
         </div>
 

@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
       zipCode: [user.zipCode, Validators.required]
     });
   }
-
+  
   // Update new values
   private updateDto(): UpdateUserDto {
     const formValue = this.profileForm.getRawValue();
@@ -97,7 +97,7 @@ export class ProfileComponent implements OnInit {
     }
 
     const formValue = this.profileForm.value;
-    
+
     const updateDto: UpdateUserDto = {
       ...formValue,
       state: Number(formValue.state)

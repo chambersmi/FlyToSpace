@@ -1,0 +1,31 @@
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -10;
+}
+
+.navbar-fixed {    
+  position: fixed;
+  height: 70px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: black;
+  box-shadow: 0 10px 50px -10px rgba(241, 239, 239, 0.1);
+  border-bottom: 0.01rem solid white;
+}
+
+.page-content {
+  padding-top: 70px; /* Exactly matches navbar height */
+  position: relative;
+  z-index: 0; /* ensure it's above background */
+}
+
+router-outlet {
+    display: block;
+}
