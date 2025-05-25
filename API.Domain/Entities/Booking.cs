@@ -17,14 +17,10 @@ namespace API.Domain.Entities
         public ApplicationUser? User { get; set; } = null!;        
 
         public int? FlightId { get; set; }
-        public string? SeatNumber { get; set; }
+        public int SeatsBooked { get; set; } // can change this variable name ot something better.
         public string? Status { get; set; }
-
-        public int DurationInDays { get; set; }
         public decimal TotalPrice { get; set; }
-
         public DateTime BookingDate { get; set; } = DateTime.UtcNow;
-
     }
 
 }

@@ -31,8 +31,7 @@ namespace API.Application.Mapping
             CreateMap<UpdateBookingDto, Booking>();
 
             CreateMap<Booking, BookingDto>()
-                .ForMember(dest => dest.TourName, opt => opt.MapFrom(src => src.Tour.TourName))
-                .ForMember(dest => dest.TourPricePerDay, opt => opt.MapFrom(src => src.Tour.TourPricePerDay));
+                .ForMember(dest => dest.TourName, opt => opt.MapFrom(src => src.Tour.TourName));
 
             CreateMap<BookingDto, Booking>()
                 .ForMember(dest => dest.Tour, opt => opt.Ignore())

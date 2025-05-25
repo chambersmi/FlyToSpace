@@ -12,7 +12,7 @@ namespace API.Application.Interfaces.IServices
         Task<IEnumerable<BookingDto>> GetAllBookingsAsync();
         Task<BookingDto?> GetBookingByIdAsync(int id);
         Task<bool> DeleteBookingByIdAsync(int id);
-        Task<BookingDto> UpdateBookingAsync(int id, UpdateBookingDto dto);
-        Task<BookingDto?> CreateBookingAsync(CreateBookingDto dto);
+        Task<BookingDto?> UpdateBookingAsync(int id, UpdateBookingDto dto);
+        Task<BookingDto?> CreateBookingAsync(CreateBookingDto dto);        
     }
 }

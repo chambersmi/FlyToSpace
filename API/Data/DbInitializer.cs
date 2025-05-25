@@ -164,7 +164,7 @@ namespace API.Data
                 {
                     TourName = "Inner Solar System Fly-By!",
                     TourDescription = "Have a chance to fly near Mercury, and a full tour around Venus and Mars!",
-                    TourPricePerDay = 199.99m,
+                    TourPackagePrice = 199.99m,
                     MaxSeats = 20,
                     SeatsOccupied = 0
                 };
@@ -205,10 +205,8 @@ namespace API.Data
                     Tour = tour,
                     UserId = user.Id,
                     FlightId = new Random().Next(1, 1000),
-                    SeatNumber = "A1",
+                    SeatsBooked = 1,
                     Status = "Confirmed",
-                    DurationInDays = 3,
-                    TotalPrice = tour.TourPricePerDay * 3,
                     BookingDate = DateTime.UtcNow
                 };
 

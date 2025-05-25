@@ -14,5 +14,6 @@ namespace API.Application.Interfaces.IRepositories
         Task UpdateBookingAsync(Booking booking);
         Task<bool> DeleteBookingAsync(int id);
         Task<Booking> CreateBookingAsync(Booking booking);
+        Task<int> GetSeatsBookedCountAsync(int tourId);
     }
 }

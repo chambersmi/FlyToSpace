@@ -9,14 +9,10 @@
 
 [X] Need User to relate to Booking
 [X] Seed Tours database
-[ ] Should Service Interfaces be in the API itself?
-[ ] Change Service/Repository "Add" into "Create" for consistency
-[ ] IMPORTANT!! I need to link User with Bookings
-[ ] Create Flight Entity
-[ ] Create Flight Repository
-[ ] Create Flight Service
-[ ] Create Flight Controller
+[X] Change Service/Repository "Add" into "Create" for consistency
+[X] IMPORTANT!! I need to link User with Bookings
 
+[ ] Seats available needs to adjust
 
 
 LATER:

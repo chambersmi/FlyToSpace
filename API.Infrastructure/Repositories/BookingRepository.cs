@@ -60,6 +60,13 @@ namespace API.Infrastructure.Repositories
             return bookingEntity;
         }
 
+        public async Task<int> GetSeatsBookedCountAsync(int tourId)
+        {
+            return await _context.Bookings
+                .Where(t => t.TourId == tourId)
+                .SumAsync(b => b.SeatsBooked);
+        }
+
         public async Task UpdateBookingAsync(Booking booking)
         {
             _context.Bookings.Update(booking);
