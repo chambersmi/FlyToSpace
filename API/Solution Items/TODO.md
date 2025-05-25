@@ -6,9 +6,9 @@
 [X] Create Booking Repository
 [X] Create Booking Service
 [X] Create Booking Controller
-[ ] Booking Services will need to book {x} amount of seats.
-[ ] Need User to relate to Booking
-[ ] Seed Tours database
+
+[X] Need User to relate to Booking
+[X] Seed Tours database
 [ ] Should Service Interfaces be in the API itself?
 [ ] Change Service/Repository "Add" into "Create" for consistency
 [ ] IMPORTANT!! I need to link User with Bookings
@@ -22,3 +22,4 @@
 LATER:
 [ ] Passenger should be able to buy more than one seat
 [ ] Each seat will need additional passenger information
+[ ] Booking Services will need to book {x} amount of seats.

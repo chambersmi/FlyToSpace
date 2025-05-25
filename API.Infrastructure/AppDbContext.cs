@@ -28,6 +28,12 @@ namespace API.Infrastructure
             builder.Entity<ApplicationUser>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            builder.Entity<Booking>()
+                .HasOne(u => u.User)
+                .WithMany(u => u.Bookings)
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Tour> Tours { get; set; }

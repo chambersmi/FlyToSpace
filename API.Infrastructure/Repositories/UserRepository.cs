@@ -40,19 +40,24 @@ namespace API.Infrastructure.Repositories
 
         public async Task<IEnumerable<ApplicationUser>> GetAllUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .Include(b => b.Bookings)
+                .ThenInclude(t => t.Tour)
+                .ToListAsync();
         }
 
         public async Task<ApplicationUser?> GetUserByIdAsync(string id)
         {
-            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);            
+            return await _context.Users
+                .Include(b => b.Bookings)
+                .ThenInclude(t => t.Tour)
+                .FirstOrDefaultAsync(x => x.Id == id);            
         }
 
         public async Task UpdateUserAsync(ApplicationUser user)
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
-
         }
     }
 }

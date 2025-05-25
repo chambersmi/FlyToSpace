@@ -12,7 +12,6 @@ namespace API.Application.DTOs
         public int? FlightId { get; set; }  
         public int? CustomerId { get; set; }
         public string? SeatNumber { get; set; }
-        public string? Status { get; set; } 
         public DateTime? BookingDate { get; set; } 
     }
 }

@@ -21,5 +21,6 @@ namespace API.Application.DTOs
         public string City { get; set; } = null!;
         public StateEnum State { get; set; }
         public string ZipCode { get; set; } = null!;
+        public List<BookingDto> Bookings { get; set; } = new List<BookingDto>();
     }
 }

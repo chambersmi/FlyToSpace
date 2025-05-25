@@ -14,7 +14,7 @@ namespace API.Application.Mapping
         public MappingProfile()
         {
             CreateMap<RegisterUserDto, ApplicationUser>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+        .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
 
             CreateMap<ApplicationUser, UserDto>()
                 .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State.ToString()));
@@ -29,24 +29,14 @@ namespace API.Application.Mapping
             // Bookings
             CreateMap<CreateBookingDto, Booking>();
             CreateMap<UpdateBookingDto, Booking>();
-            CreateMap<Booking, BookingDto>();
 
+            CreateMap<Booking, BookingDto>()
+                .ForMember(dest => dest.TourName, opt => opt.MapFrom(src => src.Tour.TourName))
+                .ForMember(dest => dest.TourPricePerDay, opt => opt.MapFrom(src => src.Tour.TourPricePerDay));
+
+            CreateMap<BookingDto, Booking>()
+                .ForMember(dest => dest.Tour, opt => opt.Ignore())
+                .ForMember(dest => dest.User, opt => opt.Ignore());
         }
     }
 }
-
-
-
-// Saving if ever needed
-//.ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State));
-//.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))  
-
-//.ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
-//.ForMember(dest => dest.MiddleName, opt => opt.MapFrom(src => src.MiddleName))
-//.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
-//.ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth))
-//.ForMember(dest => dest.StreetAddress1, opt => opt.MapFrom(src => src.StreetAddress1))
-//.ForMember(dest => dest.StreetAddress2, opt => opt.MapFrom(src => src.StreetAddress2))
-//.ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
-//.ForMember(dest => dest.ZipCode
-//, opt => opt.MapFrom(src => src.ZipCode));

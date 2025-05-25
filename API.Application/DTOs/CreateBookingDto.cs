@@ -10,13 +10,14 @@ namespace API.Application.DTOs
     {
         public int TourId { get; set; }
         public string UserId { get; set; } = null!;
-        public int? FlightId { get; set; }
-        public int? CustomerId { get; set; }
-        public string? SeatNumber { get; set; }
-        public string? Status { get; set; }
+
         public int DurationInDays { get; set; }
-        public decimal TotalPrice { get; set; }
-        public DateTime? BookingDate { get; set; }
+        //public decimal TotalPrice { get; set; } // Calculate later
+
+        public string? SeatNumber { get; set; }
+
+        public int? FlightId { get; set; }
+        public DateTime? BookingDate { get; set; } = DateTime.UtcNow;
     }
 
 }

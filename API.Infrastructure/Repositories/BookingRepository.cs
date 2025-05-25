@@ -44,12 +44,18 @@ namespace API.Infrastructure.Repositories
 
         public async Task<List<Booking>> GetAllBookingsAsync()
         {
-            return await _context.Bookings.ToListAsync();
+            return await _context.Bookings
+                .Include(b => b.Tour)
+                .Include(b => b.User)
+                .ToListAsync();
         }
 
         public async Task<Booking> GetBookingByIdAsync(int id)
         {
-            var bookingEntity = await _context.Bookings.FirstOrDefaultAsync(x => x.BookingId == id);
+            var bookingEntity = await _context.Bookings
+                .Include(b => b.Tour)
+                .Include(b => b.User)
+                .FirstOrDefaultAsync(x => x.BookingId == id);
 
             return bookingEntity;
         }
