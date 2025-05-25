@@ -14,12 +14,9 @@ namespace API.Domain.Entities
         public Tour Tour { get; set; } = null!;
 
         public string UserId { get; set; } = null!;
+        public ApplicationUser? User { get; set; } = null!;        
 
-        //public int? FlightId { get; set; }
-        //public Flight? Flight { get; set; }
-
-        public int? CustomerId { get; set; }
-        public ApplicationUser? Customer { get; set; }
+        public int? FlightId { get; set; }
 
         public string? SeatNumber { get; set; }
 

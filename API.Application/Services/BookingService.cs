@@ -32,6 +32,13 @@ namespace API.Application.Services
         public async Task<BookingDto?> CreateBookingAsync(CreateBookingDto dto)
         {
             var bookingEntity = _mapper.Map<Booking>(dto);
+
+            if(!bookingEntity.FlightId.HasValue)
+            {
+                var random = new Random();
+                bookingEntity.FlightId = random.Next(1, 1000);
+            }
+            
             var booking = await _bookingRepository.CreateBookingAsync(bookingEntity);
             var resultDto = _mapper.Map<BookingDto>(booking);
 

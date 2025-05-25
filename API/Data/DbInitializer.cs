@@ -1,7 +1,10 @@
-﻿using API.Domain.Entities;
+﻿using API.Application.Services;
+using API.Domain.Entities;
 using API.Infrastructure;
+using API.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 
 namespace API.Data
 {
@@ -28,7 +31,7 @@ namespace API.Data
             var dbPath = context.Database.GetDbConnection().DataSource;
 
             var getPendingMigrations = context.Database.GetPendingMigrations();
-            if(getPendingMigrations.Any())
+            if (getPendingMigrations.Any())
             {
                 context.Database.Migrate();
                 Console.WriteLine("Migration applied.");
@@ -37,9 +40,11 @@ namespace API.Data
             {
                 Console.WriteLine("No pending migrations.");
             }
-                
+
             // Seed database mock users
-            await SeedData(context, userManager);
+            await SeedUserData(context, userManager);
+            await SeedTourData(context);
+            await SeedBookingData(context, userManager);
         }
 
         /// <summary>
@@ -49,7 +54,7 @@ namespace API.Data
         /// <param name="userManager">The database context used to access the identity user table.</param>
         /// <returns>A task that completes once seeding is finished</returns>
         /// <exception cref="Exception"></exception>
-        public static async Task SeedData(AppDbContext context, UserManager<ApplicationUser> userManager)
+        public static async Task SeedUserData(AppDbContext context, UserManager<ApplicationUser> userManager)
         {
             if (!userManager.Users.Any())
             {
@@ -66,7 +71,7 @@ namespace API.Data
                         StreetAddress1 = "123 Main St.",
                         City = "McTesterTown",
                         State = Domain.Enums.StateEnum.MI,
-                        ZipCode = "55527"
+                        ZipCode = "55527",
                     }, "Test123!"),
 
                     (new ApplicationUser
@@ -147,6 +152,74 @@ namespace API.Data
                         Console.WriteLine($"User {user.Email} already exists!");
                     }
                 }
+
+            }
+        }
+
+        public static async Task SeedTourData(AppDbContext context)
+        {
+            if (!context.Tours.Any())
+            {
+                var tour = new Tour
+                {
+                    TourName = "Inner Solar System Fly-By!",
+                    TourDescription = "Have a chance to fly near Mercury, and a full tour around Venus and Mars!",
+                    TourPricePerDay = 199.99m,
+                    MaxSeats = 20,
+                    SeatsOccupied = 0
+                };
+
+                await context.Tours.AddAsync(tour);
+                await context.SaveChangesAsync();
+
+                Console.WriteLine($"Seeded tour: {tour.TourName}");
+            }
+            else
+            {
+                Console.WriteLine($"Tour already exists.");
+            }
+        }
+
+        public static async Task SeedBookingData(AppDbContext context, UserManager<ApplicationUser> userManager)
+        {
+            if (!context.Bookings.Any())
+            {
+                var user = await userManager.FindByEmailAsync("kaleb@nasa.gov");
+                if (user == null)
+                {
+                    Console.WriteLine($"Cannot seed. User was not found.");
+                    return;
+                }
+
+                var tour = await context.Tours.FirstOrDefaultAsync();
+
+                if (tour == null)
+                {
+                    Console.WriteLine("Cannot seed booking: tour was not found.");
+                    return;
+                }
+
+                var booking = new Booking
+                {
+                    TourId = tour.TourId,
+                    Tour = tour,
+                    UserId = user.Id,
+                    FlightId = new Random().Next(1, 1000),
+                    SeatNumber = "A1",
+                    Status = "Confirmed",
+                    DurationInDays = 3,
+                    TotalPrice = tour.TourPricePerDay * 3,
+                    BookingDate = DateTime.UtcNow
+                };
+
+                await context.Bookings.AddAsync(booking);
+                await context.SaveChangesAsync();
+
+                Console.WriteLine($"Seeded booking for user {user.Email} on tour {tour.TourName}");
+            }
+            else
+            {
+                Console.WriteLine("Bookings already exist. No seeding required.");
 
             }
         }

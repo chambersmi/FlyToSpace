@@ -23,6 +23,8 @@ namespace API.Application.DTOs
         public string UserId { get; set; } = null!;
 
         public DateTime BookingDate { get; set; }
+        
+        public int FlightId { get; set; }
 
     }
 }

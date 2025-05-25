@@ -21,5 +21,7 @@ namespace API.Domain.Entities
         public StateEnum State { get; set; } = StateEnum.MI;
         public string ZipCode { get; set; } = null!;
 
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+
     }
 }

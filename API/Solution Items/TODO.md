@@ -16,3 +16,9 @@
 [ ] Create Flight Repository
 [ ] Create Flight Service
 [ ] Create Flight Controller
+
+
+
+LATER:
+[ ] Passenger should be able to buy more than one seat
+[ ] Each seat will need additional passenger information

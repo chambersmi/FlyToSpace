@@ -3,6 +3,7 @@ using System;
 using API.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250525151518_AddedBookings")]
+    partial class AddedBookings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -126,6 +129,12 @@ namespace API.Infrastructure.Data.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CustomerId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("DurationInDays")
                         .HasColumnType("INTEGER");
 
@@ -150,9 +159,9 @@ namespace API.Infrastructure.Data.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("TourId");
+                    b.HasIndex("CustomerId1");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("TourId");
 
                     b.ToTable("Bookings");
                 });
@@ -315,21 +324,19 @@ namespace API.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("API.Domain.Entities.Booking", b =>
                 {
+                    b.HasOne("API.Domain.Entities.ApplicationUser", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId1");
+
                     b.HasOne("API.Domain.Entities.Tour", "Tour")
                         .WithMany()
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Domain.Entities.ApplicationUser", "User")
-                        .WithMany("Bookings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Customer");
 
                     b.Navigation("Tour");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -381,11 +388,6 @@ namespace API.Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("API.Domain.Entities.ApplicationUser", b =>
-                {
-                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }
