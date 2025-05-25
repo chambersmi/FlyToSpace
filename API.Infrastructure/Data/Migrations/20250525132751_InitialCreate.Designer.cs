@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250517024042_SeedingDatabase")]
-    partial class SeedingDatabase
+    [Migration("20250525132751_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,6 +118,34 @@ namespace API.Infrastructure.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("API.Domain.Entities.Tour", b =>
+                {
+                    b.Property<int>("TourId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MaxSeats")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SeatsOccupied")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TourDescription")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TourName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("TourPrice")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("TourId");
+
+                    b.ToTable("Tours");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

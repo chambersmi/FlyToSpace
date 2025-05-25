@@ -1,4 +1,5 @@
 using API.Application.Interfaces.IServices;
+using API.Application.Mapping;
 using API.Application.Services;
 using API.Application.Settings;
 using API.Application.Validation;
@@ -24,6 +25,9 @@ namespace API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            // AutoMapper
+            builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
             // Register services and repositories
             builder.Services.AddInfrastructure(builder.Configuration);
@@ -55,17 +59,15 @@ namespace API
                 });
 
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-
+            // End Configure JWT
 
 
             // Non-Infrastructure Services
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<GetStatesService>();
-
-            // Fluent Validation
-            
-
+            builder.Services.AddScoped<ITourService, TourService>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();

@@ -117,6 +117,34 @@ namespace API.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("API.Domain.Entities.Tour", b =>
+                {
+                    b.Property<int>("TourId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MaxSeats")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SeatsOccupied")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TourDescription")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TourName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("TourPrice")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("TourId");
+
+                    b.ToTable("Tours");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

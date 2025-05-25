@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedingDatabase : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,6 +57,23 @@ namespace API.Infrastructure.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tours",
+                columns: table => new
+                {
+                    TourId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TourName = table.Column<string>(type: "TEXT", nullable: false),
+                    TourDescription = table.Column<string>(type: "TEXT", nullable: false),
+                    TourPrice = table.Column<double>(type: "REAL", nullable: false),
+                    MaxSeats = table.Column<int>(type: "INTEGER", nullable: false),
+                    SeatsOccupied = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tours", x => x.TourId);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,6 +243,9 @@ namespace API.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Tours");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -31,9 +31,9 @@ namespace API.Infrastructure
 
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITourRepository, TourRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
 
-            // AutoMapper
-            services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
                         
 

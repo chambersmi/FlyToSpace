@@ -38,6 +38,12 @@ namespace API.Controllers
         public async Task<IActionResult> GetUserByIdAsync(string id)
         {
             var users = await _userService.GetUserByIdAsync(id);
+
+            if(users == null)
+            {
+                return NotFound();
+            }
+
             return Ok(users);
         }
 
@@ -50,6 +56,11 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUserAsync(string id, [FromBody] UpdateUserDto dto)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var isSuccess = await _userService.UpdateUserAsync(id, dto);
             
             if(!isSuccess)

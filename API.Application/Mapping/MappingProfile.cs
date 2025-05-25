@@ -20,6 +20,17 @@ namespace API.Application.Mapping
                 .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State.ToString()));
 
             CreateMap<UpdateUserDto, ApplicationUser>();
+
+            // Tours
+            CreateMap<CreateTourDto, Tour>();
+            CreateMap<UpdateTourDto, Tour>();
+            CreateMap<Tour, TourDto>();
+
+            // Bookings
+            CreateMap<CreateBookingDto, Booking>();
+            CreateMap<UpdateBookingDto, Booking>();
+            CreateMap<Booking, BookingDto>();
+
         }
     }
 }

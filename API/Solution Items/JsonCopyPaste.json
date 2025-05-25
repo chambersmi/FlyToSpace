@@ -29,3 +29,10 @@
   "zipCode": "48827"
 }
 
+{
+  "tourName": "Mars Tour",
+  "tourDescription": "Travel around Mars and see its moons, Phoebe and Demos!",
+  "tourPrice": 149.99,
+  "maxSeats": 50,
+  "seatsOccupied": 30
+}

@@ -1,6 +1,18 @@
 ﻿[X] App crashing when a user selects anything besides MI on the state dropdown
 [ ] Why does AL (state) not Save??
-[ ] Create Tours Repository
-[ ] Create Tours Service
-[ ] Create Tours Controller
+[X] Create Tours Repository
+[X] Create Tours Service
+[X] Create Tours Controller
+[X] Create Booking Repository
+[X] Create Booking Service
+[X] Create Booking Controller
+[ ] Booking Services will need to book {x} amount of seats.
+[ ] Need User to relate to Booking
 [ ] Seed Tours database
+[ ] Should Service Interfaces be in the API itself?
+[ ] Change Service/Repository "Add" into "Create" for consistency
+[ ] IMPORTANT!! I need to link User with Bookings
+[ ] Create Flight Entity
+[ ] Create Flight Repository
+[ ] Create Flight Service
+[ ] Create Flight Controller

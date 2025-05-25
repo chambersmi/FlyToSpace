@@ -29,5 +29,8 @@ namespace API.Infrastructure
                 .HasIndex(u => u.Email)
                 .IsUnique();
         }
+
+        public DbSet<Tour> Tours { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }
