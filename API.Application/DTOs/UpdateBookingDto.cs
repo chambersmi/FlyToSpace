@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace API.Application.DTOs
 {
     public class UpdateBookingDto
-    {
+    {        
         public int? FlightId { get; set; }  
         public int SeatsBooked { get; set; }
         public DateTime? BookingDate { get; set; } 

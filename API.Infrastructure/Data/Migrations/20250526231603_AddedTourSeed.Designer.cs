@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250525203521_BookingToursUpdated")]
-    partial class BookingToursUpdated
+    [Migration("20250526231603_AddedTourSeed")]
+    partial class AddedTourSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

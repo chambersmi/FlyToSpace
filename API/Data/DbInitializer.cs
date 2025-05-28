@@ -160,25 +160,74 @@ namespace API.Data
         {
             if (!context.Tours.Any())
             {
-                var tour = new Tour
+                var tour = new List<Tour>
                 {
-                    TourName = "Inner Solar System Fly-By!",
-                    TourDescription = "Have a chance to fly near Mercury, and a full tour around Venus and Mars!",
-                    TourPackagePrice = 199.99m,
-                    MaxSeats = 20,
-                    SeatsOccupied = 0
-                };
+                    new Tour {
+                        TourName = "Inner Solar System Fly-By!",
+                        TourDescription = "Have a chance to fly near Mercury, and a full tour around Venus and Mars!",
+                        TourPackagePrice = 199.99m,
+                        MaxSeats = 20,
+                        SeatsOccupied = 0
+                    },
 
-                await context.Tours.AddAsync(tour);
+                    new Tour
+                    {
+                        TourName = "Dazzle with Saturn",
+                        TourDescription = "Experience the elegance of Saturn’s iconic rings up close. Glide past icy spokes and enjoy scenic views of Titan, Rhea, and Enceladus. Don’t forget your zero-gravity camera!",
+                        TourPackagePrice = 449.99m,
+                        MaxSeats = 15,
+                        SeatsOccupied = 0
+                    },
+                    new Tour
+                    {
+                        TourName = "Ring in the New Year with Saturn",
+                        TourDescription = "Celebrate the New Year with a stunning orbital party above Saturn’s rings. Includes a fly-by of Titan’s methane seas and fireworks visible from the dark side!",
+                        TourPackagePrice = 499.99m,
+                        MaxSeats = 12,
+                        SeatsOccupied = 0
+                    },
+
+                    new Tour
+                    {
+                        TourName = "Europa Chill Expedition",
+                        TourDescription = "Cool off on Jupiter’s ice moon Europa. Marvel at its surface cracks and frozen ridges while our sub-ice drone explores what's beneath. Includes hot chocolate in orbit.",
+                        TourPackagePrice = 399.99m,
+                        MaxSeats = 10,
+                        SeatsOccupied = 0
+                    },
+
+                    new Tour
+                    {
+                        TourName = "Volcano Views of Io",
+                        TourDescription = "For thrill-seekers! Witness the most volcanically active body in the solar system. Tour includes shielded observation pods and a lava-light show like no other.",
+                        TourPackagePrice = 429.99m,
+                        MaxSeats = 8,
+                        SeatsOccupied = 0
+                    },
+                    new Tour
+                    {
+                        TourName = "The Grand Outer Circuit",
+                        TourDescription = "A 10-day journey across the gas giants: Jupiter, Saturn, Uranus, and Neptune. Full tours of each planet’s moons, rings, and atmospheric wonders. For the ultimate explorer.",
+                        TourPackagePrice = 999.99m,
+                        MaxSeats = 5,
+                        SeatsOccupied = 0
+                        },
+                    };
+
+
+                await context.Tours.AddRangeAsync(tour);
                 await context.SaveChangesAsync();
 
-                Console.WriteLine($"Seeded tour: {tour.TourName}");
+                foreach(var tours in tour)
+                {
+                    Console.WriteLine($"{tours.TourName} added to database.");
+                }
             }
-            else
-            {
-                Console.WriteLine($"Tour already exists.");
+                else
+                {
+                    Console.WriteLine($"Tour already exists.");
+                }
             }
-        }
 
         public static async Task SeedBookingData(AppDbContext context, UserManager<ApplicationUser> userManager)
         {

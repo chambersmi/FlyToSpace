@@ -16,6 +16,5 @@ namespace API.Domain.Entities
         public decimal TourPackagePrice { get; set; }
         public int MaxSeats { get; set; }
         public int SeatsOccupied { get; set; }
-        public int SeatsAvailable => MaxSeats - SeatsOccupied;
     }
 }

@@ -15,4 +15,5 @@ export class TourService {
   getAllTours():Observable<TourDto[]> {
     return this.httpClient.get<TourDto[]>(`${this.apiUrl}/all`);
   }
+  
 }

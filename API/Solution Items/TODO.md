@@ -12,7 +12,7 @@
 [X] Change Service/Repository "Add" into "Create" for consistency
 [X] IMPORTANT!! I need to link User with Bookings
 
-[ ] Seats available needs to adjust
+[ ] Seats available need to adjust
 
 
 LATER:

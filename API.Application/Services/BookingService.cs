@@ -33,79 +33,80 @@ namespace API.Application.Services
         }
 
         public async Task<BookingDto?> CreateBookingAsync(CreateBookingDto dto)
-        {
+        {            
             var bookingEntity = _mapper.Map<Booking>(dto);
-
-            // Get tour for seat count
-            var tour = await _tourRepository.GetTourByIdAsync(dto.TourId);
-
-            if(tour == null)
-            {
-                throw new Exception("Tour not found.");
-            }
 
             // Assign random Flight Id
             // If a user is booking multiple seats, it'll have to be the same id
-            if(!bookingEntity.FlightId.HasValue)
+            if (!bookingEntity.FlightId.HasValue)
             {
                 var random = new Random();
                 bookingEntity.FlightId = random.Next(1, 1000);
             }
 
-            if(dto.SeatsBooked <= 0)
+            if (dto.SeatsBooked <= 0)
             {
                 throw new Exception("Must book at least one seat.");
             }
 
-            int currentOccupiedSeats = await _bookingRepository.GetSeatsBookedCountAsync(tour.TourId);
+            // Check seat availability
+            // Tours has MaxSeats and SeatsOccupied
+            var tourEntity = await _tourRepository.GetTourByIdAsync(dto.TourId);
+            var maxSeats = tourEntity.MaxSeats;
+            var seatsOccupied = tourEntity.SeatsOccupied;
             
-            if(currentOccupiedSeats + dto.SeatsBooked > tour.MaxSeats)
+            // Subtract max seats from seats occupied
+            var availableSeats = maxSeats - seatsOccupied;
+
+            if(dto.SeatsBooked > availableSeats)
             {
-                throw new Exception("Not enough seats available.");
+                throw new Exception("There are not enough seats.");                
             }
 
-            tour.SeatsOccupied += dto.SeatsBooked;
-            await _tourRepository.UpdateTourAsync(tour);
+            tourEntity.SeatsOccupied += dto.SeatsBooked;
+            await _tourRepository.UpdateTourAsync(tourEntity);
+            // End check seat availablity
 
             bookingEntity.BookingDate = DateTime.UtcNow;
             bookingEntity.TotalPrice = await CalculuateTotalPriceAsync(dto.TourId, dto.SeatsBooked);
-            
+
             var booking = await _bookingRepository.CreateBookingAsync(bookingEntity);
             var resultDto = _mapper.Map<BookingDto>(booking);
 
             return resultDto;
         }
 
-        public async Task<BookingDto?> UpdateBookingAsync(int id, UpdateBookingDto dto)
+        public async Task<BookingDto?> UpdateBookingAsync(int bookingId, UpdateBookingDto dto)
         {
-            var existingBooking = await _bookingRepository.GetBookingByIdAsync(id);
+            var existingBooking = await _bookingRepository.GetBookingByIdAsync(bookingId);
 
             if (existingBooking == null)
                 return null;
 
-            var tour = await _tourRepository.GetTourByIdAsync(existingBooking.TourId);
-
-            if (tour == null)
-                throw new Exception("Tour not found.");
-
             if (dto.SeatsBooked <= 0)
                 throw new Exception("Must book at least one seat.");
+            
+            // Check seat availability
+            // Tours has MaxSeats and SeatsOccupied
+            var tourEntity = await _tourRepository.GetTourByIdAsync(existingBooking.TourId);
+            var maxSeats = tourEntity.MaxSeats;
+            var seatsOccupied = tourEntity.SeatsOccupied;
 
-            // !!!! NEEDS REFACTORED !!!!
-            // Seat calculations
-            int currentOccupiedSeats = await _bookingRepository.GetSeatsBookedCountAsync(tour.TourId);
-            int updatedOccupiedSeats = currentOccupiedSeats - existingBooking.SeatsBooked + dto.SeatsBooked;
+            // Subtract max seats from seats occupied
+            var availableSeats = maxSeats - seatsOccupied;
 
-            if (updatedOccupiedSeats > tour.MaxSeats)
-                throw new Exception("Not enough seats available.");
+            if (dto.SeatsBooked > availableSeats)
+            {
+                throw new Exception("There are not enough seats.");
+            }
 
-            int seatDifference = dto.SeatsBooked - existingBooking.SeatsBooked;
-            tour.SeatsOccupied += seatDifference;
-            await _tourRepository.UpdateTourAsync(tour);
+            tourEntity.SeatsOccupied += dto.SeatsBooked;
+            await _tourRepository.UpdateTourAsync(tourEntity);
+            // End check seat availablity
 
-            // Update fields
-            existingBooking.SeatsBooked = dto.SeatsBooked;
-            existingBooking.TotalPrice = await CalculuateTotalPriceAsync(tour.TourId, dto.SeatsBooked);
+            existingBooking.TotalPrice = await CalculuateTotalPriceAsync(existingBooking.TourId, dto.SeatsBooked);
+
+            // FlightId should change if they are changing the date            
             existingBooking.FlightId = dto.FlightId ?? existingBooking.FlightId;
             existingBooking.BookingDate = dto.BookingDate ?? existingBooking.BookingDate;
 
@@ -145,13 +146,18 @@ namespace API.Application.Services
             decimal taxAmount = 0.06m;
 
             var tour = await _tourRepository.GetTourByIdAsync(tourId);
-            
+
             if (tour == null)
             {
                 throw new Exception($"{tourId} not found.");
             }
 
             return (tour.TourPackagePrice * seatsBooked) * (1 + taxAmount);
+        }
+
+        private async Task UpdateSeatAvailabilityAsync(int tourId, int seatsToBook, int? originalSeatsBooked = null)
+        {
+
         }
     }
 }

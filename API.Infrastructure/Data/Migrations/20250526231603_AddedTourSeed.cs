@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class BookingToursUpdated : Migration
+    public partial class AddedTourSeed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
