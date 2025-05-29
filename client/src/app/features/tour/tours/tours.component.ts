@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TourDto } from '../../../models/tour/tour-dto.model';
 import { TourService } from '../../../services/tour/tour.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tours',
@@ -14,7 +15,7 @@ export class ToursComponent implements OnInit {
   error: string | null = null;
   isLoading = false;
 
-  constructor(private tourService:TourService) {}
+  constructor(private tourService:TourService, private router:Router) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -33,7 +34,8 @@ export class ToursComponent implements OnInit {
   }
 
   bookTour(tourId:number) {
-    console.log(`Booking tour: ${tourId}`);
+    console.log("Button clicked");
+    this.router.navigate(['/create-booking', tourId]);
   }
 
 }
