@@ -40,14 +40,16 @@ namespace API.Controllers
         [HttpGet("itinerary")]
         public async Task<IActionResult> GetAllUserBookingsAsync()
         {
-           var user = await _userManager.GetUserAsync(User);
+            //var user = await _userManager.GetUserAsync(User);
+            var userId = User.FindFirst("id")?.Value;
+            var email = User.FindFirst("email")?.Value;
             
-           if(user == null)
+           if(userId == null)
             {
                 return NotFound();
             }
 
-            var bookings = await _bookingService.GetAllUserBookingsAsync(user.Id);
+            var bookings = await _bookingService.GetAllUserBookingsAsync(userId);
             return Ok(bookings);
         }
 
