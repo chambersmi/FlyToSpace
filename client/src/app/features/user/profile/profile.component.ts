@@ -7,6 +7,9 @@ import { UserDto } from '../../../models/auth/user-dto.model';
 import { CommonModule } from '@angular/common';
 import { StateService } from '../../../services/states/state.service';
 import { NotificationService } from '../../../services/notification.service';
+import { TourService } from '../../../services/tour/tour.service';
+import { BookingTourService } from '../../../services/bookTour/booking-tour.service';
+import { BookingDto } from '../../../models/bookTour/booking-dto.model';
 
 @Component({
   selector: 'app-profile',
@@ -20,42 +23,31 @@ export class ProfileComponent implements OnInit {
   userId!: string;
   states: { [key: number]: string } = {};
   stateKeys: number[] = [];
+  bookings: BookingDto[] = [];
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private userService: UserService,
     private stateService: StateService,
-    private notification: NotificationService
-  ) {}
+    private notification: NotificationService,
+    private bookingService: BookingTourService
+  ) { }
 
   ngOnInit(): void {
     const user = this.authService.getUserFromToken();
-    
-    if(!user) {
+
+    if (!user) {
       console.log(`${user} not found.`);
       return;
     }
 
-    this.authService.getUserFromToken
-
+    this.authService.getUserFromToken();
     this.userId = user.id;
-
-    this.userService.getUserById(this.userId).subscribe({
-      next: (userData: UserDto) => {
-        this.initForm(userData);
-        console.log(userData);
-      },
-      error: (err) => {
-        console.error('Failed to fetch user data: ', err);
-      }
-    });
-
-    this.stateService.getStates().subscribe((data) => {
-      this.states = data;
-      this.stateKeys = Object.keys(data).map(Number);
-    })
-  } 
+    
+    this.loadUser();
+    this.loadBookings();
+  }
 
   // Populate form
   private initForm(user: UserDto): void {
@@ -72,7 +64,7 @@ export class ProfileComponent implements OnInit {
       zipCode: [user.zipCode, Validators.required]
     });
   }
-  
+
   // Update new values
   private updateDto(): UpdateUserDto {
     const formValue = this.profileForm.getRawValue();
@@ -91,7 +83,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(): void {
-    if(this.profileForm.invalid) {
+    if (this.profileForm.invalid) {
       console.warn("Invalid form.");
       return;
     }
@@ -114,6 +106,35 @@ export class ProfileComponent implements OnInit {
         console.log('Failed to update profile\n', err);
         this.notification.error('Error in updating profile.')
       }
+    });
+  }
+
+  private loadBookings() {
+    this.bookingService.getAllBookings().subscribe({
+      next: (data) => {
+        this.bookings = data;
+        console.log("Users bookings:");
+        console.log(this.bookings);
+      },
+      error: (err) => {
+        console.error('Error loading bookings:\n', err)
+      }
+    });
+  }
+
+  private loadUser() {
+    this.userService.getUserById(this.userId).subscribe({
+      next: (userData: UserDto) => {
+        this.initForm(userData);
+      },
+      error: (err) => {
+        console.error('Failed to fetch user data: ', err);
+      }
+    });
+
+    this.stateService.getStates().subscribe((data) => {
+      this.states = data;
+      this.stateKeys = Object.keys(data).map(Number);
     });
   }
 }

@@ -7,6 +7,6 @@ namespace API.Application.Interfaces.IServices
     public interface IAuthService
     {
         Task<IdentityResult> RegisterAsync(RegisterUserDto dto);
-        Task<(bool Success, ApplicationUser? user)> AuthenticateUserAsync(LoginDto dto);
+        Task<(bool Success, string? Token)> AuthenticateUserAsync(LoginDto dto);
     }
 }

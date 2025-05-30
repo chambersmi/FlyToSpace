@@ -58,14 +58,13 @@ namespace API.Controllers
         {
             try
             {
-                var (success, user) = await _authService.AuthenticateUserAsync(model);
+                var (success, token) = await _authService.AuthenticateUserAsync(model);
 
-                if (!success || user == null)
+                if (!success || token == null)
                 {
                     return Unauthorized("Invalid Credentials.");
                 }
 
-                var token = _jwtTokenGenerator.GenerateToken(user);
                 return Ok(new
                 {
                     token

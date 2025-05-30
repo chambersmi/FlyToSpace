@@ -1,9 +1,11 @@
 ﻿using API.Application.DTOs;
 using API.Application.Interfaces.IServices;
 using API.Domain.Entities;
+using API.Infrastructure.Auth;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+
 
 namespace API.Infrastructure.Services
 {
@@ -12,21 +14,24 @@ namespace API.Infrastructure.Services
         private readonly ILogger<AuthService> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IMapper _mapper;
 
         public AuthService(
-            ILogger<AuthService> logger, 
+            ILogger<AuthService> logger,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            IJwtTokenGenerator jwtTokenGenerator,
             IMapper mapper)
         {
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _jwtTokenGenerator = jwtTokenGenerator;
         }
 
-        public async Task<(bool Success, ApplicationUser? user)> AuthenticateUserAsync(LoginDto dto)
+        public async Task<(bool Success, string? Token)> AuthenticateUserAsync(LoginDto dto)
         {
             var user = await _userManager.FindByEmailAsync(dto.Email);
 
@@ -39,8 +44,11 @@ namespace API.Infrastructure.Services
             
             if(result.Succeeded)
             {
-                return (true, user);
+                var token = _jwtTokenGenerator.GenerateToken(user);
+                return (true, token);
             }
+
+            
             return (false, null);
         }
 

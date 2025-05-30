@@ -22,12 +22,11 @@ export class ToursComponent implements OnInit {
 
     this.tourService.getAllTours().subscribe({
       next: (data) => {
-        console.log(data);
         this.tours = data;
         this.isLoading = false;
       },
       error: (err) => {
-        console.log('Error!\n', err); 
+        console.log('Error with getting Tour data!\n', err); 
         this.isLoading = false;               
       }
     })

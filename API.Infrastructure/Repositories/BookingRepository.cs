@@ -42,19 +42,31 @@ namespace API.Infrastructure.Repositories
             return true;
         }
 
-        public async Task<List<Booking>> GetAllBookingsAsync()
+        /// <summary>
+        /// This will retrieve ALL bookings by the user id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<List<Booking>> GetAllBookingsByUserIdAsync(string userId)
         {
             return await _context.Bookings
                 .Include(b => b.Tour)
                 .Include(b => b.User)
+                .Where(u => u.UserId == userId)
                 .ToListAsync();
         }
 
-        public async Task<Booking> GetBookingByIdAsync(int id)
+        /// <summary>
+        /// This will retrieve a single booking by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<Booking> GetUserBookingByIdAsync(int id, string userId)
         {
             var bookingEntity = await _context.Bookings
                 .Include(b => b.Tour)
-                .Include(b => b.User)
+                .Include(b => b.User)                
+                .Where(b => b.UserId == userId)
                 .FirstOrDefaultAsync(x => x.BookingId == id);
 
             return bookingEntity;
@@ -72,5 +84,26 @@ namespace API.Infrastructure.Repositories
             _context.Bookings.Update(booking);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Booking>> GetAllBookingsAsync()
+        {
+            var bookingEntity = await _context.Bookings
+                .Include(b => b.Tour)
+                .Include(b => b.User)
+                .ToListAsync();
+
+            return bookingEntity;
+        }
+
+        public async Task<Booking> GetBookingByIdAsync(int id)
+        {
+            var bookingEntity = await _context.Bookings
+                .Include(b => b.Tour)
+                .Include(b => b.User)
+                .FirstOrDefaultAsync(x => x.BookingId == id);
+
+            return bookingEntity;
+        }
+        
     }
 }

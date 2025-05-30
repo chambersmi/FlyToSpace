@@ -128,15 +128,32 @@ namespace API.Application.Services
             return true;
         }
 
-        public async Task<IEnumerable<BookingDto>> GetAllBookingsAsync()
+        /// <summary>
+        /// Returns all bookings made by that user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<BookingDto>> GetAllUserBookingsAsync(string userId)
         {
-            var bookings = await _bookingRepository.GetAllBookingsAsync();
+            var bookings = await _bookingRepository.GetAllBookingsByUserIdAsync(userId);
             return _mapper.Map<IEnumerable<BookingDto>>(bookings);
         }
 
-        public async Task<BookingDto?> GetBookingByIdAsync(int id)
+        /// <summary>
+        /// Gets a single booking by user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<BookingDto?> GetUserBookingByIdAsync(int id, string userId)
         {
-            var booking = await _bookingRepository.GetBookingByIdAsync(id);
+            var booking = await _bookingRepository.GetUserBookingByIdAsync(id, userId);
+            
+            if(booking == null || booking.UserId != userId)
+            {
+                return null;
+            }
+
             return _mapper.Map<BookingDto>(booking);
         }
 
@@ -155,9 +172,18 @@ namespace API.Application.Services
             return (tour.TourPackagePrice * seatsBooked) * (1 + taxAmount);
         }
 
-        private async Task UpdateSeatAvailabilityAsync(int tourId, int seatsToBook, int? originalSeatsBooked = null)
+        public async Task<IEnumerable<BookingDto>> GetAllBookingsAsync()
         {
+            var booking = await _bookingRepository.GetAllBookingsAsync();
 
+            return _mapper.Map<IEnumerable<BookingDto>>(booking);
+        }
+
+        public async Task<BookingDto> GetBookingByIdAsync(int id)
+        {
+            var booking = await _bookingRepository.GetBookingByIdAsync(id);
+
+            return _mapper.Map<BookingDto>(booking);
         }
     }
 }

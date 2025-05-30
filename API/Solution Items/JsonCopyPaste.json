@@ -36,3 +36,9 @@
   "maxSeats": 50,
   "seatsOccupied": 30
 }
+
+{
+  "email": "test@test.com",
+  "password": "Test123!",
+  "rememberMe": true
+}

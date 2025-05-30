@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(dto).subscribe({
      next: (response: LoginResponse) => {
       localStorage.setItem('authToken', response.token);
+      console.log("Response token: ", response.token);
       this.router.navigateByUrl(this.returnUrl);
      },
      error: (err) => {

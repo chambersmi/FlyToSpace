@@ -2,12 +2,13 @@
 using API.Application.Interfaces.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
-    [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
@@ -87,6 +88,24 @@ namespace API.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet("me")]
+        public IActionResult GetCurrentUser()
+        {
+
+            Console.WriteLine("\n\n\n\n\nClaim Types:");
+            foreach (var claim in User.Claims)
+            {
+                Console.WriteLine($"Claim: {claim.Type}");
+
+            }
+            Console.WriteLine("\n\n\n\n\n");
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var email = User.FindFirstValue(ClaimTypes.Email);
+
+            return Ok(new { userId, email });
         }
 
 

@@ -1,43 +1,79 @@
 ﻿using API.Application.DTOs;
 using API.Application.Interfaces.IServices;
+using API.Domain.Entities;
+using API.Infrastructure.Auth;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class BookingController : Controller
+    public class BookingController : ControllerBase
     {
         private readonly ILogger<BookingController> _logger;
         private readonly IBookingService _bookingService;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserService _userService;
 
         public BookingController(
             ILogger<BookingController> logger,
             IBookingService bookingService,
-            IMapper mapper)
+            IMapper mapper,
+            UserManager<ApplicationUser> userManager,
+            IUserService userService
+            )
         {
             _logger = logger;
             _bookingService = bookingService;
-            _mapper = mapper;                
+            _mapper = mapper;
+            _userManager = userManager;
+            _userService = userService;
         }
 
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAllBookingsAsync()
+        
+        [HttpGet("itinerary")]
+        public async Task<IActionResult> GetAllUserBookingsAsync()
         {
-            var bookings = await _bookingService.GetAllBookingsAsync();
+           var user = await _userManager.GetUserAsync(User);
+            
+           if(user == null)
+            {
+                return NotFound();
+            }
+
+            var bookings = await _bookingService.GetAllUserBookingsAsync(user.Id);
             return Ok(bookings);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBookingByIdAsync(int id)
+        [HttpGet("claims")]
+        public IActionResult GetClaims()
         {
-            var booking = await _bookingService.GetBookingByIdAsync(id);
+            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+            return Ok(claims);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserBookingsByIdAsync(int bookingId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            
+            if(userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var booking = await _bookingService.GetUserBookingByIdAsync(bookingId, userId);
 
             if(booking == null)
             {
-                return NotFound($"{id} not found.");
+                return NotFound($"{bookingId} not found.");
             }
 
             return Ok(booking);
@@ -84,6 +120,13 @@ namespace API.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllBookingsAsync()
+        {
+            var bookings = await _bookingService.GetAllBookingsAsync();
+            return Ok(bookings);
         }
     }
 }

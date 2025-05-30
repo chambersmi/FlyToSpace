@@ -1,20 +1,14 @@
 using API.Application.Interfaces.IServices;
 using API.Application.Mapping;
 using API.Application.Services;
-using API.Application.Settings;
-using API.Application.Validation;
 using API.Data;
 using API.Domain.Entities;
 using API.Infrastructure;
-using API.Infrastructure.Auth;
 using API.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using API.Utilities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
-using System.Text;
-using System.Text.Unicode;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
 
 namespace API
 {
@@ -29,37 +23,12 @@ namespace API
             // AutoMapper
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
-            // Register services and repositories
+            // Register services and repositories and sets up Database DBContext
             builder.Services.AddInfrastructure(builder.Configuration);
 
-
-            // Configure JWT
-            var jwtSection = builder.Configuration.GetSection("JwtSettings");
-            var jwtSettings = jwtSection.Get<JwtSettings>();
-
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    if (jwtSettings == null || string.IsNullOrWhiteSpace(jwtSettings.Key)
-                        || string.IsNullOrWhiteSpace(jwtSettings.Issuer) || string.IsNullOrWhiteSpace(jwtSettings.Audience))
-                    {
-                        throw new InvalidOperationException("JWT Settings are not configured properly for this application.");
-                    }
-
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = jwtSettings.Issuer,
-                        ValidAudience = jwtSettings.Audience, // 
-                        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(jwtSettings.Key))
-                    };
-                });
-
-            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-            // End Configure JWT
+            // Sets up JWT Authentication and Authorization
+            builder.Services.AddJwtAuthenticationAndAuthorization(builder.Configuration);
+            builder.Services.AddHttpContextAccessor();
 
 
             // Non-Infrastructure Services
@@ -71,9 +40,8 @@ namespace API
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            
-            builder.Services.AddControllers();                                
+            builder.Services.AddSwaggerConfiguration(builder.Configuration);
+            builder.Services.AddControllers();
 
             // CORS Policy
             var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
@@ -88,11 +56,6 @@ namespace API
                 });
             });
 
-            // Register Authorization
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
-
             // Allowing username characters so email can be used as a username
             builder.Services.Configure<IdentityOptions>(options =>
             {
@@ -100,6 +63,9 @@ namespace API
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             });
+
+            // Take out after dev
+            IdentityModelEventSource.ShowPII = true;
 
             var app = builder.Build();
 
@@ -121,20 +87,29 @@ namespace API
 
             app.UseHttpsRedirection();
             app.UseCors("AngularApp");
-            
-            app.UseAuthentication();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.MapControllers();
+
+            //app.Urls.Add("http://*:80");
+            app.Use(async (context, next) =>
+            {
+                var authHeader = context.Request.Headers["Authorization"].ToString();
+                Console.WriteLine($"Authorization Header: {authHeader}");
+                await next.Invoke();
+            });
 
             try
             {
                 app.Run();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            
+
         }
     }
 }

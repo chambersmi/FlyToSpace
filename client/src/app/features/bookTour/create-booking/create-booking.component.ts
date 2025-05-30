@@ -33,14 +33,10 @@ export class CreateBookingComponent implements OnInit {
   ngOnInit(): void {
     this.tourId = Number(this.route.snapshot.paramMap.get('tourId'));
     
+    this.loadTourDetails();
+
     this.bookingForm = this.fb.group({
       seatsBooked:[1,[Validators.required, Validators.min(1)]]      
-    });
-
-    this.tourService.getTourById(this.tourId).subscribe(tour => {
-      this.tour = tour;      
-      this.seatsAvailable = tour.maxSeats - tour.seatsOccupied;
-      this.maxSeats = Array.from({length:this.seatsAvailable}, (_, i) => i + 1);
     });
   }
 
@@ -72,7 +68,15 @@ export class CreateBookingComponent implements OnInit {
         console.error('Failed to book tour:\n', err);
         alert("Booking failed.");
       }
-    })
+    });
+  }
+
+  private loadTourDetails(): void {    
+    this.tourService.getTourById(this.tourId).subscribe(tour => {
+      this.tour = tour;      
+      this.seatsAvailable = tour.maxSeats - tour.seatsOccupied;
+      this.maxSeats = Array.from({length:this.seatsAvailable}, (_, i) => i + 1);
+    });
   }
 
 }
