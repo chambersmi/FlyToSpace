@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ItineraryService } from '../../../services/itinerary/itinerary.service';
 import { ItineraryDto } from '../../../models/itinerary/itinerary-dto.model';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-itinerary',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './itinerary.component.html',
   styleUrl: './itinerary.component.css'
 })

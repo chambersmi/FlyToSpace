@@ -15,6 +15,10 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/tours" routerLinkActive="active">Tours</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/itinerary" routerLinkActive="active">My Itinerary</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav ms-auto">
@@ -27,15 +31,15 @@
                     </li>
                 </ng-container>
 
-            <ng-template #loggedInTemplate>
-                <li class="nav-item">
-                    <span class="nav-link text-light" [routerLink]="['/profile']">{{userEmail}}</span>
-                </li>
+                <ng-template #loggedInTemplate>
+                    <li class="nav-item">
+                        <span class="nav-link text-light" [routerLink]="['/profile']">{{userEmail}}</span>
+                    </li>
 
-                <li class="nav-item">
-                    <button class="btn btn-sm btn-outline-light" (click)="logout()">Logout</button>
-                </li>
-            </ng-template>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-light" (click)="logout()">Logout</button>
+                    </li>
+                </ng-template>
             </ul>
         </div>
     </div>

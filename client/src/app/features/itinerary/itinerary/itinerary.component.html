@@ -1,1 +1,36 @@
-<p>itinerary works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div *ngFor="let itin of itinerary" class="col-md-8 mb-4">
+      <div class="card">
+        <div class="card-body card-styling">
+          <h5 class="card-title">Booking #{{ itin.bookingId }}</h5>
+
+          <div class="row mb-2">
+            <div class="col-sm-4 fw-bold">Tour ID:</div>
+            <div class="col-sm-8">{{ itin.tourId }}</div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-sm-4 fw-bold">Total Price:</div>
+            <div class="col-sm-8">{{ itin.totalPrice | currency }}</div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-sm-4 fw-bold">Seats Booked:</div>
+            <div class="col-sm-8">{{ itin.seatsBooked }}</div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-sm-4 fw-bold">Booking Date:</div>
+            <div class="col-sm-8">{{ itin.bookingDate | date: 'mediumDate' }}</div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-sm-4 fw-bold">Flight ID:</div>
+            <div class="col-sm-8">{{ itin.flightId }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

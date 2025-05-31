@@ -1,7 +1,6 @@
 <div class="d-flex justify-content-center mt-5">
   <div class="card w-50">
-    <div class="card-body bg-dark">
-      <app-itinerary></app-itinerary>
+    <div class="card-body card-styling">
       <h4 class="card-title mb-4">Edit Profile</h4>      
       <form *ngIf="profileForm" [formGroup]="profileForm" (ngSubmit)="updateProfile()">
         <div class="mb-3 row align-items-center">

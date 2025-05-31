@@ -1,29 +1,28 @@
-<div class="tours-container">
+<div class="tours-container container">
   <!-- Loading Indicator -->
-  <div *ngIf="isLoading" class="loading">
+  <div *ngIf="isLoading" class="alert alert-info text-center">
     Loading tours...
   </div>
 
-  <div *ngIf="error" class="error-message">
+  <div *ngIf="error" class="alert alert-danger text-center">
     {{ error }}
   </div>
 
-  <ul *ngIf="!isLoading && !error && tours.length > 0" class="tours-list">
-    <li *ngFor="let tour of tours" class="tour-item">
-      <h3>{{ tour.tourName }}</h3>
-      <p>{{ tour.tourDescription }}</p>
-      <p>
-        <strong>Price:</strong> {{ tour.tourPackagePrice | currency }}
-      </p>
-      <p>
-        <strong>Seats:</strong> {{ tour.seatsOccupied }} / {{ tour.maxSeats }}
-      </p>
-      <button (click)="bookTour(tour.tourId)">Book Now</button>
-    </li>
-  </ul>
-
-  <div *ngIf="!isLoading && !error && (!tours || tours.length === 0)">
-    No tours available at the moment.
+  <div *ngIf="!isLoading && !error && tours.length > 0" class="row">
+    <div *ngFor="let tour of tours" class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body card-styling d-flex flex-column">
+          <h5 class="card-title">{{ tour.tourName }}</h5>
+          <p class="card-text">{{ tour.tourDescription }}</p>
+          <p><strong>Price:</strong> {{ tour.tourPackagePrice | currency }}</p>
+          <p><strong>Seats:</strong> {{ tour.seatsOccupied }} / {{ tour.maxSeats }}</p>
+          <button class="btn btn-primary mt-auto" (click)="bookTour(tour.tourId)">Book Now</button>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <div *ngIf="!isLoading && !error && (!tours || tours.length === 0)" class="alert alert-warning text-center">
+    No tours available at the moment.
+  </div>
 </div>
