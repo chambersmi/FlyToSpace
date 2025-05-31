@@ -34,7 +34,7 @@ export class ToursComponent implements OnInit {
 
   bookTour(tourId:number) {
     console.log("Button clicked");
-    this.router.navigate(['/create-booking', tourId]);
+    this.router.navigate(['/create-itinerary', tourId]);
   }
 
 }

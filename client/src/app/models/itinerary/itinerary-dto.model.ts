@@ -1,4 +1,4 @@
-export interface BookingDto {
+export interface ItineraryDto {
     bookingId:number;
     tourId:number;
     totalPrice:number;

@@ -37,8 +37,8 @@ namespace API.Controllers
         }
 
         
-        [HttpGet("itinerary")]
-        public async Task<IActionResult> GetAllUserBookingsAsync()
+        [HttpGet("itinerary/all")]
+        public async Task<IActionResult> GetAllItinerariesByUserIdAsync()
         {
             //var user = await _userManager.GetUserAsync(User);
             var userId = User.FindFirst("id")?.Value;
@@ -49,19 +49,12 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            var bookings = await _bookingService.GetAllUserBookingsAsync(userId);
+            var bookings = await _bookingService.GetAllItinerariesByUserIdAsync(userId);
             return Ok(bookings);
         }
 
-        [HttpGet("claims")]
-        public IActionResult GetClaims()
-        {
-            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
-            return Ok(claims);
-        }
-
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserBookingsByIdAsync(int bookingId)
+        public async Task<IActionResult> GetSingleUserItineraryByIdAsync(int bookingId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             
@@ -71,7 +64,7 @@ namespace API.Controllers
                 return Unauthorized();
             }
 
-            var booking = await _bookingService.GetUserBookingByIdAsync(bookingId, userId);
+            var booking = await _bookingService.GetSingleUserItineraryByIdAsync(bookingId, userId);
 
             if(booking == null)
             {

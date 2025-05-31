@@ -6,7 +6,6 @@ import { LoginDto } from '../../models/auth/login-dto.model';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoginResponse } from '../../models/auth/login-response.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserDto } from '../../models/auth/user-dto.model';
 import { TokenUserDto } from '../../models/auth/token-dto.model';
 
 @Injectable({

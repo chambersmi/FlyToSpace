@@ -133,9 +133,9 @@ namespace API.Application.Services
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<BookingDto>> GetAllUserBookingsAsync(string userId)
+        public async Task<IEnumerable<BookingDto>> GetAllItinerariesByUserIdAsync(string userId)
         {
-            var bookings = await _bookingRepository.GetAllBookingsByUserIdAsync(userId);
+            var bookings = await _bookingRepository.GetAllItinerariesByUserIdAsync(userId);
             return _mapper.Map<IEnumerable<BookingDto>>(bookings);
         }
 
@@ -145,9 +145,9 @@ namespace API.Application.Services
         /// <param name="id"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<BookingDto?> GetUserBookingByIdAsync(int id, string userId)
+        public async Task<BookingDto?> GetSingleUserItineraryByIdAsync(int id, string userId)
         {
-            var booking = await _bookingRepository.GetUserBookingByIdAsync(id, userId);
+            var booking = await _bookingRepository.GetSingleUserItineraryByIdAsync(id, userId);
             
             if(booking == null || booking.UserId != userId)
             {

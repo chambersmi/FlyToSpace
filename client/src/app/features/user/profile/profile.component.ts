@@ -7,13 +7,13 @@ import { UserDto } from '../../../models/auth/user-dto.model';
 import { CommonModule } from '@angular/common';
 import { StateService } from '../../../services/states/state.service';
 import { NotificationService } from '../../../services/notification.service';
-import { TourService } from '../../../services/tour/tour.service';
-import { BookingTourService } from '../../../services/bookTour/booking-tour.service';
-import { BookingDto } from '../../../models/bookTour/booking-dto.model';
+import { ItineraryService } from '../../../services/itinerary/itinerary.service';
+import { ItineraryDto } from '../../../models/itinerary/itinerary-dto.model';
+import { ItineraryComponent } from "../../itinerary/itinerary/itinerary.component";
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ItineraryComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -23,15 +23,15 @@ export class ProfileComponent implements OnInit {
   userId!: string;
   states: { [key: number]: string } = {};
   stateKeys: number[] = [];
-  bookings: BookingDto[] = [];
+  itinerary: ItineraryDto[] = [];
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private userService: UserService,
     private stateService: StateService,
-    private notification: NotificationService,
-    private bookingService: BookingTourService
+    private notification: NotificationService,    
+    private itineraryService: ItineraryService
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
     this.userId = user.id;
     
     this.loadUser();
-    this.loadBookings();
+
   }
 
   // Populate form
@@ -109,18 +109,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  private loadBookings() {
-    this.bookingService.getAllBookings().subscribe({
-      next: (data) => {
-        this.bookings = data;
-        console.log("Users bookings:");
-        console.log(this.bookings);
-      },
-      error: (err) => {
-        console.error('Error loading bookings:\n', err)
-      }
-    });
-  }
 
   private loadUser() {
     this.userService.getUserById(this.userId).subscribe({

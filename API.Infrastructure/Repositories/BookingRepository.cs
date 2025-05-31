@@ -47,7 +47,7 @@ namespace API.Infrastructure.Repositories
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<List<Booking>> GetAllBookingsByUserIdAsync(string userId)
+        public async Task<List<Booking>> GetAllItinerariesByUserIdAsync(string userId)
         {
             return await _context.Bookings
                 .Include(b => b.Tour)
@@ -61,7 +61,7 @@ namespace API.Infrastructure.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<Booking> GetUserBookingByIdAsync(int id, string userId)
+        public async Task<Booking> GetSingleUserItineraryByIdAsync(int id, string userId)
         {
             var bookingEntity = await _context.Bookings
                 .Include(b => b.Tour)

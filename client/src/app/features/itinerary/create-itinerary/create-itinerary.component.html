@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center mt-5">
     <div class="card w-50">
         <div class="card-body card-styling">
-            <h4 class="card-title mb-4">Book Tour</h4>
+            <h4 class="card-title mb-4">Book your trip!</h4>
 
             <div *ngIf="tour">
                 <h2>{{ tour.tourName }}</h2>
@@ -12,7 +12,7 @@
                 <p><strong>Seats Available:</strong> {{ seatsAvailable }}</p>
             </div>
 
-            <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
+            <form [formGroup]="itineraryForm" (ngSubmit)="submitBooking()">
                 <div class="mb-3 row align-items-center">
                     <label for="seatsBooked" class="col-auto col-form-label mt-3 mt-md-0 text-end pe-1">Number of
                         Seats</label>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="d-flex justify-content-center">
                     <div class="d-flex gap-5">
-                        <button type="submit" class="btn btn-primary" [disabled]="bookingForm.invalid">Buy Tickets</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="itineraryForm.invalid">Buy Tickets</button>
                         <button type="reset" class="btn btn-primary">Cancel</button>
                     </div>
                 </div>

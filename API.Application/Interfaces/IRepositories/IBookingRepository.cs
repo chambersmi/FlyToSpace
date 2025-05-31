@@ -9,8 +9,8 @@ namespace API.Application.Interfaces.IRepositories
 {
     public interface IBookingRepository
     {
-        Task<List<Booking>> GetAllBookingsByUserIdAsync(string userId);
-        Task<Booking> GetUserBookingByIdAsync(int id, string userId);
+        Task<List<Booking>> GetAllItinerariesByUserIdAsync(string userId);
+        Task<Booking> GetSingleUserItineraryByIdAsync(int id, string userId);
         Task UpdateBookingAsync(Booking booking);
         Task<bool> DeleteBookingAsync(int id);
         Task<Booking> CreateBookingAsync(Booking booking);
