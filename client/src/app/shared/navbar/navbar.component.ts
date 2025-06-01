@@ -13,14 +13,15 @@ import { TokenUserDto } from '../../models/auth/token-dto.model';
 export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   userEmail: string  | null = null;
+  user: TokenUserDto | null = null;
 
   constructor(private authService:AuthService) {}
 
   ngOnInit(): void {
     this.authService.isAuthenticated().subscribe((status) => {
       this.isLoggedIn = status;
-      const user = this.authService.getUserFromToken();
-      this.userEmail = status && user ? user.email : null;      
+      this.user = this.authService.getUserFromToken();
+      this.userEmail = status && this.user ? this.user.email : null;      
       console.log(this.userEmail);
     });
   }

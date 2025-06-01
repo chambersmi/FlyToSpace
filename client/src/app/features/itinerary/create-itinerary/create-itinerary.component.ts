@@ -46,8 +46,7 @@ export class CreateItineraryComponent implements OnInit {
 
     const user = this.authService.getUserFromToken();
     
-    if (!user) {
-      alert('You must be logged in to book a tour.');
+    if (!user) {      
       this.router.navigate(['/login']);
       return;
     }

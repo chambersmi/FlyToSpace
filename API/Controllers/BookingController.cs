@@ -36,7 +36,10 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        
+        /// <summary>
+        /// Returns all itineraries by user
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("itinerary/all")]
         public async Task<IActionResult> GetAllItinerariesByUserIdAsync()
         {
@@ -53,7 +56,12 @@ namespace API.Controllers
             return Ok(bookings);
         }
 
-        [HttpGet("{id}")]
+        /// <summary>
+        /// Return a single itinerary by a user
+        /// </summary>
+        /// <param name="bookingId"></param>
+        /// <returns></returns>
+        [HttpGet("itinerary/{id}")]
         public async Task<IActionResult> GetSingleUserItineraryByIdAsync(int bookingId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

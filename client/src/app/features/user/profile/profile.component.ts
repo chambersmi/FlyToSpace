@@ -9,11 +9,10 @@ import { StateService } from '../../../services/states/state.service';
 import { NotificationService } from '../../../services/notification.service';
 import { ItineraryService } from '../../../services/itinerary/itinerary.service';
 import { ItineraryDto } from '../../../models/itinerary/itinerary-dto.model';
-import { ItineraryComponent } from "../../itinerary/itinerary/itinerary.component";
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule, CommonModule, ItineraryComponent],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -41,8 +40,7 @@ export class ProfileComponent implements OnInit {
       console.log(`${user} not found.`);
       return;
     }
-
-    this.authService.getUserFromToken();
+    
     this.userId = user.id;
     
     this.loadUser();
@@ -65,22 +63,22 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  // Update new values
-  private updateDto(): UpdateUserDto {
-    const formValue = this.profileForm.getRawValue();
+  // // Update new values
+  // private updateDto(): UpdateUserDto {
+  //   const formValue = this.profileForm.getRawValue();
 
-    return {
-      firstName: formValue.firstName,
-      middleName: formValue.middleName,
-      lastName: formValue.lastName,
-      dateOfBirth: formValue.dateOfBirth,
-      streetAddress1: formValue.streetAddress1,
-      streetAddress2: formValue.streetAddress2,
-      city: formValue.city,
-      state: formValue.state,
-      zipCode: formValue.zipCode
-    };
-  }
+  //   return {
+  //     firstName: formValue.firstName,
+  //     middleName: formValue.middleName,
+  //     lastName: formValue.lastName,
+  //     dateOfBirth: formValue.dateOfBirth,
+  //     streetAddress1: formValue.streetAddress1,
+  //     streetAddress2: formValue.streetAddress2,
+  //     city: formValue.city,
+  //     state: formValue.state,
+  //     zipCode: formValue.zipCode
+  //   };
+  // }
 
   updateProfile(): void {
     if (this.profileForm.invalid) {
