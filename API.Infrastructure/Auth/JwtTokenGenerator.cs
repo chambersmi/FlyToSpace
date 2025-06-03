@@ -31,7 +31,6 @@ namespace API.Infrastructure.Auth
 
             };
 
-            //var key = new SymmetricSecurityKey(Convert.FromBase64String(_jwtSettings.Key));
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
 
             //var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -48,7 +47,6 @@ namespace API.Infrastructure.Auth
                 signingCredentials: credentials);
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-            Console.WriteLine($"Token String: {tokenString}");
 
             return tokenString;
         }

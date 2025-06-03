@@ -23,9 +23,11 @@ export class ItineraryComponent implements OnInit {
     private authService: AuthService,
     private router:Router) {}
 
+
   ngOnInit(): void {
     this.loadBookings();
-    this.user = this.authService.getUserFromToken();
+
+    this.user = this.authService.getUserFromToken();    
 
     if(!this.user) {
       this.router.navigate(['/login']);
@@ -34,7 +36,7 @@ export class ItineraryComponent implements OnInit {
   }
 
 
-  private loadBookings() {
+  private loadBookings():void {
     this.itineraryService.getAllItinerariesByUserIdAsync().subscribe({
       next: (data) => {
         this.itinerary = data;
@@ -45,5 +47,9 @@ export class ItineraryComponent implements OnInit {
         console.error('Error loading bookings:\n', err)
       }
     });
+  }
+
+  private updateTotalPrice(): void {
+    
   }
 }

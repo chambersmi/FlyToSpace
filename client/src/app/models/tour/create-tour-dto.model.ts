@@ -1,6 +1,7 @@
 export interface CreateTourDto {
     tourName: string;
     tourDescription: string;
-    tourPackagePrice: number;
+    tourPrice: number;
     maxSeats: number;
+    seatsOccupied:number;
 }

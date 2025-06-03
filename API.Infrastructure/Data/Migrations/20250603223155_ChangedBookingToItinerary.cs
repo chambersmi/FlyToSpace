@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedTourSeed : Migration
+    public partial class ChangedBookingToItinerary : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,7 +67,7 @@ namespace API.Infrastructure.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     TourName = table.Column<string>(type: "TEXT", nullable: false),
                     TourDescription = table.Column<string>(type: "TEXT", nullable: false),
-                    TourPackagePrice = table.Column<decimal>(type: "TEXT", nullable: false),
+                    TourPrice = table.Column<decimal>(type: "TEXT", nullable: false),
                     MaxSeats = table.Column<int>(type: "INTEGER", nullable: false),
                     SeatsOccupied = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -183,10 +183,10 @@ namespace API.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookings",
+                name: "Itineraries",
                 columns: table => new
                 {
-                    BookingId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ItineraryId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     TourId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
@@ -198,15 +198,15 @@ namespace API.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookings", x => x.BookingId);
+                    table.PrimaryKey("PK_Itineraries", x => x.ItineraryId);
                     table.ForeignKey(
-                        name: "FK_Bookings_AspNetUsers_UserId",
+                        name: "FK_Itineraries_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Bookings_Tours_TourId",
+                        name: "FK_Itineraries_Tours_TourId",
                         column: x => x.TourId,
                         principalTable: "Tours",
                         principalColumn: "TourId",
@@ -257,13 +257,13 @@ namespace API.Infrastructure.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_TourId",
-                table: "Bookings",
+                name: "IX_Itineraries_TourId",
+                table: "Itineraries",
                 column: "TourId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_UserId",
-                table: "Bookings",
+                name: "IX_Itineraries_UserId",
+                table: "Itineraries",
                 column: "UserId");
         }
 
@@ -286,7 +286,7 @@ namespace API.Infrastructure.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Bookings");
+                name: "Itineraries");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

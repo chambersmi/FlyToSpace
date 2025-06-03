@@ -11,7 +11,7 @@ namespace API.Application.DTOs
         public int TourId { get; set; }
         public string TourName { get; set; } = null!;
         public string TourDescription { get; set; } = null!;
-        public decimal TourPackagePrice { get; set; }
+        public decimal TourPrice { get; set; }
         public int MaxSeats { get; set; }
         public int SeatsOccupied { get; set; }
     }

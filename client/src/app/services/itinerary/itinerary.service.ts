@@ -10,12 +10,12 @@ import { UpdateItineraryDto } from '../../models/itinerary/update-itinerary-dto.
   providedIn: 'root'
 })
 export class ItineraryService {
-  private readonly apiUrl = `${environment.apiUrl}/api/booking`;
+  private readonly apiUrl = `${environment.apiUrl}/api/itinerary`;
   
   constructor(private httpClient:HttpClient) { }
 
   getAllItineraries():Observable<ItineraryDto[]> {
-    return this.httpClient.get<ItineraryDto[]>(`${this.apiUrl}/all`);
+    return this.httpClient.get<ItineraryDto[]>(`${this.apiUrl}/itinerary/get-all`);
   }
 
   getItineraryById(itineraryId:number):Observable<ItineraryDto> {
@@ -23,22 +23,27 @@ export class ItineraryService {
   }
 
   getSingleUserItineraryById(itineraryId:number):Observable<ItineraryDto> {
-    return this.httpClient.get<ItineraryDto>(`${this.apiUrl}/itinerary/all/${itineraryId}`);
+    return this.httpClient.get<ItineraryDto>(`${this.apiUrl}/itinerary/user/${itineraryId}`);
   }
 
   getAllItinerariesByUserIdAsync():Observable<ItineraryDto[]> {
-    return this.httpClient.get<ItineraryDto[]>(`${this.apiUrl}/itinerary/all`);
+    return this.httpClient.get<ItineraryDto[]>(`${this.apiUrl}/itinerary/user/all`);
   }
 
-  createBooking(dto:CreateItineraryDto):Observable<CreateItineraryDto> {
-    return this.httpClient.post<CreateItineraryDto>(`${this.apiUrl}/create`, dto);
+  createItinerary(dto:CreateItineraryDto):Observable<CreateItineraryDto> {
+    return this.httpClient.post<CreateItineraryDto>(`${this.apiUrl}/itinerary/create`, dto);
   }
 
   updateItinerary(itineraryId:number, dto:UpdateItineraryDto):Observable<ItineraryDto> {
-    return this.httpClient.put<ItineraryDto>(`${this.apiUrl}/update/${itineraryId}`, dto);
+    return this.httpClient.put<ItineraryDto>(`${this.apiUrl}/itinerary/update/${itineraryId}`, dto);
   }
 
   deleteItineraryById(itineraryId:number):Observable<boolean> {
-    return this.httpClient.delete<boolean>(`${this.apiUrl}/delete/${itineraryId}`);
+    return this.httpClient.delete<boolean>(`${this.apiUrl}/itinerary/delete/${itineraryId}`);
+  }
+
+  // Get price with taxes and fees from database
+  getTotalPriceOfItinerary(totalPrice:number):Observable<number> {
+    return this.httpClient.get<number>(`${this.apiUrl}/itinerary/total-price/${totalPrice}`);
   }
 }

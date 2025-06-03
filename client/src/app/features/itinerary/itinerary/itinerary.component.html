@@ -9,11 +9,12 @@
             <div class="col-sm-4 fw-bold">Tour ID:</div>
             <div class="col-sm-8">{{ itin.tourId }}</div>
           </div>
-
+          
           <div class="row mb-2">
-            <div class="col-sm-4 fw-bold">Total Price:</div>
-            <div class="col-sm-8">{{ itin.totalPrice | currency }}</div>
+            <div class="col-sm-4 fw-bold">Flight ID:</div>
+            <div class="col-sm-8">{{ itin.flightId }}</div>
           </div>
+          <hr>
 
           <div class="row mb-2">
             <div class="col-sm-4 fw-bold">Seats Booked:</div>
@@ -25,9 +26,10 @@
             <div class="col-sm-8">{{ itin.bookingDate | date: 'mediumDate' }}</div>
           </div>
 
+
           <div class="row mb-2">
-            <div class="col-sm-4 fw-bold">Flight ID:</div>
-            <div class="col-sm-8">{{ itin.flightId }}</div>
+            <div class="col-sm-4 fw-bold">Total Price:</div>
+            <div class="col-sm-8">{{ itin.totalPrice | currency }}</div>
           </div>
         </div>
       </div>

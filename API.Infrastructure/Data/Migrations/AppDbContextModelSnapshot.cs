@@ -117,9 +117,9 @@ namespace API.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("API.Domain.Entities.Booking", b =>
+            modelBuilder.Entity("API.Domain.Entities.Itinerary", b =>
                 {
-                    b.Property<int>("BookingId")
+                    b.Property<int>("ItineraryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -145,13 +145,13 @@ namespace API.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("BookingId");
+                    b.HasKey("ItineraryId");
 
                     b.HasIndex("TourId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Itineraries");
                 });
 
             modelBuilder.Entity("API.Domain.Entities.Tour", b =>
@@ -174,7 +174,7 @@ namespace API.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("TourPackagePrice")
+                    b.Property<decimal>("TourPrice")
                         .HasColumnType("TEXT");
 
                     b.HasKey("TourId");
@@ -310,7 +310,7 @@ namespace API.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("API.Domain.Entities.Booking", b =>
+            modelBuilder.Entity("API.Domain.Entities.Itinerary", b =>
                 {
                     b.HasOne("API.Domain.Entities.Tour", "Tour")
                         .WithMany()

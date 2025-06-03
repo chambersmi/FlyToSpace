@@ -7,6 +7,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateItineraryDto } from '../../../models/itinerary/create-itinerary-dto.model';
 import { CommonModule } from '@angular/common';
+import { CreateTourDto } from '../../../models/tour/create-tour-dto.model';
 
 @Component({
   selector: 'app-create-itinerary',
@@ -18,8 +19,9 @@ export class CreateItineraryComponent implements OnInit {
   tourId!: number;
   itineraryForm!: FormGroup;
   maxSeats: number[] = [];
-  tour: TourDto | null = null;
+  tour: CreateTourDto | null = null;
   seatsAvailable: number = 0;
+  totalPrice: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +37,7 @@ export class CreateItineraryComponent implements OnInit {
 
     this.itineraryForm = this.fb.group({
       seatsBooked: [1, [Validators.required, Validators.min(1)]]
+
     });
   }
 
@@ -57,7 +60,7 @@ export class CreateItineraryComponent implements OnInit {
       seatsBooked: this.itineraryForm.value.seatsBooked
     };
 
-    this.itineraryService.createBooking(dto).subscribe({
+    this.itineraryService.createItinerary(dto).subscribe({
       next: res => {
         console.log('Booking successful.');
         this.router.navigate(['/']);
@@ -75,6 +78,25 @@ export class CreateItineraryComponent implements OnInit {
       this.seatsAvailable = tour.maxSeats - tour.seatsOccupied;
       this.maxSeats = Array.from({ length: this.seatsAvailable }, (_, i) => i + 1);
     });
+  }
+
+  public onSeatsChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const targetValue = target.value;
+
+    if(targetValue) {
+      const seats = Number(targetValue);
+      console.log('Seats changed to ', targetValue);
+      this.updateTotalPrice(seats);
+    } else {
+      console.warn('No value selected');
+    }
+  }
+
+  private updateTotalPrice(seatsBooked:number) {
+    if(this.tour) {
+      this.totalPrice = seatsBooked * this.tour.tourPrice;
+    }
   }
 
 }

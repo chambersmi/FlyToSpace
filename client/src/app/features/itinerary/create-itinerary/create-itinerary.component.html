@@ -6,18 +6,23 @@
             <div *ngIf="tour">
                 <h2>{{ tour.tourName }}</h2>
                 <p>{{ tour.tourDescription }}</p>
-                <p><strong>Package Price:</strong> {{ tour.tourPackagePrice| currency }}</p>
+                <p><strong>Package Price:</strong> {{ tour.tourPrice| currency }}</p>
                 <p><strong>Max Seats:</strong> {{ tour.maxSeats }}</p>
                 <p><strong>Currently Booked:</strong> {{ tour.seatsOccupied }}</p>
                 <p><strong>Seats Available:</strong> {{ seatsAvailable }}</p>
+                <p><strong>Total Price:</strong> {{ totalPrice | currency }}</p>
             </div>
 
             <form [formGroup]="itineraryForm" (ngSubmit)="submitBooking()">
                 <div class="mb-3 row align-items-center">
                     <label for="seatsBooked" class="col-auto col-form-label mt-3 mt-md-0 text-end pe-1">Number of
                         Seats</label>
+
                     <div class="col-auto mt-3 mt-md-0">
-                        <select id="seatsBooked" formControlName="seatsBooked" class="form-select form-select-sm">
+                        <select 
+                        id="seatsBooked" 
+                        formControlName="seatsBooked" class="form-select form-select-sm"
+                        (change)="onSeatsChange($event)">
                             <option *ngFor="let availSeats of maxSeats" [value]="availSeats">{{availSeats}}</option>
                         </select>
                     </div>

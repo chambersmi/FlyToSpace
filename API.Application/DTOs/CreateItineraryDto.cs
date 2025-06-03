@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Application.DTOs
 {
-    public class CreateBookingDto
+    public class CreateItineraryDto
     {
         public int TourId { get; set; }
         public string UserId { get; set; } = null!;

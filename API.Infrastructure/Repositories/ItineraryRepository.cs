@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace API.Infrastructure.Repositories
 {
-    public class BookingRepository : IBookingRepository
+    public class ItineraryRepository : IItineraryRepository
     {
-        private readonly ILogger<TourRepository> _logger;
+        private readonly ILogger<ItineraryRepository> _logger;
         private readonly AppDbContext _context;
 
-        public BookingRepository(ILogger<TourRepository> logger, AppDbContext context)
+        public ItineraryRepository(ILogger<ItineraryRepository> logger, AppDbContext context)
         {
             _context = context;
             _logger = logger;
         }
 
-        public async Task<Booking> CreateBookingAsync(Booking booking)
+        public async Task<Itinerary> CreateItineraryAsync(Itinerary booking)
         {
             await _context.AddAsync(booking);
             await _context.SaveChangesAsync();
@@ -29,14 +29,14 @@ namespace API.Infrastructure.Repositories
             return booking;
         }
 
-        public async Task<bool> DeleteBookingAsync(int id)
+        public async Task<bool> DeleteItineraryByIdAsync(int id)
         {
-            var bookingId = await _context.Bookings.FirstOrDefaultAsync(x => x.BookingId == id);
+            var bookingId = await _context.Itineraries.FirstOrDefaultAsync(x => x.ItineraryId == id);
 
             if (bookingId == null)
                 return false;
 
-            _context.Bookings.Remove(bookingId);
+            _context.Itineraries.Remove(bookingId);
             await _context.SaveChangesAsync();
 
             return true;
@@ -47,9 +47,9 @@ namespace API.Infrastructure.Repositories
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<List<Booking>> GetAllItinerariesByUserIdAsync(string userId)
+        public async Task<List<Itinerary>> GetAllItinerariesByUserIdAsync(string userId)
         {
-            return await _context.Bookings
+            return await _context.Itineraries
                 .Include(b => b.Tour)
                 .Include(b => b.User)
                 .Where(u => u.UserId == userId)
@@ -61,33 +61,33 @@ namespace API.Infrastructure.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<Booking> GetSingleUserItineraryByIdAsync(int id, string userId)
+        public async Task<Itinerary> GetSingleUserItineraryByIdAsync(int id, string userId)
         {
-            var bookingEntity = await _context.Bookings
+            var bookingEntity = await _context.Itineraries
                 .Include(b => b.Tour)
                 .Include(b => b.User)                
                 .Where(b => b.UserId == userId)
-                .FirstOrDefaultAsync(x => x.BookingId == id);
+                .FirstOrDefaultAsync(x => x.ItineraryId == id);
 
             return bookingEntity;
         }
 
         public async Task<int> GetSeatsBookedCountAsync(int tourId)
         {
-            return await _context.Bookings
+            return await _context.Itineraries
                 .Where(t => t.TourId == tourId)
                 .SumAsync(b => b.SeatsBooked);
         }
 
-        public async Task UpdateBookingAsync(Booking booking)
+        public async Task UpdateItineraryAsync(Itinerary booking)
         {
-            _context.Bookings.Update(booking);
+            _context.Itineraries.Update(booking);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Booking>> GetAllBookingsAsync()
+        public async Task<List<Itinerary>> GetAllItinerariesAsync()
         {
-            var bookingEntity = await _context.Bookings
+            var bookingEntity = await _context.Itineraries
                 .Include(b => b.Tour)
                 .Include(b => b.User)
                 .ToListAsync();
@@ -95,12 +95,12 @@ namespace API.Infrastructure.Repositories
             return bookingEntity;
         }
 
-        public async Task<Booking> GetBookingByIdAsync(int id)
+        public async Task<Itinerary> GetItineraryByIdAsync(int id)
         {
-            var bookingEntity = await _context.Bookings
+            var bookingEntity = await _context.Itineraries
                 .Include(b => b.Tour)
                 .Include(b => b.User)
-                .FirstOrDefaultAsync(x => x.BookingId == id);
+                .FirstOrDefaultAsync(x => x.ItineraryId == id);
 
             return bookingEntity;
         }

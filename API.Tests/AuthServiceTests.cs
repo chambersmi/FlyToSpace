@@ -25,6 +25,7 @@ namespace API.Tests
             _signInManagerMock = MockUserManagerAndSignInWithDTOConversion.MockSignInManager(_userManagerMock.Object);
             _mockLogger = new Mock<ILogger<AuthService>>();
             _mockJwtTokenGenerator = new Mock<IJwtTokenGenerator>();
+            
 
             var mapperConfig = new MapperConfiguration(config =>
             {

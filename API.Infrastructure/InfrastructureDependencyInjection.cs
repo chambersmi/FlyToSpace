@@ -32,7 +32,7 @@ namespace API.Infrastructure
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITourRepository, TourRepository>();
-            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IItineraryRepository, ItineraryRepository>();
 
 
                         

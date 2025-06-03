@@ -29,7 +29,7 @@ namespace API.Infrastructure
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
-            builder.Entity<Booking>()
+            builder.Entity<Itinerary>()
                 .HasOne(u => u.User)
                 .WithMany(u => u.Bookings)
                 .HasForeignKey(u => u.UserId)
@@ -37,6 +37,6 @@ namespace API.Infrastructure
         }
 
         public DbSet<Tour> Tours { get; set; }
-        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Itinerary> Itineraries { get; set; }
     }
 }

@@ -12,16 +12,16 @@ using System.Threading.Tasks;
 
 namespace API.Application.Services
 {
-    public class BookingService : IBookingService
+    public class ItineraryService : IItineraryService
     {
-        private ILogger<BookingService> _logger;
-        private IBookingRepository _bookingRepository;
+        private ILogger<ItineraryService> _logger;
+        private IItineraryRepository _bookingRepository;
         private ITourRepository _tourRepository;
         private readonly IMapper _mapper;
 
-        public BookingService(
-            ILogger<BookingService> logger,
-            IBookingRepository bookingRepository,
+        public ItineraryService(
+            ILogger<ItineraryService> logger,
+            IItineraryRepository bookingRepository,
             ITourRepository tourRepository,
             IMapper mapper
             )
@@ -32,9 +32,9 @@ namespace API.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<BookingDto?> CreateBookingAsync(CreateBookingDto dto)
+        public async Task<BookingDto?> CreateItineraryAsync(CreateItineraryDto dto)
         {            
-            var bookingEntity = _mapper.Map<Booking>(dto);
+            var bookingEntity = _mapper.Map<Itinerary>(dto);
 
             // Assign random Flight Id
             // If a user is booking multiple seats, it'll have to be the same id
@@ -70,15 +70,15 @@ namespace API.Application.Services
             bookingEntity.BookingDate = DateTime.UtcNow;
             bookingEntity.TotalPrice = await CalculuateTotalPriceAsync(dto.TourId, dto.SeatsBooked);
 
-            var booking = await _bookingRepository.CreateBookingAsync(bookingEntity);
+            var booking = await _bookingRepository.CreateItineraryAsync(bookingEntity);
             var resultDto = _mapper.Map<BookingDto>(booking);
 
             return resultDto;
         }
 
-        public async Task<BookingDto?> UpdateBookingAsync(int bookingId, UpdateBookingDto dto)
+        public async Task<BookingDto?> UpdateItineraryAsync(int bookingId, UpdateItineraryDto dto)
         {
-            var existingBooking = await _bookingRepository.GetBookingByIdAsync(bookingId);
+            var existingBooking = await _bookingRepository.GetItineraryByIdAsync(bookingId);
 
             if (existingBooking == null)
                 return null;
@@ -110,20 +110,20 @@ namespace API.Application.Services
             existingBooking.FlightId = dto.FlightId ?? existingBooking.FlightId;
             existingBooking.BookingDate = dto.BookingDate ?? existingBooking.BookingDate;
 
-            await _bookingRepository.UpdateBookingAsync(existingBooking);
+            await _bookingRepository.UpdateItineraryAsync(existingBooking);
 
             var resultDto = _mapper.Map<BookingDto>(existingBooking);
 
             return resultDto;
         }
 
-        public async Task<bool> DeleteBookingByIdAsync(int id)
+        public async Task<bool> DeleteItineraryByIdAsync(int id)
         {
-            var bookingToDelete = await _bookingRepository.GetBookingByIdAsync(id);
+            var bookingToDelete = await _bookingRepository.GetItineraryByIdAsync(id);
             if (bookingToDelete == null)
                 return false;
 
-            await _bookingRepository.DeleteBookingAsync(bookingToDelete.BookingId);
+            await _bookingRepository.DeleteItineraryByIdAsync(bookingToDelete.ItineraryId);
 
             return true;
         }
@@ -169,21 +169,41 @@ namespace API.Application.Services
                 throw new Exception($"{tourId} not found.");
             }
 
-            return (tour.TourPackagePrice * seatsBooked) * (1 + taxAmount);
+            return (tour.TourPrice * seatsBooked) * (1 + taxAmount);
         }
 
-        public async Task<IEnumerable<BookingDto>> GetAllBookingsAsync()
+        public async Task<IEnumerable<BookingDto>> GetAllItinerariesAsync()
         {
-            var booking = await _bookingRepository.GetAllBookingsAsync();
+            var booking = await _bookingRepository.GetAllItinerariesAsync();
+
+            if (booking == null)
+            {
+                throw new Exception($"No itineraries were found.");
+            }
 
             return _mapper.Map<IEnumerable<BookingDto>>(booking);
         }
 
-        public async Task<BookingDto> GetBookingByIdAsync(int id)
+        public async Task<BookingDto> GetItineraryByIdAsync(int id)
         {
-            var booking = await _bookingRepository.GetBookingByIdAsync(id);
+            var booking = await _bookingRepository.GetItineraryByIdAsync(id);
+
+            if (booking == null)
+            {
+                throw new Exception($"Itinerary with {id} was not found.");
+            }
 
             return _mapper.Map<BookingDto>(booking);
+        }
+
+        public async Task<decimal> GetTotalPriceAsync(int id)
+        {
+            var booking = await _bookingRepository.GetItineraryByIdAsync(id);
+            
+            var totalPrice = booking.TotalPrice;
+
+            return totalPrice;
+
         }
     }
 }

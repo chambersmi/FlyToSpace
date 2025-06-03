@@ -27,13 +27,13 @@ namespace API.Application.Mapping
             CreateMap<Tour, TourDto>();
 
             // Bookings
-            CreateMap<CreateBookingDto, Booking>();
-            CreateMap<UpdateBookingDto, Booking>();
+            CreateMap<CreateItineraryDto, Itinerary>();
+            CreateMap<UpdateItineraryDto, Itinerary>();
 
-            CreateMap<Booking, BookingDto>()
+            CreateMap<Itinerary, BookingDto>()
                 .ForMember(dest => dest.TourName, opt => opt.MapFrom(src => src.Tour.TourName));
 
-            CreateMap<BookingDto, Booking>()
+            CreateMap<BookingDto, Itinerary>()
                 .ForMember(dest => dest.Tour, opt => opt.Ignore())
                 .ForMember(dest => dest.User, opt => opt.Ignore());
         }

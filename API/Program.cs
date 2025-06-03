@@ -36,7 +36,7 @@ namespace API
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<GetStatesService>();
             builder.Services.AddScoped<ITourService, TourService>();
-            builder.Services.AddScoped<IBookingService, BookingService>();
+            builder.Services.AddScoped<IItineraryService, ItineraryService>();
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
