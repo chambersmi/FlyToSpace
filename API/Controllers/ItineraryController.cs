@@ -40,7 +40,7 @@ namespace API.Controllers
         /// Returns all itineraries by user
         /// </summary>
         /// <returns></returns>
-        [HttpGet("itinerary/user/all")]
+        [HttpGet("user/all")]
         public async Task<IActionResult> GetAllItinerariesByUserIdAsync()
         {
             //var user = await _userManager.GetUserAsync(User);
@@ -61,7 +61,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="bookingId"></param>
         /// <returns></returns>
-        [HttpGet("itinerary/user/{id}")]
+        [HttpGet("user/{id}")]
         public async Task<IActionResult> GetSingleUserItineraryByIdAsync(int itineraryId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -82,7 +82,7 @@ namespace API.Controllers
             return Ok(itinerary);
         }
 
-        [HttpPost("itinerary/create")]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateItineraryAsync([FromBody] CreateItineraryDto dto)
         {
             if(!ModelState.IsValid)
@@ -95,7 +95,7 @@ namespace API.Controllers
             return Ok(dto);
         }
 
-        [HttpPut("itinerary/update/{id}")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateBookingAsync(int id, [FromBody] UpdateItineraryDto dto)
         {
             if (!ModelState.IsValid)
@@ -112,7 +112,7 @@ namespace API.Controllers
 
         }
 
-        [HttpDelete("itinerary/delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteItineraryAsync(int id)
         {
             var isSuccess = await _itineraryService.DeleteItineraryByIdAsync(id);
@@ -125,14 +125,14 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("itinerary/get-all")]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAllItinerariesAsync()
         {
             var itineraries = await _itineraryService.GetAllItinerariesAsync();
             return Ok(itineraries);
         }
 
-        [HttpGet("itinerary/total-price/{id}")]
+        [HttpGet("total-price/{id}")]
         public async Task<IActionResult> GetTotalPriceAsync(int id)
         {
             decimal? totalPrice = await _itineraryService.GetTotalPriceAsync(id);

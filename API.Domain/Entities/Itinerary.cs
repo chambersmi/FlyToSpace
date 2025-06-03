@@ -9,7 +9,6 @@ namespace API.Domain.Entities
 {
     public class Itinerary
     {
-        [Key]
         public int ItineraryId { get; set; }    
         
         public int TourId { get; set; }
