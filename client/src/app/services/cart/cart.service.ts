@@ -25,9 +25,9 @@ export class CartService {
     return this.httpClient.get<CartItem[]>(`${this.apiUrl}/get-all/${userId}`);
   }
 
-  removeFromCart(tourId:number):Observable<void> {
+  removeFromCart(bookingId:string):Observable<void> {
     const userId = this.getUserId();
-    return this.httpClient.delete<void>(`${this.apiUrl}/remove/${userId}/${tourId}`);
+    return this.httpClient.delete<void>(`${this.apiUrl}/remove/${userId}/${bookingId}`);
   }
 
   clearCart():Observable<void> {

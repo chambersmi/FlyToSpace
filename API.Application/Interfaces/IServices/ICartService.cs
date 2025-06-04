@@ -13,6 +13,6 @@ namespace API.Application.Interfaces.IServices
         Task AddToCartAsync(string userId, int tourId, int seatsBooked);
         Task<IEnumerable<CartItemDto?>> GetCartAsync(string userId);
         Task ClearCartAsync(string userId);
-        Task RemoveFromCartAsync(string userId, int tourId);
+        Task RemoveFromCartAsync(string userId, Guid bookingId);
     }
 }

@@ -59,7 +59,7 @@ namespace API.Controllers
                         };
 
                         await _itineraryService.CreateItineraryAsync(dto);
-                        await _cartService.RemoveFromCartAsync(userId, item.TourId);
+                        await _cartService.RemoveFromCartAsync(userId, item.BookingId);
                     }
                 }
 

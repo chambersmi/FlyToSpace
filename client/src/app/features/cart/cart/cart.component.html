@@ -10,7 +10,7 @@
       <p class="card-text">Seats: {{ item.seatsBooked }}</p>
       <p class="card-text">Tour Price: ${{ item.tourPrice }}</p>
       <p class="card-text">Total: ${{ item.totalPrice }}</p>
-      <button class="btn btn-danger" (click)="removeItem(item.tourId)">Remove</button>
+      <button class="btn btn-danger" (click)="removeItem(item.bookingId!)">Remove</button>
     </div>
   </div>
 

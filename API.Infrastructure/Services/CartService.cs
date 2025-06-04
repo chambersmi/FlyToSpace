@@ -1,14 +1,8 @@
 ﻿using API.Application.DTOs;
 using API.Application.Interfaces.IServices;
-using API.Application.ViewModels;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace API.Infrastructure.Services
 {
@@ -68,21 +62,21 @@ namespace API.Infrastructure.Services
                 .ToList()!;
         }
 
-        public async Task RemoveFromCartAsync(string userId, int tourId)
+        public async Task RemoveFromCartAsync(string userId, Guid bookingId)
         {
             var redisKey = $"cart:{userId}";
-            var cartData = await _database.StringGetAsync(redisKey);
+            var items = await _database.ListRangeAsync(redisKey);
+            if (items.Length == 0) return;
 
-            if (!cartData.HasValue)
-                return;
-
-            var cartItems = JsonSerializer.Deserialize<List<CartItemDto>>(cartData!);
-
-            var updatedCart = cartItems
-                .Where(item => item.TourId != tourId)
-                .ToList();
-
-            await _database.StringSetAsync(redisKey, JsonSerializer.Serialize(updatedCart));
+            foreach(var item in items)
+            {
+                var cartItem = JsonSerializer.Deserialize<CartItemDto>(item!);
+                if (cartItem != null && cartItem.BookingId == bookingId)
+                {
+                    await _database.ListRemoveAsync(redisKey, item);
+                    break;
+                }
+            }
         }
     }
 }

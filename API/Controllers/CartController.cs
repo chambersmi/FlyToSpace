@@ -41,10 +41,10 @@ namespace API.Controllers
             return Ok(cart);
         }
 
-        [HttpDelete("remove/{userId}/{tourId}")]
-        public async Task<IActionResult> RemoveFromCart(string userId, int tourId)
+        [HttpDelete("remove/{userId}/{bookingId}")]
+        public async Task<IActionResult> RemoveFromCart(string userId, Guid bookingId)
         {
-            await _cartService.RemoveFromCartAsync(userId, tourId);
+            await _cartService.RemoveFromCartAsync(userId, bookingId);
             return Ok();
         }
 

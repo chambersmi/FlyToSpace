@@ -26,8 +26,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeItem(tourId:number) {
-    this.cartService.removeFromCart(tourId).subscribe(() => {
+  removeItem(bookingId:string) {
+    this.cartService.removeFromCart(bookingId).subscribe(() => {
       this.ngOnInit();
     });
   }

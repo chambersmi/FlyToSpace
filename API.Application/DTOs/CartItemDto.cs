@@ -8,6 +8,7 @@ namespace API.Application.DTOs
 {
     public class CartItemDto
     {
+        public Guid BookingId { get; set; } = Guid.NewGuid();
         public int TourId { get; set; }
         public string TourName { get; set; } = string.Empty;
         public int SeatsBooked { get; set; }

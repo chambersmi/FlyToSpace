@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250603223155_ChangedBookingToItinerary")]
-    partial class ChangedBookingToItinerary
+    [Migration("20250604231111_AddedBookingIdToCartItems")]
+    partial class AddedBookingIdToCartItems
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
