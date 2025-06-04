@@ -1,7 +1,7 @@
 export interface CartItem {
     tourId:number;
     tourName:string;
-    seats:number;
+    seatsBooked:number;
     tourPrice:number;
     totalPrice:number;
 }

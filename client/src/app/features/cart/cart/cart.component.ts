@@ -19,23 +19,21 @@ export class CartComponent implements OnInit {
   constructor(private cartService:CartService, private router:Router) {}
   
   ngOnInit(): void {
-    const userId = localStorage.getItem(environment.getUserId)!;
-    this.cartService.getCart(userId).subscribe(item => {
-      this.cartItems = this.cartItems;
+    this.cartService.getCart().subscribe(item => {
+      console.log(item);
+      this.cartItems = item;
       this.total = this.cartItems.reduce((sum, i) => sum + i.totalPrice, 0);
     });
   }
 
   removeItem(tourId:number) {
-    const userId = localStorage.getItem(environment.getUserId)!;
-    this.cartService.removeFromCart(userId, tourId).subscribe(() => {
+    this.cartService.removeFromCart(tourId).subscribe(() => {
       this.ngOnInit();
     });
   }
 
   clearCart() {
-    const userId = localStorage.getItem(environment.getUserId)!;
-    this.cartService.clearCart(userId).subscribe(() => {
+    this.cartService.clearCart().subscribe(() => {
       this.ngOnInit();
     });
   }

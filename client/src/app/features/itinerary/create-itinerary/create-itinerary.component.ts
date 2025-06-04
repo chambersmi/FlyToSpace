@@ -40,41 +40,12 @@ export class CreateItineraryComponent implements OnInit {
     this.loadTourDetails();
 
     this.itineraryForm = this.fb.group({
-      seatsBooked: [1, [Validators.required, Validators.min(1)]]
+      seatsBooked: [0, [Validators.required, Validators.min(1)]]
 
     });
   }
 
-  submitBooking(): void {
-    // if (this.itineraryForm.invalid) {
-    //   console.log("Invalid booking form.");
-    //   return;
-    // }
-
-    // const user = this.authService.getUserFromToken();
-    
-    // if (!user) {      
-    //   this.router.navigate(['/login']);
-    //   return;
-    // }
-
-    // const dto: CreateItineraryDto = {
-    //   tourId: this.tourId,
-    //   userId: user.id,
-    //   seatsBooked: this.itineraryForm.value.seatsBooked
-    // };
-
-    // this.itineraryService.createItinerary(dto).subscribe({
-    //   next: res => {
-    //     console.log('Booking successful.');
-    //     this.router.navigate(['/']);
-    //   },
-    //   error: err => {
-    //     console.error('Failed to book tour:\n', err);
-    //     alert("Booking failed.");
-    //   }
-    // });
-
+  addToCart(): void {
     if(this.itineraryForm.invalid) {
       console.log("Invalid itinerary.");
       return;
@@ -90,27 +61,27 @@ export class CreateItineraryComponent implements OnInit {
       console.error('Tour data did not load.');
       return;
     }
-
-    const seats = this.itineraryForm.value.seatsBooked;
+   
+    const seatsBooked = this.itineraryForm.value.seatsBooked;
 
     const cartItem: CartItem = {
       tourId: this.tourId,
       tourName: this.tour.tourName,
-      seats: seats,
+      seatsBooked: seatsBooked,
       tourPrice: this.tour.tourPrice,
-      totalPrice: seats * this.tour.tourPrice
+      totalPrice: seatsBooked * this.tour.tourPrice
     };
 
-    this.cartService.addToCart(user.id, this.tourId, seats).subscribe({
-      next:(data) => {
-        console.log('Item added to cart.\n', data);
+    this.cartService.addToCart(cartItem).subscribe({
+      next: (data) => {
+        console.log('Item was added to cart');
         this.router.navigate(['/cart']);
       },
-      error: err => {
+      error: (err) => {
         console.error('Failed to add to cart:\n', err);
-        alert("Add to cart failed!\n");
+        alert('Failed to add to cart.');
       }
-    });
+    })
   }
 
   private loadTourDetails(): void {
@@ -127,7 +98,6 @@ export class CreateItineraryComponent implements OnInit {
 
     if(targetValue) {
       const seats = Number(targetValue);
-      console.log('Seats changed to ', targetValue);
       this.updateTotalPrice(seats);
     } else {
       console.warn('No value selected');

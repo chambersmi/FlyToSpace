@@ -40,7 +40,7 @@ namespace API.Controllers
                 var stripeEvent = EventUtility.ConstructEvent(
                     json,
                     Request.Headers["Stripe-Signature"],
-                    _config["Stripe:WebhookSecret"]);
+                    _config["Stripe:Publishable"]);
 
                 if (stripeEvent.Type == "checkout.session.completed")
                 {

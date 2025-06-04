@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("cart")]
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
@@ -31,7 +33,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("get-all/{userId}")]
         public async Task<ActionResult<List<CartItemDto>>> GetCart(string userId)
         {
             var cart = await _cartService.GetCartAsync(userId);

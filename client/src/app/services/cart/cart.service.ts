@@ -3,33 +3,44 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CartItem } from '../../models/cart/cart.model';
 import { Observable } from 'rxjs';
+import { AddToCartRequest } from '../../models/cart/add-to-cart-request.model';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private readonly apiUrl = `${environment.apiUrl}/cart`;
+  constructor(private httpClient:HttpClient, private authService:AuthService) { }
 
-  constructor(private httpClient:HttpClient) { }
 
-  addToCart(userId:string, tourId:number, seats:number):Observable<void> {
-    return this.httpClient.post<void>(`${this.apiUrl}/add/${userId}`, 
-      {
-        userId,
-        tourId,        
-        seats
-      });
+
+  addToCart(req:AddToCartRequest):Observable<void> {
+    const userId = this.getUserId();
+    return this.httpClient.post<void>(`${this.apiUrl}/add/${userId}`, req)
   }
-  
-  getCart(userId:string):Observable<CartItem[]> {
-    return this.httpClient.get<CartItem[]>(`${this.apiUrl}/${userId}`);
+    
+  getCart():Observable<CartItem[]> {
+    const userId = this.getUserId();
+    return this.httpClient.get<CartItem[]>(`${this.apiUrl}/get-all/${userId}`);
   }
 
-  removeFromCart(userId:string, tourId:number):Observable<void> {
+  removeFromCart(tourId:number):Observable<void> {
+    const userId = this.getUserId();
     return this.httpClient.delete<void>(`${this.apiUrl}/remove/${userId}/${tourId}`);
   }
 
-  clearCart(userId:string):Observable<void> {
+  clearCart():Observable<void> {
+    const userId = this.getUserId();
     return this.httpClient.delete<void>(`${this.apiUrl}/clear/${userId}`);
+  }
+
+  private getUserId(): any {
+    const user = this.authService.getUserFromToken();
+    if(!user || !user.id) {
+      throw new Error('User is not authenticated');
+    }
+
+    return user.id;
   }
 }

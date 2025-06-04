@@ -16,7 +16,7 @@
           <p class="card-text">{{ tour.tourDescription }}</p>
           <p><strong>Price:</strong> {{ tour.tourPrice | currency }}</p>
           <p><strong>Seats:</strong> {{ tour.seatsOccupied }} / {{ tour.maxSeats }}</p>
-          <button class="btn btn-primary mt-auto" (click)="bookTour(tour.tourId)">Book Now</button>
+          <button class="btn btn-primary mt-auto" (click)="bookNow(tour.tourId)">Book Now</button>
         </div>
       </div>
     </div>
