@@ -35,7 +35,6 @@ export class AuthService {
     return this.httpClient.post<LoginResponse>(`${this.apiUrl}/login`, dto).pipe(
       tap((response) => {
         localStorage.setItem(this.tokenKey, response.token);
-        console.log('TOKEN!!! ', localStorage.getItem('authToken'));
         this.isUserLoggedIn.next(true);
       })
     );

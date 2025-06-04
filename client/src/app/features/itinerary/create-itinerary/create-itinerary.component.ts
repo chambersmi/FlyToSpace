@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CreateItineraryDto } from '../../../models/itinerary/create-itinerary-dto.model';
 import { CommonModule } from '@angular/common';
 import { CreateTourDto } from '../../../models/tour/create-tour-dto.model';
+import { CartService } from '../../../services/cart/cart.service';
+import { CartItem } from '../../../models/cart/cart.model';
 
 @Component({
   selector: 'app-create-itinerary',
@@ -29,7 +31,9 @@ export class CreateItineraryComponent implements OnInit {
     private itineraryService: ItineraryService,
     private router: Router,
     private authService: AuthService,
-    private tourService: TourService) { }
+    private tourService: TourService,
+    private cartService:CartService
+  ) { }
 
   ngOnInit(): void {
     this.tourId = Number(this.route.snapshot.paramMap.get('tourId'));
@@ -42,32 +46,69 @@ export class CreateItineraryComponent implements OnInit {
   }
 
   submitBooking(): void {
-    if (this.itineraryForm.invalid) {
-      console.log("Invalid booking form.");
+    // if (this.itineraryForm.invalid) {
+    //   console.log("Invalid booking form.");
+    //   return;
+    // }
+
+    // const user = this.authService.getUserFromToken();
+    
+    // if (!user) {      
+    //   this.router.navigate(['/login']);
+    //   return;
+    // }
+
+    // const dto: CreateItineraryDto = {
+    //   tourId: this.tourId,
+    //   userId: user.id,
+    //   seatsBooked: this.itineraryForm.value.seatsBooked
+    // };
+
+    // this.itineraryService.createItinerary(dto).subscribe({
+    //   next: res => {
+    //     console.log('Booking successful.');
+    //     this.router.navigate(['/']);
+    //   },
+    //   error: err => {
+    //     console.error('Failed to book tour:\n', err);
+    //     alert("Booking failed.");
+    //   }
+    // });
+
+    if(this.itineraryForm.invalid) {
+      console.log("Invalid itinerary.");
       return;
     }
 
     const user = this.authService.getUserFromToken();
-    
-    if (!user) {      
+    if(!user) {
       this.router.navigate(['/login']);
       return;
     }
 
-    const dto: CreateItineraryDto = {
+    if(!this.tour) {
+      console.error('Tour data did not load.');
+      return;
+    }
+
+    const seats = this.itineraryForm.value.seatsBooked;
+
+    const cartItem: CartItem = {
       tourId: this.tourId,
-      userId: user.id,
-      seatsBooked: this.itineraryForm.value.seatsBooked
+      tourName: this.tour.tourName,
+      seats: seats,
+      tourPrice: this.tour.tourPrice,
+      totalPrice: seats * this.tour.tourPrice
     };
 
-    this.itineraryService.createItinerary(dto).subscribe({
-      next: res => {
-        console.log('Booking successful.');
-        this.router.navigate(['/']);
+    this.cartService.addToCart(user.id, this.tourId, seats).subscribe({
+      next:(data) => {
+        console.log('Item added to cart.\n', data);
+        this.router.navigate(['/cart']);
       },
       error: err => {
-        console.error('Failed to book tour:\n', err);
-        alert("Booking failed.");
+        console.error('Failed to add to cart:\n', err);
+        alert("Add to cart failed!\n");
       }
     });
   }

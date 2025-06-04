@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <h2>🧑‍🚀 Your Space Cart</h2>
+  <div *ngIf="cartItems.length === 0">
+    Your cart is empty.
+  </div>
+
+  <div *ngFor="let item of cartItems" class="card mb-2">
+    <div class="card-body card-styling">
+      <h5 class="card-title">{{ item.tourName }}</h5>
+      <p class="card-text">Seats: {{ item.seats }}</p>
+      <p class="card-text">Tour Price: ${{ item.tourPrice }}</p>
+      <p class="card-text">Total: ${{ item.totalPrice }}</p>
+      <button class="btn btn-danger" (click)="removeItem(item.tourId)">Remove</button>
+    </div>
+  </div>
+
+  <div *ngIf="cartItems.length > 0">
+    <h4>Total: ${{ total }}</h4>
+    <button class="btn btn-warning" (click)="clearCart()">Clear Cart</button>
+    <button class="btn btn-success">Proceed to Checkout</button>
+  </div>
+</div>

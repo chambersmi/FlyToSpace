@@ -33,9 +33,9 @@ namespace API.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITourRepository, TourRepository>();
             services.AddScoped<IItineraryRepository, ItineraryRepository>();
+            services.AddScoped<ICartService, CartService>();
 
 
-                        
 
             return services;
         }

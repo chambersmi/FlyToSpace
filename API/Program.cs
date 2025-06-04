@@ -6,9 +6,11 @@ using API.Domain.Entities;
 using API.Infrastructure;
 using API.Infrastructure.Services;
 using API.Utilities;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -37,11 +39,21 @@ namespace API
             builder.Services.AddScoped<GetStatesService>();
             builder.Services.AddScoped<ITourService, TourService>();
             builder.Services.AddScoped<IItineraryService, ItineraryService>();
+            builder.Services.AddScoped<IStripeService, StripeService>();
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerConfiguration(builder.Configuration);
             builder.Services.AddControllers();
+
+            // Redis
+            var redisConnectionString = builder.Configuration.GetConnectionString("RedisConnection");
+            if(string.IsNullOrEmpty(redisConnectionString))
+            {
+                throw new InvalidOperationException("Redis connection string is not configured.");
+            }
+            builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnectionString));
+            
 
             // CORS Policy
             var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();

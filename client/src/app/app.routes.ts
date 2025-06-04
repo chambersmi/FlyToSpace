@@ -6,6 +6,7 @@ import { HomeComponent } from './features/home/home/home.component';
 import { ToursComponent } from './features/tour/tours/tours.component';
 import { CreateItineraryComponent } from './features/itinerary/create-itinerary/create-itinerary.component';
 import { ItineraryComponent } from './features/itinerary/itinerary/itinerary.component';
+import { CartComponent } from './features/cart/cart/cart.component';
 
 
 export const routes: Routes = [
@@ -15,5 +16,6 @@ export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'tours', component: ToursComponent},
     { path: 'create-itinerary/:tourId', component: CreateItineraryComponent},
-    { path: 'itinerary', component: ItineraryComponent}
+    { path: 'itinerary', component: ItineraryComponent},
+    { path: 'cart', component: CartComponent}
 ];
