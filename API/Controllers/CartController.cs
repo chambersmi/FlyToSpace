@@ -16,15 +16,18 @@ namespace API.Controllers
         private readonly ICartService _cartService;
         private readonly ILogger<CartController> _logger;
         private readonly IStripeService _stripeService;
+        private readonly IItineraryService _itineraryService;
 
         public CartController(
             ILogger<CartController> logger,
             ICartService cartService,
-            IStripeService stripeService)
+            IStripeService stripeService,
+            IItineraryService itineraryService)
         {
             _logger = logger;
             _cartService = cartService;
             _stripeService = stripeService;
+            _itineraryService = itineraryService;
         }
 
         [HttpPost("add/{userId}")]
@@ -55,6 +58,41 @@ namespace API.Controllers
             await _cartService.ClearCartAsync(userId);
 
             return Ok();
+        }
+
+        [HttpPost("checkout")]
+        public async Task<IActionResult> Checkout([FromBody] CheckoutRequestDto request)
+        {
+            var userId = request.UserId ?? User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
+            var cartItems = await _cartService.GetCartAsync(userId);
+
+            if(cartItems == null || !cartItems.Any())
+            {
+                return BadRequest("Cart is empty");
+            }
+
+            foreach (var item in cartItems)
+            {
+                var itinerary = new CreateItineraryDto
+                {
+                    UserId = userId,
+                    TourId = item.TourId,
+                    SeatsBooked = item.SeatsBooked
+                };
+
+                await _itineraryService.CreateItineraryAsync(itinerary);
+                await _cartService.RemoveFromCartAsync(userId, item.BookingId);
+            }
+
+            
+
+            return Ok("Itinerary created.");
         }
 
         [HttpPost("create-checkout-session")]

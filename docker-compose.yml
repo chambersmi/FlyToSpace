@@ -21,10 +21,13 @@ services:
       dockerfile: API/Dockerfile
     ports:
       - "5050:80"
-      - "5051:443"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       Redis__ConnectionString: redis:6379,abortConnect=false
+      # Stripe__SecretKey: "${Stripe__SecretKey}"
+      # Stripe__PublishableKey: "${Stripe__PublishableKey}"
+      # Stripe__WHSecret: "${Stripe__WHSecret}"
+      ASPNETCORE_URLS: "http://+:80"
     depends_on:
       - redis
     restart: unless-stopped

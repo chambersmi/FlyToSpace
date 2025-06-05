@@ -40,7 +40,7 @@ namespace API.Controllers
                 var stripeEvent = EventUtility.ConstructEvent(
                     json,
                     Request.Headers["Stripe-Signature"],
-                    _config["Stripe:NA"]);
+                    _config["Stripe:SecretKey"]);
 
                 if (stripeEvent.Type == "checkout.session.completed")
                 {

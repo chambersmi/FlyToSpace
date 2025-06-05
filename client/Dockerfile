@@ -14,5 +14,6 @@ FROM nginx:alpine
 # Copy custom Nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+RUN mkdir -p /usr/share/nginx/client && chmod -R 755 /usr/share/nginx/client
 # Copy Angular build output
-COPY --from=build /app/dist/client /usr/share/nginx/html
+COPY --from=build /app/dist/client/browser /usr/share/nginx/client

@@ -2,7 +2,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 
 WORKDIR /app
-EXPOSE 7149
+EXPOSE 80
+EXPOSE 443
 
 # Create www-data user if it doesn't exist (safe way)
 RUN if ! getent group www-data > /dev/null; then \

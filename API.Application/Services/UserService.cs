@@ -60,5 +60,23 @@ namespace API.Application.Services
 
             return true;
         }
+
+        public async Task<CheckoutRequestDto> GetUserInformation(string userId)
+        {
+            var user = await _userRepository.GetUserByIdAsync(userId);
+
+            return new CheckoutRequestDto
+            {
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                DateOfBirth = user.DateOfBirth,
+                StreetAddress1 = user.StreetAddress1,
+                StreetAddress2 = user.StreetAddress2,
+                City = user.City,
+                State = user.State,
+                ZipCode = user.ZipCode
+            };
+        }
     }
 }

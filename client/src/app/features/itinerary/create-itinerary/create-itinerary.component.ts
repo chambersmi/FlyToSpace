@@ -75,7 +75,7 @@ export class CreateItineraryComponent implements OnInit {
     this.cartService.addToCart(cartItem).subscribe({
       next: (data) => {
         console.log('Item was added to cart');
-        this.router.navigate(['/cart']);
+        //this.router.navigate(['/cart/']);
       },
       error: (err) => {
         console.error('Failed to add to cart:\n', err);

@@ -3,6 +3,7 @@ using API.Application.Interfaces.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -106,6 +107,27 @@ namespace API.Controllers
             var email = User.FindFirstValue(ClaimTypes.Email);
 
             return Ok(new { userId, email });
+        }
+
+        [HttpGet("get-all-information")]
+        public async Task<IActionResult> GetUserInformation()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if(string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
+            var userInformation = await _userService.GetUserInformation(userId);
+
+            if(userInformation == null)
+            {
+                return BadRequest("User was not found.");
+            }
+
+            return Ok(userInformation);
+
         }
 
 

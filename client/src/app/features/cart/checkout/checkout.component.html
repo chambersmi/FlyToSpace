@@ -1,8 +1,48 @@
-<div class="text-center mt-5" *ngIf="isLoading">
-  <p>Preparing checkout session with Stripe...</p>
-  <div class="spinner-border text-primary" role="status"></div>
-</div>
+<div class="container mt-4" *ngIf="checkoutForm">
+  <h2>Checkout</h2>
+  <form [formGroup]="checkoutForm" (ngSubmit)="submitCheckout()">
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
 
-<div class="alert alert-danger mt-3" *ngIf="errorMessage">
-  {{ errorMessage }}
+    <div class="mb-3">
+      <label>Address</label>
+      <input type="text" class="form-control" formControlName="address" />
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label>City</label>
+        <input type="text" class="form-control" formControlName="city" />
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>State</label>
+        <input type="text" class="form-control" formControlName="state" />
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>Postal Code</label>
+        <input type="text" class="form-control" formControlName="postalCode" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Payment Method</label><br />
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" value="credit" formControlName="paymentMethod" id="credit" />
+        <label class="form-check-label" for="credit">Credit Card</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" value="paypal" formControlName="paymentMethod" id="paypal" />
+        <label class="form-check-label" for="paypal">PayPal</label>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="isLoading || checkoutForm.invalid">
+      {{ isLoading ? 'Processing...' : 'Complete Checkout' }}
+    </button>
+
+    <div class="mt-3 text-success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="mt-3 text-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </form>
 </div>
