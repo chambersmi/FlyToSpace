@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { TokenUserDto } from '../../models/auth/token-dto.model';
@@ -17,7 +17,10 @@ export class NavbarComponent implements OnInit {
   user: TokenUserDto | null = null;
   itemsInCart = 0;
 
-  constructor(private authService: AuthService, private cartService: CartService) { }
+  constructor(
+    private authService: AuthService, 
+    private cartService: CartService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.authService.isAuthenticated().subscribe((status) => {
@@ -36,6 +39,7 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 
 }

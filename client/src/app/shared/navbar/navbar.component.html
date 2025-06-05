@@ -22,12 +22,14 @@
                     </li>
                 </ng-container>
 
+                <ng-container *ngIf="user">
                 <li class="nav-item position-relative">
                     <a routerLink="/cart" class="nav-link d-flex align-items-center">
                         Cart<i class="bi bi-rocket-takeoff position-relative ms-2"></i>
                         <span *ngIf="itemsInCart > 0" class="cart-badge">{{itemsInCart}}</span>
                     </a>
                 </li>
+                </ng-container>
             </ul>
 
             <ul class="navbar-nav ms-auto">

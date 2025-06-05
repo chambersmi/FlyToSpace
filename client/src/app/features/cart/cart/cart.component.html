@@ -15,7 +15,7 @@
   </div>
 
   <div *ngIf="cartItems.length > 0">
-    <h4>Total: ${{ total }}</h4>
+    <h4>Total: {{ total + (total * 0.06) | currency }}</h4>
     <button class="btn btn-warning" (click)="clearCart()">Clear Cart</button>
     <button class="btn btn-success" (click)="proceedToCheckout()">Proceed to Checkout</button>
   </div>

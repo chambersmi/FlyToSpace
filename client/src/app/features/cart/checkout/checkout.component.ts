@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user/user.service';
+import { CartService } from '../../../services/cart/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -26,7 +27,9 @@ export class CheckoutComponent implements OnInit {
     private http: HttpClient,
     private authService: AuthService,
     private router: Router,
-    private userService: UserService) {
+    private userService: UserService,
+    private cartService: CartService) {
+
     this.checkoutForm = this.fb.group({
       email: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -106,6 +109,7 @@ export class CheckoutComponent implements OnInit {
         this.successMessage = 'Booking confirmed!';
         this.isLoading = false;
         setTimeout(() => this.router.navigate(['/itinerary']), 1500);
+        this.cartService.getCartItemCount();
       },
       error: (err) => {
         this.errorMessage = 'Checkout failed. Please try again.';
