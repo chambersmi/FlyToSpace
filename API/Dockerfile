@@ -1,36 +1,48 @@
-# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-# This stage is used when running from VS in fast mode (Default for Debug configuration)
+# Base image for runtime
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
+
 WORKDIR /app
 EXPOSE 7149
 
+# Create www-data user if it doesn't exist (safe way)
+RUN if ! getent group www-data > /dev/null; then \
+      addgroup --system www-data; \
+    fi && \
+    if ! id -u www-data > /dev/null 2>&1; then \
+      adduser --system --ingroup www-data www-data; \
+    fi
 
-# This stage is used to build the service project
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["API/API.csproj", "API/"]
-COPY ["../API.Application/API.Application.csproj", "../API.Application/"]
-COPY ["../API.Domain/API.Domain.csproj", "../API.Domain/"]
-COPY ["../API.Infrastructure/API.Infrastructure.csproj", "../API.Infrastructure/"]
-RUN dotnet restore "./API/API.csproj"
-COPY . .
-WORKDIR "/src/API"
-RUN dotnet build "./API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# This stage is used to publish the service project to be copied to the final stage
+COPY ["API/API.csproj", "API/"]
+COPY ["API.Application/API.Application.csproj", "API.Application/"]
+COPY ["API.Domain/API.Domain.csproj", "API.Domain/"]
+COPY ["API.Infrastructure/API.Infrastructure.csproj", "API.Infrastructure/"]
+
+RUN dotnet restore "API/API.csproj"
+
+COPY .. .
+
+WORKDIR "/src/API"
+RUN dotnet build "API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
+
 COPY --from=publish /app/publish .
-#USER www-data
-#RUN mkdir /data && chown -R www-data:www-data /data
-COPY --from=publish /app/publish .
+
+RUN mkdir -p /data && chown -R www-data:www-data /data
+
+USER www-data
+
+ENV DATA_DIRECTORY=/data
 
 ENTRYPOINT ["dotnet", "API.dll"]

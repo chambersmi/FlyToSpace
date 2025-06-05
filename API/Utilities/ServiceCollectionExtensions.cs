@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
 using System.Security.Claims;
 
 namespace API.Utilities
@@ -109,6 +110,47 @@ namespace API.Utilities
             }));
 
             return services;
+        }
+
+        public static IServiceCollection AddRedisConnection(this IServiceCollection service, IConfiguration configuration)
+        {
+            var redisConnectionString = configuration.GetConnectionString("RedisConnection");
+
+            if (string.IsNullOrEmpty(redisConnectionString))
+            {
+                throw new InvalidOperationException("Redis connection string is not configured.");
+            }
+
+            var redisConfig = ConfigurationOptions.Parse(redisConnectionString);
+            redisConfig.AbortOnConnectFail = false; // Important!
+
+            // Optional: retry logic in a simple loop
+            ConnectionMultiplexer redis = null;
+            int retryCount = 5;
+            while (retryCount > 0)
+            {
+                try
+                {
+                    redis = ConnectionMultiplexer.Connect(redisConfig);
+                    break;
+                }
+                catch (RedisConnectionException)
+                {
+                    retryCount--;
+                    Console.WriteLine($"Redis connection failed, retrying... attempts left: {retryCount}");
+                    Thread.Sleep(2000);
+                }
+            }
+
+            if (redis == null)
+            {
+                throw new InvalidOperationException("Unable to connect to Redis after retries.");
+            }
+
+            service.AddSingleton<IConnectionMultiplexer>(redis);
+
+            return service;
+
         }
     }
 }

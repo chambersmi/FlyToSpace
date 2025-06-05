@@ -20,6 +20,12 @@ namespace API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Change appsettings based on environment
+            builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
             // Add services to the container.
 
             // AutoMapper
@@ -47,13 +53,7 @@ namespace API
             builder.Services.AddControllers();
 
             // Redis
-            var redisConnectionString = builder.Configuration.GetConnectionString("RedisConnection");
-            if(string.IsNullOrEmpty(redisConnectionString))
-            {
-                throw new InvalidOperationException("Redis connection string is not configured.");
-            }
-
-            builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnectionString));
+            builder.Services.AddRedisConnection(builder.Configuration);
 
 
             // CORS Policy
@@ -113,7 +113,7 @@ namespace API
                 Console.WriteLine($"Authorization Header: {authHeader}");
                 await next.Invoke();
             });
-
+            Console.WriteLine($"Environment: {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}");
             try
             {
                 app.Run();
