@@ -106,7 +106,7 @@ namespace API.Controllers
             var itinerary = await _itineraryService.UpdateItineraryAsync(id, dto);
 
             if (itinerary == null)
-                return BadRequest($"{itinerary.BookingId} not found.");
+                return BadRequest($"{itinerary.ItineraryId} not found.");
 
             return Ok(itinerary);
 

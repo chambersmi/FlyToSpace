@@ -35,7 +35,6 @@ export class ItineraryComponent implements OnInit {
     }
   }
 
-
   private loadBookings():void {
     this.itineraryService.getAllItinerariesByUserIdAsync().subscribe({
       next: (data) => {
@@ -47,9 +46,5 @@ export class ItineraryComponent implements OnInit {
         console.error('Error loading bookings:\n', err)
       }
     });
-  }
-
-  private updateTotalPrice(): void {
-    
   }
 }

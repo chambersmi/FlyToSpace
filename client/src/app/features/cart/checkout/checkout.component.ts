@@ -14,41 +14,41 @@ import { UserService } from '../../../services/user/user.service';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit {
-  checkoutForm:FormGroup;
+  checkoutForm: FormGroup;
   isLoading = false;
   errorMessage = '';
   successMessage = '';
 
-  private readonly apiUrl = `${environment.apiUrl}/cart`;
+  private readonly apiUrl = `${environment.apiUrl}/api/cart`;
 
   constructor(
-    private fb:FormBuilder,
-    private http:HttpClient,
-    private authService:AuthService,
-    private router:Router,
-    private userService:UserService) 
-    {
-       this.checkoutForm = this.fb.group({
-        firstName: ['', Validators.required],
-        middleName: [''],
-        lastName: ['', Validators.required],
-        streetAddress1: ['', Validators.required],
-        streetAddress2: [''],
-        city: ['', Validators.required],
-        state: ['', Validators.required],
-        zipCode: ['', Validators.required],
-        paymentMethod: ['', Validators.required]
-      });
-    }
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router,
+    private userService: UserService) {
+    this.checkoutForm = this.fb.group({
+      email: ['', Validators.required],
+      firstName: ['', Validators.required],
+      middleName: [''],
+      lastName: ['', Validators.required],
+      streetAddress1: ['', Validators.required],
+      streetAddress2: [''],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zipCode: ['', Validators.required],
+      paymentMethod: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
-   this.loadUserInformation();
+    this.loadUserInformation();
   }
 
 
   loadUserInformation(): void {
     var user = this.authService.getUserFromToken();
-    if(!user) {
+    if (!user) {
       this.router.navigate(['/login']);
       return;
     }
@@ -56,6 +56,7 @@ export class CheckoutComponent implements OnInit {
     this.userService.getAllUserInformation(user.id).subscribe({
       next: (user) => {
         this.checkoutForm?.patchValue({
+          email: user.email,
           firstName: user.firstName,
           middleName: user.middleName,
           lastName: user.lastName,
@@ -80,21 +81,40 @@ export class CheckoutComponent implements OnInit {
 
     const formValue = this.checkoutForm.value;
 
-    this.http.post(`${this.apiUrl}/checkout`, {
-      ...formValue
-    }).subscribe({
+    // Construct the payload with PascalCase keys expected by the API
+    const checkoutPayload: any = {
+      email: formValue.email,
+      firstName: formValue.firstName,
+      lastName: formValue.lastName,
+      streetAddress1: formValue.streetAddress1,
+      city: formValue.city,
+      state: formValue.state,
+      zipCode: formValue.zipCode
+    };
+
+    // Include optional fields if they have values
+    if (formValue.middleName?.trim()) {
+      checkoutPayload.MiddleName = formValue.middleName;
+    }
+
+    if (formValue.streetAddress2?.trim()) {
+      checkoutPayload.StreetAddress2 = formValue.streetAddress2;
+    }
+
+    this.http.post(`${this.apiUrl}/checkout`, checkoutPayload).subscribe({
       next: (data) => {
         this.successMessage = 'Booking confirmed!';
         this.isLoading = false;
         setTimeout(() => this.router.navigate(['/itinerary']), 1500);
       },
-
       error: (err) => {
         this.errorMessage = 'Checkout failed. Please try again.';
-        console.error('Checkout error: ', err);
+        console.error('Checkout error:', err);
+        if (err?.error?.errors) {
+          console.table(err.error.errors); // Optional: Show validation detail
+        }
         this.isLoading = false;
       }
     });
   }
-
 }

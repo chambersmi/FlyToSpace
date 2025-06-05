@@ -9,14 +9,14 @@ namespace API.Application.Interfaces.IServices
 {
     public interface IItineraryService
     {
-        Task<IEnumerable<BookingDto>> GetAllItinerariesByUserIdAsync(string userId);
-        Task<BookingDto?> GetSingleUserItineraryByIdAsync(int id, string userId);
+        Task<IEnumerable<ItineraryDto>> GetAllItinerariesByUserIdAsync(string userId);
+        Task<ItineraryDto?> GetSingleUserItineraryByIdAsync(int id, string userId);
         Task<bool> DeleteItineraryByIdAsync(int id);
-        Task<BookingDto?> UpdateItineraryAsync(int id, UpdateItineraryDto dto);
-        Task<BookingDto?> CreateItineraryAsync(CreateItineraryDto dto);
+        Task<ItineraryDto?> UpdateItineraryAsync(int id, UpdateItineraryDto dto);
+        Task<ItineraryDto?> CreateItineraryAsync(CreateItineraryDto dto);
 
-        Task<IEnumerable<BookingDto>> GetAllItinerariesAsync();
-        Task<BookingDto> GetItineraryByIdAsync(int id);
+        Task<IEnumerable<ItineraryDto>> GetAllItinerariesAsync();
+        Task<ItineraryDto> GetItineraryByIdAsync(int id);
         Task<decimal> GetTotalPriceAsync(int id);
     }
 }

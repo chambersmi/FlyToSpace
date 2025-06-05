@@ -11,7 +11,7 @@ namespace API.Application.DTOs
 {
     public class CheckoutRequestDto
     {
-        public string UserId { get; set; } = null!;
+        public string? UserId { get; set; }
         public string Email { get; set; } = null!;
         public string FirstName { get; set; } = null!;
         public string? MiddleName { get; set; }

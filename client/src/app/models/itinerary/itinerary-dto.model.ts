@@ -1,5 +1,5 @@
 export interface ItineraryDto {
-    bookingId:number;
+    itineraryId:number;
     tourId:number;
     userId:string;
     seatsBooked:number;

@@ -10,23 +10,20 @@ namespace API.Controllers
     [Authorize]
     [ApiController]
     //[Route("api/[controller]")]
-    [Route("cart")]
+    [Route("api/cart")]
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
         private readonly ILogger<CartController> _logger;
-        private readonly IStripeService _stripeService;
         private readonly IItineraryService _itineraryService;
 
         public CartController(
             ILogger<CartController> logger,
             ICartService cartService,
-            IStripeService stripeService,
             IItineraryService itineraryService)
         {
             _logger = logger;
             _cartService = cartService;
-            _stripeService = stripeService;
             _itineraryService = itineraryService;
         }
 
@@ -89,34 +86,9 @@ namespace API.Controllers
                 await _itineraryService.CreateItineraryAsync(itinerary);
                 await _cartService.RemoveFromCartAsync(userId, item.BookingId);
             }
-
-            
-
-            return Ok("Itinerary created.");
-        }
-
-        [HttpPost("create-checkout-session")]
-        public async Task<IActionResult> Checkout()
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if(string.IsNullOrEmpty(userId))
-            {
-                return Unauthorized();
-            }
-
-            var cartItems = await _cartService.GetCartAsync(userId);
-
-            if (!cartItems.Any())
-            {
-                return BadRequest("Cart is empty.");
-            }
-
-            var stripeSession = await _stripeService.CreateCheckoutSession(cartItems, userId);
-
             return Ok(new
             {
-                url = stripeSession.Url
+                message = "Itinerary created."
             });
         }
     }

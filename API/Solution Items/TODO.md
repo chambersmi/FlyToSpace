@@ -19,3 +19,7 @@ LATER:
 [ ] Passenger should be able to buy more than one seat
 [ ] Each seat will need additional passenger information
 [ ] Booking Services will need to book {x} amount of seats.
+
+
+
+docker run -d --name redis -p 6379:6379 redis:7

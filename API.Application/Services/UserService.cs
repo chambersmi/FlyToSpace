@@ -67,6 +67,7 @@ namespace API.Application.Services
 
             return new CheckoutRequestDto
             {
+                Email = user.Email ?? string.Empty,
                 FirstName = user.FirstName,
                 MiddleName = user.MiddleName,
                 LastName = user.LastName,

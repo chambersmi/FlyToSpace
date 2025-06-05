@@ -1,5 +1,4 @@
  export interface CheckoutDto {
-    userId:string;
     email:string;
     firstName:string;
     middleName?:string;

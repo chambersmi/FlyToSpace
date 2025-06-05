@@ -30,10 +30,10 @@ namespace API.Application.Mapping
             CreateMap<CreateItineraryDto, Itinerary>();
             CreateMap<UpdateItineraryDto, Itinerary>();
 
-            CreateMap<Itinerary, BookingDto>()
+            CreateMap<Itinerary, ItineraryDto>()
                 .ForMember(dest => dest.TourName, opt => opt.MapFrom(src => src.Tour.TourName));
 
-            CreateMap<BookingDto, Itinerary>()
+            CreateMap<ItineraryDto, Itinerary>()
                 .ForMember(dest => dest.Tour, opt => opt.Ignore())
                 .ForMember(dest => dest.User, opt => opt.Ignore());
         }
