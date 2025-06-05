@@ -8,3 +8,4 @@ dist/
 tmp/
 package-lock.json
 *.db
+secrets.json

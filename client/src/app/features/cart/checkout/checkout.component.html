@@ -1,0 +1,8 @@
+<div class="text-center mt-5" *ngIf="isLoading">
+  <p>Preparing checkout session with Stripe...</p>
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<div class="alert alert-danger mt-3" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>

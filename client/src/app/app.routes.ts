@@ -7,6 +7,8 @@ import { ToursComponent } from './features/tour/tours/tours.component';
 import { CreateItineraryComponent } from './features/itinerary/create-itinerary/create-itinerary.component';
 import { ItineraryComponent } from './features/itinerary/itinerary/itinerary.component';
 import { CartComponent } from './features/cart/cart/cart.component';
+import { CheckoutComponent } from './features/cart/checkout/checkout.component';
+import { ConfirmationComponent } from './features/cart/confirmation/confirmation.component';
 
 
 export const routes: Routes = [
@@ -17,5 +19,7 @@ export const routes: Routes = [
     { path: 'tours', component: ToursComponent},
     { path: 'create-itinerary/:tourId', component: CreateItineraryComponent},
     { path: 'itinerary', component: ItineraryComponent},
-    { path: 'cart', component: CartComponent}
+    { path: 'cart', component: CartComponent},
+    { path: 'cart/checkout', component: CheckoutComponent },
+    { path: 'cart/confirmation', component: ConfirmationComponent }
 ];

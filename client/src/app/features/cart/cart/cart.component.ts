@@ -38,4 +38,8 @@ export class CartComponent implements OnInit {
     });
   }
 
+  proceedToCheckout() {
+    this.router.navigate(['/cart/checkout']);
+  }
+
 }

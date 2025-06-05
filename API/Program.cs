@@ -52,8 +52,12 @@ namespace API
             {
                 throw new InvalidOperationException("Redis connection string is not configured.");
             }
+
             builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnectionString));
-            
+
+            builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("secrets.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
 
             // CORS Policy
             var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();

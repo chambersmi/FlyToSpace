@@ -3,6 +3,7 @@ using API.Application.Interfaces.IServices;
 using API.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -56,20 +57,28 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPost("checkout")]
-        public async Task<IActionResult> Checkout(string userId)
+        [HttpPost("create-checkout-session")]
+        public async Task<IActionResult> Checkout()
         {
-            var cart = await _cartService.GetCartAsync(userId);
-            if (!cart.Any())
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
+            var cartItems = await _cartService.GetCartAsync(userId);
+
+            if (!cartItems.Any())
             {
                 return BadRequest("Cart is empty.");
             }
 
-            var stripeSession = await _stripeService.CreateCheckoutSession(cart, userId);
+            var stripeSession = await _stripeService.CreateCheckoutSession(cartItems, userId);
 
             return Ok(new
             {
-                sessionId = stripeSession.Id
+                url = stripeSession.Url
             });
         }
     }
