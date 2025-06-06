@@ -46,6 +46,7 @@ namespace API
             builder.Services.AddScoped<ITourService, TourService>();
             builder.Services.AddScoped<IItineraryService, ItineraryService>();
             //builder.Services.AddScoped<IStripeService, StripeService>();
+           
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -97,6 +98,8 @@ namespace API
 
                 app.UseSwagger();
             }
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
             app.UseCors("AngularApp");

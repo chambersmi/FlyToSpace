@@ -1,6 +1,9 @@
-<div class="tours-container container">
+<div class="tours-container container my-5">
   <!-- Loading Indicator -->
   <div *ngIf="isLoading" class="alert alert-info text-center">
+    <div class="spinner-border text-primary me-2" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
     Loading tours...
   </div>
 
@@ -8,15 +11,20 @@
     {{ error }}
   </div>
 
-  <div *ngIf="!isLoading && !error && tours.length > 0" class="row">
-    <div *ngFor="let tour of tours" class="col-md-4 mb-4">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body card-styling d-flex flex-column">
-          <h5 class="card-title">{{ tour.tourName }}</h5>
-          <p class="card-text">{{ tour.tourDescription }}</p>
-          <p><strong>Price:</strong> {{ tour.tourPrice | currency }}</p>
-          <p><strong>Seats:</strong> {{ tour.seatsOccupied }} / {{ tour.maxSeats }}</p>
-          <button class="btn btn-primary mt-auto" (click)="bookNow(tour.tourId)">Book Now</button>
+  <div *ngIf="!isLoading && !error && tours.length > 0" class="row gy-4">
+    <div *ngFor="let tour of tours" class="col-md-6 col-lg-4">
+      <div class="card h-100 border-0 shadow-lg rounded-4">
+        <div class="card-body d-flex flex-column p-4">
+          <img *ngIf="tour.imageUrl" [src]="tour.imageUrl" class="card-img-top" alt="tour.tourName"/>
+          <h5 class="card-title fw-bold text-primary">{{ tour.tourName }}</h5>
+          <p class="card-text text-muted">{{ tour.tourDescription }}</p>
+          <ul class="list-unstyled small mb-4">
+            <li><strong>Price:</strong> {{ tour.tourPrice | currency }}</li>
+            <li><strong>Seats:</strong> {{ tour.seatsOccupied }} / {{ tour.maxSeats }}</li>
+          </ul>
+          <button class="btn btn-outline-primary mt-auto rounded-pill" (click)="bookNow(tour.tourId)">
+            <i class="bi bi-calendar-check me-2"></i>Book Now
+          </button>
         </div>
       </div>
     </div>

@@ -13,5 +13,6 @@ namespace API.Application.DTOs
         public decimal TourPrice { get; set; }
         public int MaxSeats { get; set; }
         public int SeatsOccupied { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

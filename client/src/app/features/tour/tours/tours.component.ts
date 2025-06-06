@@ -43,23 +43,6 @@ export class ToursComponent implements OnInit {
       this.router.navigate(['/login']);      
       return;
     }
-    
     this.router.navigate(['/create-itinerary', tourId]);    
   }
 }
-
-
-
-  //   this.cartService.addToCart(user.id, {
-  //     tourId: tourId,
-  //     seatsBooked: seatsBooked
-  //   }).subscribe({
-  //     next: () => {
-  //       console.log(`Successfully added tour ${tourId} to cart`)
-  //       this.router.navigate(['/cart']);
-  //     },
-  //     error: (err) => {
-  //       this.error = 'Could not add to cart.';
-  //     }
-  //   });
-  // }

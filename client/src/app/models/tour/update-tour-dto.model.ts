@@ -4,4 +4,5 @@ export interface UpdateTourDto {
     tourPackagePrice: number;
     maxSeats: number;
     seatsOccupied: number;
+    imageUrl:string;
 }

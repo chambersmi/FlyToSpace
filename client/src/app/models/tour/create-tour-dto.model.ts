@@ -4,4 +4,5 @@ export interface CreateTourDto {
     tourPrice: number;
     maxSeats: number;
     seatsOccupied:number;
+    imageUrl?:string;
 }

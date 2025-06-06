@@ -160,6 +160,9 @@ namespace API.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("MaxSeats")
                         .HasColumnType("INTEGER");
 

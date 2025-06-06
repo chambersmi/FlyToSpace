@@ -16,19 +16,25 @@
                     <a class="nav-link" routerLink="/tours" routerLinkActive="active">Tours</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/about-us" routerLinkActive="active">About Fly To Space!</a>
+                </li>
+
+
                 <ng-container *ngIf="user">
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/itinerary" routerLinkActive="active">My Itinerary</a>
                     </li>
                 </ng-container>
 
+
                 <ng-container *ngIf="user">
-                <li class="nav-item position-relative">
-                    <a routerLink="/cart" class="nav-link d-flex align-items-center">
-                        Cart<i class="bi bi-rocket-takeoff position-relative ms-2"></i>
-                        <span *ngIf="itemsInCart > 0" class="cart-badge">{{itemsInCart}}</span>
-                    </a>
-                </li>
+                    <li class="nav-item position-relative">
+                        <a routerLink="/cart" class="nav-link d-flex align-items-center">
+                            Cart<i class="bi bi-rocket-takeoff position-relative ms-2"></i>
+                            <span *ngIf="itemsInCart > 0" class="cart-badge">{{itemsInCart}}</span>
+                        </a>
+                    </li>
                 </ng-container>
             </ul>
 

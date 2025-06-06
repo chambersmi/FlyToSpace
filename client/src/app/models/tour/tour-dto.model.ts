@@ -5,4 +5,5 @@ export interface TourDto {
     tourPrice: number;
     maxSeats: number;
     seatsOccupied: number;
+    imageUrl:string;
 }

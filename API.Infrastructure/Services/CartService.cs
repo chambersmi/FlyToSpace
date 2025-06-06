@@ -1,5 +1,6 @@
 ﻿using API.Application.DTOs;
 using API.Application.Interfaces.IServices;
+using API.Application.Services;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 using System.Text.Json;
@@ -11,15 +12,18 @@ namespace API.Infrastructure.Services
         private readonly IDatabase _database;
         private readonly ILogger<CartService> _logger;
         private readonly ITourService _tourService;
+        private readonly IItineraryService _itineraryService;
 
         public CartService(
-            ILogger<CartService> logger, 
+            ILogger<CartService> logger,
             IConnectionMultiplexer redis,
-            ITourService tourService)
+            ITourService tourService,
+            IItineraryService itineraryService)
         {
             _database = redis.GetDatabase();
             _logger = logger;
             _tourService = tourService;
+            _itineraryService = itineraryService;
         }
 
         public async Task AddToCartAsync(string userId, int tourId, int seatsBooked)
@@ -39,7 +43,7 @@ namespace API.Infrastructure.Services
                 TourPrice = tour.TourPrice,
                 SeatsBooked = seatsBooked,
                 // Eventually use calculate total price method
-                TotalPrice = seatsBooked * tour.TourPrice
+                TotalPrice = await _itineraryService.GetTotalPriceAsync(tourId)
             };
 
             var json = JsonSerializer.Serialize(cartItem);

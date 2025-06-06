@@ -1,0 +1,28 @@
+.about-us-section {
+  background-color: #1b2133;
+  color: #e1e6ef;
+  box-shadow: 0 0 30px rgba(240, 123, 53, 0.2); 
+  border-left: 4px solid #f3b15a;
+  border-right: 4px solid #afc9f0;
+}
+
+.about-us-section .section-title {
+  color: #f3b15a;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.about-us-section strong {
+  color: #afc9f0;
+}
+
+.about-us-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #c8d4e7;
+}
+
+.about-us-section p:last-child {
+  color: #f07c35;
+  font-size: 1.1rem;
+}

@@ -165,52 +165,59 @@ namespace API.Data
                     new Tour {
                         TourName = "Inner Solar System Fly-By!",
                         TourDescription = "Have a chance to fly near Mercury, and a full tour around Venus and Mars!",
-                        TourPrice = 199.99m,
+                        TourPrice = 999.99m,
                         MaxSeats = 20,
-                        SeatsOccupied = 0
+                        SeatsOccupied = 0,
+                        ImageUrl = "/assets/tourImages/InnerSolarSystemFlyBy.png"
                     },
 
                     new Tour
                     {
                         TourName = "Dazzle with Saturn",
                         TourDescription = "Experience the elegance of Saturn’s iconic rings up close. Glide past icy spokes and enjoy scenic views of Titan, Rhea, and Enceladus. Don’t forget your zero-gravity camera!",
-                        TourPrice = 449.99m,
+                        TourPrice = 889.99m,
                         MaxSeats = 15,
-                        SeatsOccupied = 0
+                        SeatsOccupied = 0,
+                        ImageUrl = "/assets/tourImages/DazzleWithSaturn.png"
                     },
                     new Tour
                     {
-                        TourName = "Ring in the New Year with Saturn",
-                        TourDescription = "Celebrate the New Year with a stunning orbital party above Saturn’s rings. Includes a fly-by of Titan’s methane seas and fireworks visible from the dark side!",
-                        TourPrice = 499.99m,
-                        MaxSeats = 12,
-                        SeatsOccupied = 0
+                        TourName = "Mars, Phobos and Deimos: Oh my!",
+                        TourDescription = "Take a journey to Mars and its moons, Phobos and Deimos, where you’ll explore their mysterious surfaces and enjoy breathtaking views of the Red Planet. This tour offers a unique opportunity to witness Mars up close and experience the vast beauty of our solar system’s most intriguing celestial bodies.",
+                        TourPrice = 299.99m,
+                        MaxSeats = 18,
+                        SeatsOccupied = 0,
+                        ImageUrl = "/assets/tourImages/MarsPhobosDeimos.png"
                     },
 
                     new Tour
                     {
-                        TourName = "Europa Chill Expedition",
+                        TourName = "Europa N' Chill Expedition",
                         TourDescription = "Cool off on Jupiter’s ice moon Europa. Marvel at its surface cracks and frozen ridges while our sub-ice drone explores what's beneath. Includes hot chocolate in orbit.",
-                        TourPrice = 399.99m,
+                        TourPrice = 499.99m,
                         MaxSeats = 10,
-                        SeatsOccupied = 0
+                        SeatsOccupied = 0,
+                        ImageUrl = "/assets/tourImages/EuropaAndChill.png"
                     },
 
                     new Tour
                     {
                         TourName = "Volcano Views of Io",
                         TourDescription = "For thrill-seekers! Witness the most volcanically active body in the solar system. Tour includes shielded observation pods and a lava-light show like no other.",
-                        TourPrice = 429.99m,
+                        TourPrice = 747.99m,
                         MaxSeats = 8,
-                        SeatsOccupied = 0
+                        SeatsOccupied = 0,
+                        ImageUrl = "/assets/tourImages/VolcanoViewsOfIo.png"
+
                     },
                     new Tour
                     {
                         TourName = "The Grand Outer Circuit",
                         TourDescription = "A 10-day journey across the gas giants: Jupiter, Saturn, Uranus, and Neptune. Full tours of each planet’s moons, rings, and atmospheric wonders. For the ultimate explorer.",
-                        TourPrice = 999.99m,
+                        TourPrice = 1999.99m,
                         MaxSeats = 5,
-                        SeatsOccupied = 0
+                        SeatsOccupied = 0,
+                        ImageUrl = "/assets/tourImages/VolcanoViewsOfIo.png"
                         },
                     };
 

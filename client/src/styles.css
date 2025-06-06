@@ -24,8 +24,11 @@ html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; font-famil
   color: white !important;
 }
 
+
+
+/* Card Styling */
 .card-styling {
-    background: linear-gradient(to bottom, #130124, #5c36ad) !important;
+    background: #1b2133 !important;
 }
 
 .card {
@@ -34,7 +37,7 @@ html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; font-famil
 
 .card-body.card-styling input {
   border-radius: 12px;
-  background-color: #5c36ad;
+  background-color: #8ca0c3;
   color: rgb(224, 217, 217);
   font-family:Arial, Helvetica, sans-serif;
   border: 3px solid black;

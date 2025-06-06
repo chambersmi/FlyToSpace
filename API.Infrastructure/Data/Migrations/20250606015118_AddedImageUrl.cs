@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedBookingIdToCartItems : Migration
+    public partial class AddedImageUrl : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,7 +69,8 @@ namespace API.Infrastructure.Data.Migrations
                     TourDescription = table.Column<string>(type: "TEXT", nullable: false),
                     TourPrice = table.Column<decimal>(type: "TEXT", nullable: false),
                     MaxSeats = table.Column<int>(type: "INTEGER", nullable: false),
-                    SeatsOccupied = table.Column<int>(type: "INTEGER", nullable: false)
+                    SeatsOccupied = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

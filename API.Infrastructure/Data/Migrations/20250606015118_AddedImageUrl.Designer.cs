@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250604231111_AddedBookingIdToCartItems")]
-    partial class AddedBookingIdToCartItems
+    [Migration("20250606015118_AddedImageUrl")]
+    partial class AddedImageUrl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,6 +162,9 @@ namespace API.Infrastructure.Data.Migrations
                     b.Property<int>("TourId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("MaxSeats")
                         .HasColumnType("INTEGER");

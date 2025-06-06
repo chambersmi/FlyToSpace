@@ -1,22 +1,32 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { TourDto } from '../../models/tour/tour-dto.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourService {
-  private readonly apiUrl = `${environment.apiUrl}/api/tour`;
+  private readonly apiUrl = `${environment.apiUrl}`;
+
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllTours():Observable<TourDto[]> {
-    return this.httpClient.get<TourDto[]>(`${this.apiUrl}/all`);
+  getAllTours(): Observable<TourDto[]> {
+    return this.httpClient.get<TourDto[]>(`${this.apiUrl}/api/tour/all`).pipe(
+      map(tours =>
+        tours.map(tour => ({
+          ...tour,
+          imageUrl: `${environment.apiUrl}${tour.imageUrl}`
+        }))
+      )
+    );
   }
 
-  getTourById(id:number):Observable<TourDto> {
-    return this.httpClient.get<TourDto>(`${this.apiUrl}/${id}`)
+
+  getTourById(id: number): Observable<TourDto> {
+    return this.httpClient.get<TourDto>(`${this.apiUrl}/api/tour/${id}`)
   }
+
 }

@@ -9,6 +9,7 @@ import { ItineraryComponent } from './features/itinerary/itinerary/itinerary.com
 import { CartComponent } from './features/cart/cart/cart.component';
 import { CheckoutComponent } from './features/cart/checkout/checkout.component';
 import { ConfirmationComponent } from './features/cart/confirmation/confirmation.component';
+import { AboutUsComponent } from './features/about/about-us/about-us.component';
 
 
 export const routes: Routes = [
@@ -21,5 +22,6 @@ export const routes: Routes = [
     { path: 'itinerary', component: ItineraryComponent},
     { path: 'cart', component: CartComponent},
     { path: 'cart/checkout', component: CheckoutComponent },
-    { path: 'cart/confirmation', component: ConfirmationComponent }
+    { path: 'cart/confirmation', component: ConfirmationComponent },
+    { path: 'about-us', component: AboutUsComponent}
 ];
