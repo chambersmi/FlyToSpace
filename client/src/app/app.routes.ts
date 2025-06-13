@@ -21,8 +21,8 @@ export const routes: Routes = [
     { path: 'tours', component: ToursComponent },
     { path: 'create-itinerary/:tourId', component: CreateItineraryComponent },
     { path: 'itinerary', component: ItineraryComponent, canActivate: [AuthGuard]},
-    { path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
-    { path: 'cart/checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
-    { path: 'cart/confirmation', component: ConfirmationComponent, canActivate: [AuthGuard] },
+    { path: 'cart', component: CartComponent },
+    { path: 'cart/checkout', component: CheckoutComponent },
+    { path: 'cart/confirmation', component: ConfirmationComponent },
     { path: 'about-us', component: AboutUsComponent}
 ];

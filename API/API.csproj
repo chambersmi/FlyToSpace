@@ -33,4 +33,11 @@
     <Folder Include="wwwroot\assets\tourImages\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Update="Scripts\redis.ps1">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+
 </Project>

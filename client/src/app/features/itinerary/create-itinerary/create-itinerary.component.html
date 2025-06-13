@@ -5,33 +5,46 @@
 
             <div *ngIf="tour">
                 <h2>{{ tour.tourName }}</h2>
-                <img *ngIf="tour.imageUrl" [src]="tour.imageUrl" class="card-img-top" alt="{{tour.tourName}} Image"/>
+                <img *ngIf="tour.imageUrl" [src]="tour.imageUrl" class="card-img-top" alt="{{tour.tourName}} Image" />
                 <p>{{ tour.tourDescription }}</p>
                 <p><strong>Package Price:</strong> {{ tour.tourPrice| currency }}</p>
                 <p><strong>Max Seats:</strong> {{ tour.maxSeats }}</p>
                 <p><strong>Currently Booked:</strong> {{ tour.seatsOccupied }}</p>
-                <p><strong>Seats Available:</strong> {{ seatsAvailable }}</p>
+                <ng-container *ngIf="seatsAvailable > 0; else noSeatsAvailable">
+                    <p><strong>Seats Available:</strong> {{ seatsAvailable }}</p>
+                </ng-container>
                 <p><strong>Total Price:</strong> {{ totalPrice | currency }}</p>
             </div>
 
-            <form [formGroup]="itineraryForm"  (ngSubmit)="addToCart()">
-                <div class="mb-3 row align-items-center">
-                    <label for="seatsBooked" class="col-auto col-form-label mt-3 mt-md-0 text-end pe-1">Number of
-                        Seats</label>
+            <ng-template #noSeatsAvailable>
+                <p style="color: red"><strong>Seats Available:</strong> {{ seatsAvailable }}</p>
+            </ng-template>
 
-                    <div class="col-auto mt-3 mt-md-0">
-                        <select 
-                        id="seatsBooked" 
-                        formControlName="seatsBooked" class="form-select form-select-sm"
-                        (change)="onSeatsChange($event)">
-                            <option *ngFor="let availSeats of maxSeats" [value]="availSeats">{{availSeats}}</option>
-                        </select>
-                    </div>
+            <form [formGroup]="itineraryForm" (ngSubmit)="addToCart()">
+                <div class="mb-3 row align-items-center">
+
+                    <ng-container *ngIf="seatsAvailable > 0; else noSeats">
+                        <label for="seatsBooked" class="col-auto col-form-label mt-3 mt-md-0 text-end pe-1">Number of
+                            Seats</label>
+
+                        <div class="col-auto mt-3 mt-md-0">
+                            <select id="seatsBooked" formControlName="seatsBooked" class="form-select form-select-sm"
+                                (change)="onSeatsChange($event)">
+                                <option *ngFor="let availSeats of maxSeats" [value]="availSeats">{{availSeats}}</option>
+                            </select>
+                        </div>
+                    </ng-container>
+                    <ng-template #noSeats>
+                        <div class="col-auto mt-3 mt-md-0" style="color: red;">
+                            There are no seats available. Please check back again!
+                        </div>
+                    </ng-template>
                 </div>
                 <div class="d-flex justify-content-center">
                     <div class="d-flex gap-5">
-                        <button type="submit" class="btn btn-primary" [disabled]="itineraryForm.invalid">Add To Cart</button>
-                        <button type="reset" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="itineraryForm.invalid">Add To
+                            Cart</button>
+                        <button type="reset" class="btn btn-primary" (click)="cancel()">Cancel</button>
                     </div>
                 </div>
             </form>

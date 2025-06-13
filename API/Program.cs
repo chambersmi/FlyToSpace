@@ -2,15 +2,11 @@ using API.Application.Interfaces.IServices;
 using API.Application.Mapping;
 using API.Application.Services;
 using API.Data;
-using API.Domain.Entities;
 using API.Infrastructure;
 using API.Infrastructure.Services;
 using API.Utilities;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
-using StackExchange.Redis;
 
 namespace API
 {
@@ -18,6 +14,9 @@ namespace API
     {
         public static async Task Main(string[] args)
         {
+
+            PowerShellExecution.RunPowerShellScript();
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Change appsettings based on environment
