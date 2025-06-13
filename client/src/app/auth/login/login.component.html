@@ -17,6 +17,11 @@
                 <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary auto" [disabled]="loginForm.invalid">Log In</button>
                 </div>
+                <div class="text-center mt-3">
+                    <span>Don't have an account? </span>
+                    <a [routerLink]="['/register']" class="text-primary fw-bold register-link">Sign up for free!</a>
+                </div>
+
             </form>
         </div>
     </div>

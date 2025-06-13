@@ -56,4 +56,6 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 ## Additional Resources
 
+```run Redis: docker run -d --name redis -p 6379:6379 redis:7 ```
+
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

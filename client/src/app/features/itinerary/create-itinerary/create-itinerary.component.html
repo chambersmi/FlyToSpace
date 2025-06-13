@@ -5,6 +5,7 @@
 
             <div *ngIf="tour">
                 <h2>{{ tour.tourName }}</h2>
+                <img *ngIf="tour.imageUrl" [src]="tour.imageUrl" class="card-img-top" alt="{{tour.tourName}} Image"/>
                 <p>{{ tour.tourDescription }}</p>
                 <p><strong>Package Price:</strong> {{ tour.tourPrice| currency }}</p>
                 <p><strong>Max Seats:</strong> {{ tour.maxSeats }}</p>

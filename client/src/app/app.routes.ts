@@ -10,18 +10,19 @@ import { CartComponent } from './features/cart/cart/cart.component';
 import { CheckoutComponent } from './features/cart/checkout/checkout.component';
 import { ConfirmationComponent } from './features/cart/confirmation/confirmation.component';
 import { AboutUsComponent } from './features/about/about-us/about-us.component';
+import { AuthGuard } from './shared/auth.guard';
 
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: '', component: HomeComponent },
-    { path: 'tours', component: ToursComponent},
-    { path: 'create-itinerary/:tourId', component: CreateItineraryComponent},
-    { path: 'itinerary', component: ItineraryComponent},
-    { path: 'cart', component: CartComponent},
-    { path: 'cart/checkout', component: CheckoutComponent },
-    { path: 'cart/confirmation', component: ConfirmationComponent },
+    { path: 'tours', component: ToursComponent },
+    { path: 'create-itinerary/:tourId', component: CreateItineraryComponent },
+    { path: 'itinerary', component: ItineraryComponent, canActivate: [AuthGuard]},
+    { path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
+    { path: 'cart/checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+    { path: 'cart/confirmation', component: ConfirmationComponent, canActivate: [AuthGuard] },
     { path: 'about-us', component: AboutUsComponent}
 ];

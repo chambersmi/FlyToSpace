@@ -3,7 +3,6 @@ import { TourDto } from '../../../models/tour/tour-dto.model';
 import { TourService } from '../../../services/tour/tour.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment';
 import { CartService } from '../../../services/cart/cart.service';
 import { AuthService } from '../../../services/auth/auth.service';
 
@@ -40,7 +39,10 @@ export class ToursComponent implements OnInit {
     const seatsBooked = 0;
 
     if(!user) {
-      this.router.navigate(['/login']);      
+      this.router.navigate(['/login'], {
+        queryParams: {
+          returnUrl: `/create-itinerary/${tourId}` }        
+      });      
       return;
     }
     this.router.navigate(['/create-itinerary', tourId]);    

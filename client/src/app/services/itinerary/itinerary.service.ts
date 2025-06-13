@@ -43,7 +43,7 @@ export class ItineraryService {
   }
 
   // Get price with taxes and fees from database
-  getTotalPriceOfItinerary(totalPrice:number):Observable<number> {
-    return this.httpClient.get<number>(`${this.apiUrl}/total-price/${totalPrice}`);
+  getTotalPriceOfItinerary(tourId:number):Observable<number> {
+    return this.httpClient.get<number>(`${this.apiUrl}/total-price/${tourId}`);
   }
 }

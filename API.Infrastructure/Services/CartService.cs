@@ -42,7 +42,6 @@ namespace API.Infrastructure.Services
                 TourName = tour.TourName,
                 TourPrice = tour.TourPrice,
                 SeatsBooked = seatsBooked,
-                // Eventually use calculate total price method
                 TotalPrice = await _itineraryService.GetTotalPriceAsync(tourId)
             };
 

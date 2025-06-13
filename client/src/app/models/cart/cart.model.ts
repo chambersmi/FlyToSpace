@@ -5,4 +5,5 @@ export interface CartItem {
     seatsBooked:number;
     tourPrice:number;
     totalPrice:number;
+    imageUrl?:string;
 }

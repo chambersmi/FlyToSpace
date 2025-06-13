@@ -15,7 +15,7 @@ namespace API.Application.Services
     public class ItineraryService : IItineraryService
     {
         private ILogger<ItineraryService> _logger;
-        private IItineraryRepository _bookingRepository;
+        private IItineraryRepository _itineraryRepository;
         private ITourRepository _tourRepository;
         private readonly IMapper _mapper;
 
@@ -27,7 +27,7 @@ namespace API.Application.Services
             )
         {
             _logger = logger;
-            _bookingRepository = bookingRepository;
+            _itineraryRepository = bookingRepository;
             _tourRepository = tourRepository;
             _mapper = mapper;
         }
@@ -70,7 +70,7 @@ namespace API.Application.Services
             bookingEntity.BookingDate = DateTime.UtcNow;
             bookingEntity.TotalPrice = await CalculuateTotalPriceAsync(dto.TourId, dto.SeatsBooked);
 
-            var booking = await _bookingRepository.CreateItineraryAsync(bookingEntity);
+            var booking = await _itineraryRepository.CreateItineraryAsync(bookingEntity);
             var resultDto = _mapper.Map<ItineraryDto>(booking);
 
             return resultDto;
@@ -78,7 +78,7 @@ namespace API.Application.Services
 
         public async Task<ItineraryDto?> UpdateItineraryAsync(int bookingId, UpdateItineraryDto dto)
         {
-            var existingBooking = await _bookingRepository.GetItineraryByIdAsync(bookingId);
+            var existingBooking = await _itineraryRepository.GetItineraryByIdAsync(bookingId);
 
             if (existingBooking == null)
                 return null;
@@ -110,7 +110,7 @@ namespace API.Application.Services
             existingBooking.FlightId = dto.FlightId ?? existingBooking.FlightId;
             existingBooking.BookingDate = dto.BookingDate ?? existingBooking.BookingDate;
 
-            await _bookingRepository.UpdateItineraryAsync(existingBooking);
+            await _itineraryRepository.UpdateItineraryAsync(existingBooking);
 
             var resultDto = _mapper.Map<ItineraryDto>(existingBooking);
 
@@ -119,11 +119,11 @@ namespace API.Application.Services
 
         public async Task<bool> DeleteItineraryByIdAsync(int id)
         {
-            var bookingToDelete = await _bookingRepository.GetItineraryByIdAsync(id);
+            var bookingToDelete = await _itineraryRepository.GetItineraryByIdAsync(id);
             if (bookingToDelete == null)
                 return false;
 
-            await _bookingRepository.DeleteItineraryByIdAsync(bookingToDelete.ItineraryId);
+            await _itineraryRepository.DeleteItineraryByIdAsync(bookingToDelete.ItineraryId);
 
             return true;
         }
@@ -135,7 +135,7 @@ namespace API.Application.Services
         /// <returns></returns>
         public async Task<IEnumerable<ItineraryDto>> GetAllItinerariesByUserIdAsync(string userId)
         {
-            var bookings = await _bookingRepository.GetAllItinerariesByUserIdAsync(userId);
+            var bookings = await _itineraryRepository.GetAllItinerariesByUserIdAsync(userId);
             return _mapper.Map<IEnumerable<ItineraryDto>>(bookings);
         }
 
@@ -147,7 +147,7 @@ namespace API.Application.Services
         /// <returns></returns>
         public async Task<ItineraryDto?> GetSingleUserItineraryByIdAsync(int id, string userId)
         {
-            var booking = await _bookingRepository.GetSingleUserItineraryByIdAsync(id, userId);
+            var booking = await _itineraryRepository.GetSingleUserItineraryByIdAsync(id, userId);
             
             if(booking == null || booking.UserId != userId)
             {
@@ -174,7 +174,7 @@ namespace API.Application.Services
 
         public async Task<IEnumerable<ItineraryDto>> GetAllItinerariesAsync()
         {
-            var booking = await _bookingRepository.GetAllItinerariesAsync();
+            var booking = await _itineraryRepository.GetAllItinerariesAsync();
 
             if (booking == null)
             {
@@ -186,7 +186,7 @@ namespace API.Application.Services
 
         public async Task<ItineraryDto> GetItineraryByIdAsync(int id)
         {
-            var booking = await _bookingRepository.GetItineraryByIdAsync(id);
+            var booking = await _itineraryRepository.GetItineraryByIdAsync(id);
 
             if (booking == null)
             {
@@ -198,12 +198,11 @@ namespace API.Application.Services
 
         public async Task<decimal> GetTotalPriceAsync(int id)
         {
-            var booking = await _bookingRepository.GetItineraryByIdAsync(id);
-            
-            var totalPrice = booking.TotalPrice;
+            var tour = await _tourRepository.GetTourByIdAsync(id);
+
+            var totalPrice = ((tour.TourPrice * 0.06M) + tour.TourPrice);
 
             return totalPrice;
-
         }
     }
 }

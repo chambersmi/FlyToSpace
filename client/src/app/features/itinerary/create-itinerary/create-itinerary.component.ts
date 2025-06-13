@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TourDto } from '../../../models/tour/tour-dto.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ItineraryService } from '../../../services/itinerary/itinerary.service';
 import { TourService } from '../../../services/tour/tour.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CreateItineraryDto } from '../../../models/itinerary/create-itinerary-dto.model';
 import { CommonModule } from '@angular/common';
 import { CreateTourDto } from '../../../models/tour/create-tour-dto.model';
 import { CartService } from '../../../services/cart/cart.service';
 import { CartItem } from '../../../models/cart/cart.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-create-itinerary',
@@ -28,14 +26,13 @@ export class CreateItineraryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private itineraryService: ItineraryService,
     private router: Router,
     private authService: AuthService,
     private tourService: TourService,
     private cartService:CartService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.tourId = Number(this.route.snapshot.paramMap.get('tourId'));
     this.loadTourDetails();
 
@@ -63,9 +60,10 @@ export class CreateItineraryComponent implements OnInit {
     }
    
     const seatsBooked = this.itineraryForm.value.seatsBooked;
-
+    
     const cartItem: CartItem = {
       tourId: this.tourId,
+      imageUrl: this.tour.imageUrl,
       tourName: this.tour.tourName,
       seatsBooked: seatsBooked,
       tourPrice: this.tour.tourPrice,
@@ -84,15 +82,16 @@ export class CreateItineraryComponent implements OnInit {
     })
   }
 
-  private loadTourDetails(): void {
+  loadTourDetails(): void {
     this.tourService.getTourById(this.tourId).subscribe(tour => {
       this.tour = tour;
       this.seatsAvailable = tour.maxSeats - tour.seatsOccupied;
       this.maxSeats = Array.from({ length: this.seatsAvailable }, (_, i) => i + 1);
+      this.tour.imageUrl = `${environment.apiUrl}${this.tour.imageUrl}`;
     });
   }
 
-  public onSeatsChange(event: Event) {
+  onSeatsChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     const targetValue = target.value;
 
@@ -104,10 +103,14 @@ export class CreateItineraryComponent implements OnInit {
     }
   }
 
-  private updateTotalPrice(seatsBooked:number) {
+  updateTotalPrice(seatsBooked:number) {
     if(this.tour) {
       this.totalPrice = seatsBooked * this.tour.tourPrice;
     }
+  }
+
+  cancel():void {
+    this.router.navigateByUrl('/tours');
   }
 
 }
