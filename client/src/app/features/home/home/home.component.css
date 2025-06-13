@@ -7,7 +7,7 @@
 
 .spaceship {
     position: absolute;
-    top: 5%;
+    top: -15%;
     left: 50%;
     transform: translateX(0) scale(0.2);
     animation: approach 5s ease-in-out forwards;
