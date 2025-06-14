@@ -7,6 +7,7 @@ using API.Infrastructure;
 using API.Infrastructure.Services;
 using API.Utilities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 
 namespace API
@@ -16,7 +17,7 @@ namespace API
         public static async Task Main(string[] args)
         {
 
-            PowerShellExecution.RunPowerShellScript();
+            //PowerShellExecution.RunPowerShellScript();
 
             var builder = WebApplication.CreateBuilder(args);
 
@@ -82,12 +83,14 @@ namespace API
 
             var app = builder.Build();
 
-            // Add Roles
             using (var scope = app.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
-                await RoleServices.SeedRoles(services);
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();
+
+                await RoleServices.SeedRoles(scope.ServiceProvider);
             }
+
 
                 // Initialize database and seed data (if applicable)
                 await DbInitializer.InitDb(app);

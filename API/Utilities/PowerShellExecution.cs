@@ -9,7 +9,7 @@ namespace API.Utilities
             var scriptPath = Path.Combine(AppContext.BaseDirectory, "Scripts", "redis.ps1");
             var processInfo = new ProcessStartInfo
             {
-                FileName = "powershell.exe",
+                FileName = "pwsh", 
                 Arguments = $"-ExecutionPolicy Bypass -File \"{scriptPath}\"",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,

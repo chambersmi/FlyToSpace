@@ -1,13 +1,5 @@
 {
   "profiles": {
-    //"FlyToSpace": {
-    //  "commandName": "Project",
-    //  "dotnetRunMessages": true,
-    //  "launchBrowser": true,
-    //  "applicationUrl": "http://0.0.0.0:80",
-    //  "environmentVariables": {
-    //    "ASPNETCORE_ENVIRONMENT": "Development"
-    //  },
     "http": {
       "commandName": "Project",
       "environmentVariables": {
