@@ -25,9 +25,11 @@
           <button class="btn btn-outline-primary mt-auto rounded-pill" (click)="bookNow(tour.tourId)">
             <i class="bi bi-calendar-check me-2"></i>Book Now
           </button>
-
+          <button *ngIf="isAdmin" class="btn btn-danger mt-2 rounded-pill" (click)="updateTour(tour.tourId)">
+            <i class="bi bi-pencil-square me-2"></i>Edit Tour
+          </button>
           <button *ngIf="isAdmin" class="btn btn-danger mt-2 rounded-pill" (click)="removeTour(tour.tourId)">
-            <i class="bi bi-trash me-2"></i>Delete
+            <i class="bi bi-trash me-2"></i>Delete Tour
           </button>
 
         </div>

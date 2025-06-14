@@ -1,8 +1,7 @@
 export interface UpdateTourDto {
     tourName: string;
     tourDescription: string;
-    tourPackagePrice: number;
+    tourPrice: number;
     maxSeats: number;
-    seatsOccupied: number;
     imageUrl:string;
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TourService } from '../../../services/tour/tour.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CreateTourDto } from '../../../models/tour/create-tour-dto.model';
 import { CommonModule } from '@angular/common';
+import { TourService } from '../../../../services/tour/tour.service';
+import { CreateTourDto } from '../../../../models/tour/create-tour-dto.model';
 
 @Component({
   selector: 'app-add-tour',

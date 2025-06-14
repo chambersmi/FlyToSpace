@@ -12,7 +12,8 @@ import { ConfirmationComponent } from './features/cart/confirmation/confirmation
 import { AboutUsComponent } from './features/about/about-us/about-us.component';
 import { AuthGuard } from './shared/auth.guard';
 import { UnauthorizedComponent } from './features/unauthorized/unauthorized/unauthorized.component';
-import { AddTourComponent } from './features/admin/add-tour/add-tour.component';
+import { AddTourComponent } from './features/admin/tour/add-tour/add-tour.component';
+import { EditTourComponent } from './features/admin/tour/edit-tour/edit-tour.component';
 
 
 export const routes: Routes = [
@@ -22,11 +23,12 @@ export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'tours', component: ToursComponent },
     { path: 'create-itinerary/:tourId', component: CreateItineraryComponent },
-    { path: 'itinerary', component: ItineraryComponent, canActivate: [AuthGuard]},
+    { path: 'itinerary', component: ItineraryComponent, canActivate: [AuthGuard] },
     { path: 'cart', component: CartComponent },
     { path: 'cart/checkout', component: CheckoutComponent },
     { path: 'cart/confirmation', component: ConfirmationComponent },
-    { path: 'about-us', component: AboutUsComponent},
-    { path: 'unauthorized', component: UnauthorizedComponent},
-    { path: 'admin/add-tour', component: AddTourComponent, canActivate: [AuthGuard], data: { role: 'Admin' }}
+    { path: 'about-us', component: AboutUsComponent },
+    { path: 'unauthorized', component: UnauthorizedComponent },
+    { path: 'admin/add-tour', component: AddTourComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
+    { path: 'admin/edit-tour/:tourId', component: EditTourComponent, canActivate: [AuthGuard], data: { role: 'Admin' } }
 ];

@@ -71,20 +71,46 @@ namespace API.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateTourAsync(int id, [FromBody] UpdateTourDto dto)
+        public async Task<IActionResult> UpdateTourAsync(int id, [FromForm] UpdateTourDto dto, IFormFile? imageFile)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var tour = await _tourService.UpdateTourAsync(id, dto);
+            
+            var existingTour = await _tourService.GetTourByIdAsync(id);
 
-            if (tour == null)
-                return BadRequest($"{tour.TourId} not found.");
+            if (existingTour == null)
+            {
+                return NotFound($"Tour with ID {id} not found.");
+            }
 
-            return Ok(tour);
+            if (imageFile != null)
+            {
+                var fileName = Path.GetFileName(imageFile.FileName);
+                var filePath = Path.Combine("wwwroot/assets/tourImages", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                dto.ImageUrl = $"/assets/tourImages/{fileName}";
+            }
+            else
+            {
+                dto.ImageUrl = existingTour.ImageUrl; 
+            }
+
+            var updatedTour = await _tourService.UpdateTourAsync(id, dto);
+
+            if (updatedTour == null)
+                return BadRequest($"Tour with ID {id} could not be updated.");
+
+            return Ok(updatedTour);
         }
+
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteTourAsync(int id)

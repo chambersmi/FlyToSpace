@@ -18,28 +18,29 @@ export class ToursComponent implements OnInit {
   isLoading = false;
   isAdmin: boolean = false;
 
-  constructor(private tourService:TourService, private cartService: CartService, private router:Router, private authService:AuthService) {}
+  constructor(private tourService: TourService, private cartService: CartService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loadTours();
     this.isLoading = true;
     this.isAdmin = this.authService.getUserRole() === 'Admin';
 
-    
+
   }
 
-  bookNow(tourId:number) {
+  bookNow(tourId: number) {
     const user = this.authService.getUserFromToken();
     const seatsBooked = 0;
 
-    if(!user) {
+    if (!user) {
       this.router.navigate(['/login'], {
         queryParams: {
-          returnUrl: `/create-itinerary/${tourId}` }        
-      });      
+          returnUrl: `/create-itinerary/${tourId}`
+        }
+      });
       return;
     }
-    this.router.navigate(['/create-itinerary', tourId]);    
+    this.router.navigate(['/create-itinerary', tourId]);
   }
 
   loadTours() {
@@ -49,24 +50,29 @@ export class ToursComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.log('Error with getting Tour data!\n', err); 
-        this.isLoading = false;               
+        console.log('Error with getting Tour data!\n', err);
+        this.isLoading = false;
       }
     });
   }
 
-  
-    removeTour(tourId:number) {
-      if(!confirm('Are you sure you want to delete this tour?')) return;
 
-      this.tourService.removeTour(tourId).subscribe({
-        next: () => {
-          console.log("Tour removed");
-          this.loadTours();
-        },
-        error: (err) => {
-          console.log('Error deleting tour: ', err)
-        }
-      });
-    }
+  removeTour(tourId: number) {
+    if (!confirm('Are you sure you want to delete this tour?')) return;
+
+    this.tourService.removeTour(tourId).subscribe({
+      next: () => {
+        console.log("Tour removed");
+        this.loadTours();
+      },
+      error: (err) => {
+        console.log('Error deleting tour: ', err)
+      }
+    });
+  }
+
+  updateTour(tourId: number): void {
+    this.router.navigate(['/admin/edit-tour', tourId]);
+  }
+
 }

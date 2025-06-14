@@ -7,7 +7,6 @@ import { UserDto } from '../../../models/auth/user-dto.model';
 import { CommonModule } from '@angular/common';
 import { StateService } from '../../../services/states/state.service';
 import { NotificationService } from '../../../services/notification.service';
-import { ItineraryService } from '../../../services/itinerary/itinerary.service';
 import { ItineraryDto } from '../../../models/itinerary/itinerary-dto.model';
 
 @Component({
@@ -30,7 +29,6 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private stateService: StateService,
     private notification: NotificationService,    
-    private itineraryService: ItineraryService
   ) { }
 
   ngOnInit(): void {

@@ -39,18 +39,28 @@
 
                 <ng-container *ngIf="isAdmin">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="tourDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Tour
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="tourDropdown">
-                            <li>
-                                <a class="dropdown-item" routerLink="/admin/add-tour" routerLinkActive="active">Add
-                                    Tour</a>
+                        <ul class="dropdown-menu" aria-labelledby="adminDropdown">
 
+                            <li>
+                                <h6 class="dropdown-header">Tour</h6>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item small" routerLink="/admin/add-tour"
+                                    routerLinkActive="active">Add Tour</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
                             </li>
                         </ul>
                     </li>
                 </ng-container>
+
+
             </ul>
 
             <ul class="navbar-nav ms-auto">

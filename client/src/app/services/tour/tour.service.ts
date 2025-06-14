@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { TourDto } from '../../models/tour/tour-dto.model';
 import { CreateTourDto } from '../../models/tour/create-tour-dto.model';
+import { UpdateTourDto } from '../../models/tour/update-tour-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class TourService {
 
   removeTour(tourId:number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/api/tour/delete/${tourId}`);
+  }
+
+  updateTour(tourId:number, formData:FormData): Observable<UpdateTourDto> {
+    return this.httpClient.put<UpdateTourDto>(`${this.apiUrl}/api/tour/update/${tourId}`, formData);
   }
 
 }
