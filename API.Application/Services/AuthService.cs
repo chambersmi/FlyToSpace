@@ -44,7 +44,7 @@ namespace API.Infrastructure.Services
             
             if(result.Succeeded)
             {
-                var token = _jwtTokenGenerator.GenerateToken(user);
+                var token = await _jwtTokenGenerator.GenerateToken(user);
                 return (true, token);
             }
 
@@ -66,6 +66,7 @@ namespace API.Infrastructure.Services
             var user = _mapper.Map<ApplicationUser>(dto);
 
             var result = await _userManager.CreateAsync(user, dto.Password);
+            await _userManager.AddToRoleAsync(user, dto.Role);
 
             return result;
         }

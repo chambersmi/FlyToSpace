@@ -11,4 +11,5 @@ export interface RegisterUserDto {
   city: string;
   state: number;
   zipCode: string;
+  role: string;
 }

@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { TourDto } from '../../models/tour/tour-dto.model';
+import { CreateTourDto } from '../../models/tour/create-tour-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class TourService {
       )
     );
   }
-
 
   getTourById(id: number): Observable<TourDto> {
     return this.httpClient.get<TourDto>(`${this.apiUrl}/api/tour/${id}`)

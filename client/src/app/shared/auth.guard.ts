@@ -1,6 +1,11 @@
 
 import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class AuthGuard implements CanActivate {
   
@@ -9,20 +14,24 @@ export class AuthGuard implements CanActivate {
     private authService:AuthService
   ) {}
 
-  canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot): boolean {
-    const isLoggedIn = this.authService.getUserFromToken();
-    if(isLoggedIn) {
-      return true;
-    }
-    else
-    {
-      this.router.navigate(['/login'], {
-        queryParams: {
-          returnUrl: state.url
-        }
-      });
-      return false;
-    }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  const user = this.authService.getUserFromToken();
+
+  if (!user) {
+    this.router.navigate(['/login'], {
+      queryParams: { returnUrl: state.url }
+    });
+    return false;
   }
+
+  const expectedRole = route.data['role'] as string;
+
+  if (expectedRole && user.role.toLowerCase() !== expectedRole.toLowerCase()) {
+    this.router.navigate(['/unauthorized']);
+    return false;
+  }
+
+  return true;
+}
 
 }

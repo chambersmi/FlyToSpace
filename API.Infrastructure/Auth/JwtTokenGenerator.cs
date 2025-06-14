@@ -1,5 +1,7 @@
 ﻿using API.Application.Settings;
 using API.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,15 +13,19 @@ namespace API.Infrastructure.Auth
     public class JwtTokenGenerator : IJwtTokenGenerator
     {
         private readonly JwtSettings _jwtSettings;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings)
+        public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings, UserManager<ApplicationUser> userManager)
         {
             _jwtSettings = jwtSettings.Value;
+            _userManager = userManager;
         }
 
-       public string GenerateToken(ApplicationUser user)
+        public async Task<string> GenerateToken(ApplicationUser user)
         {
-            var claims = new[]
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var claims = new List<Claim>
             {
                 //new Claim(ClaimTypes.NameIdentifier, user.Id),
                 //new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
@@ -28,8 +34,15 @@ namespace API.Infrastructure.Auth
                 new Claim("email", user.Email ?? string.Empty),
                 new Claim("username", user.UserName ?? string.Empty),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
-
             };
+
+            foreach(var role in roles)
+            {
+                claims.Add(new Claim("role", role));
+            }
+
+
+
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
 
