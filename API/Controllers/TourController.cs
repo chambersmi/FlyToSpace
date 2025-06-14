@@ -86,7 +86,7 @@ namespace API.Controllers
             return Ok(tour);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteTourAsync(int id)
         {
             var isSuccess = await _tourService.DeleteTourByIdAsync(id);

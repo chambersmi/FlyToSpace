@@ -33,4 +33,8 @@ export class TourService {
     return this.httpClient.post<CreateTourDto>(`${this.apiUrl}/api/tour/create`, formData);
   }
 
+  removeTour(tourId:number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/api/tour/delete/${tourId}`);
+  }
+
 }

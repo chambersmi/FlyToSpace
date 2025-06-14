@@ -29,6 +29,7 @@ export class AddTourComponent {
       });    
     }
 
+
     onFileChange(event:any) {
       const file = event.target.files?.[0];
       if(file) {
