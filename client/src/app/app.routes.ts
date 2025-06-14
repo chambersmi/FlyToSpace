@@ -11,6 +11,8 @@ import { CheckoutComponent } from './features/cart/checkout/checkout.component';
 import { ConfirmationComponent } from './features/cart/confirmation/confirmation.component';
 import { AboutUsComponent } from './features/about/about-us/about-us.component';
 import { AuthGuard } from './shared/auth.guard';
+import { UnauthorizedComponent } from './features/unauthorized/unauthorized/unauthorized.component';
+import { AddTourComponent } from './features/admin/add-tour/add-tour.component';
 
 
 export const routes: Routes = [
@@ -24,5 +26,7 @@ export const routes: Routes = [
     { path: 'cart', component: CartComponent },
     { path: 'cart/checkout', component: CheckoutComponent },
     { path: 'cart/confirmation', component: ConfirmationComponent },
-    { path: 'about-us', component: AboutUsComponent}
+    { path: 'about-us', component: AboutUsComponent},
+    { path: 'unauthorized', component: UnauthorizedComponent},
+    { path: 'admin/add-tour', component: AddTourComponent, canActivate: [AuthGuard], data: { role: 'Admin' }}
 ];

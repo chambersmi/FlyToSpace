@@ -62,73 +62,31 @@ namespace API.Data
                 {
                     (new ApplicationUser
                     {
-                        Email = "kaleb@nasa.gov",
-                        UserName = "kaleb@nasa.gov",
-                        FirstName = "Kaleb",
+                        Email = "test@test.com",
+                        UserName = "test@test.com",
+                        FirstName = "Test",
                         MiddleName = "",
-                        LastName = "Ziggyzoggy",
-                        DateOfBirth = DateTime.UtcNow.AddYears(-14),
+                        LastName = "User",
+                        DateOfBirth = DateTime.UtcNow.AddYears(-34),
                         StreetAddress1 = "123 Main St.",
                         City = "McTesterTown",
-                        State = Domain.Enums.StateEnum.MI,
+                        State = Domain.Enums.StateEnum.MI,                        
                         ZipCode = "55527",
                     }, "Test123!"),
 
                     (new ApplicationUser
                     {
-                        Email = "pebble@catmeow.gov",
-                        UserName = "pebble@catmeow.gov",
-                        FirstName = "Pebble",
-                        MiddleName = "RussianBlue",
-                        LastName = "Cat",
-                        DateOfBirth = DateTime.UtcNow.AddYears(-3),
-                        StreetAddress1 = "703 Tuna St",
-                        City = "Catsville",
-                        State = Domain.Enums.StateEnum.FL,
-                        ZipCode = "23423"
-                    }, "Test433!"),
-
-                     (new ApplicationUser
-                    {
-                        Email = "oreo@catmeow.gov",
-                        UserName = "oreo@catmeow.gov",
-                        FirstName = "Oreo",
-                        MiddleName = "Blueeyes",
-                        LastName = "Cat",
-                        DateOfBirth = DateTime.UtcNow.AddYears(-2),
-                        StreetAddress1 = "7563 Tuna St",
-                        City = "Meowsington",
-                        State = Domain.Enums.StateEnum.AZ,
-                        ZipCode = "23213"
-                    }, "Bazoinks232!"),
-
-                      (new ApplicationUser
-                    {
-                        Email = "rufus@woofmeow.gov",
-                        UserName = "rufus@woofmeow.gov",
-                        FirstName = "Rufus",
-                        MiddleName = "Roofington",
-                        LastName = "Zimson",
-                        DateOfBirth = DateTime.UtcNow.AddYears(-10),
-                        StreetAddress1 = "4392 Temptations St",
-                        City = "Feline",
-                        State = Domain.Enums.StateEnum.AK,
-                        ZipCode = "87555"
-                    }, "MCHammer433!"),
-
-                       (new ApplicationUser
-                    {
-                        Email = "sim@graycats.gov",
-                        UserName = "sim@graycats.gov",
-                        FirstName = "Sim",
+                        Email = "mjchambers83@chambers.net",
+                        UserName = "mjchambers83@chambers.net",
+                        FirstName = "Mike",
                         MiddleName = "",
-                        LastName = "Gray",
-                        DateOfBirth = DateTime.UtcNow.AddYears(-7),
-                        StreetAddress1 = "391 Sparrow St",
-                        City = "Ludington",
-                        State = Domain.Enums.StateEnum.MI,
-                        ZipCode = "98662"
-                    }, "VerySecure123@")
+                        LastName = "Chambers",
+                        DateOfBirth = DateTime.UtcNow.AddYears(-41),
+                        StreetAddress1 = "703 Main St.",
+                        City = "Eaton Rapids",
+                        State = Domain.Enums.StateEnum.FL,
+                        ZipCode = "48827"
+                    }, "Test123!"),                  
                 };
 
                 foreach (var (user, password) in seedUsers)
@@ -137,6 +95,7 @@ namespace API.Data
                     if (existingUser == null)
                     {
                         var result = await userManager.CreateAsync(user, password);
+                        var roles = await userManager.AddToRoleAsync(user, "Admin");
 
                         if (!result.Succeeded)
                         {

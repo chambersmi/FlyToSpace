@@ -25,7 +25,7 @@ namespace API.Utilities
                 process.WaitForExit();
 
                 Console.WriteLine("Output:");
-                Console.WriteLine(output);
+                //Console.WriteLine(output);
 
                 if (!string.IsNullOrWhiteSpace(errors))
                 {

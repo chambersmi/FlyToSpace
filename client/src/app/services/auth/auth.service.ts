@@ -61,10 +61,23 @@ export class AuthService {
     }
 
     const decodedToken = this.jwtHelper.decodeToken(token);
+    console.log("Decoded Token: ", decodedToken);
+    
     return {
       id: decodedToken["id"],
-      email: decodedToken["email"]
+      email: decodedToken["email"],
+      role: decodedToken["role"]
     };
+  }
+
+  getUserRole(): string | null {
+    const token = localStorage.getItem(this.tokenKey);
+    if(!token || this.jwtHelper.isTokenExpired(token)) {
+      return null;
+    }
+
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    return decodedToken["role"] || null;
   }
 }
 

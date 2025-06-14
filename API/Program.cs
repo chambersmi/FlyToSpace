@@ -2,6 +2,7 @@ using API.Application.Interfaces.IServices;
 using API.Application.Mapping;
 using API.Application.Services;
 using API.Data;
+using API.Identity;
 using API.Infrastructure;
 using API.Infrastructure.Services;
 using API.Utilities;
@@ -54,8 +55,7 @@ namespace API
 
             // Redis
             builder.Services.AddRedisConnection(builder.Configuration);
-
-
+            
             // CORS Policy
             var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
 
@@ -82,8 +82,15 @@ namespace API
 
             var app = builder.Build();
 
-            // Initialize database and seed data (if applicable)
-            await DbInitializer.InitDb(app);
+            // Add Roles
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                await RoleServices.SeedRoles(services);
+            }
+
+                // Initialize database and seed data (if applicable)
+                await DbInitializer.InitDb(app);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -4,6 +4,6 @@ namespace API.Infrastructure.Auth
 {
     public interface IJwtTokenGenerator
     {
-        string GenerateToken(ApplicationUser user);
+        Task<string> GenerateToken(ApplicationUser user);
     }
 }

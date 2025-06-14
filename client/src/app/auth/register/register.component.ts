@@ -39,7 +39,8 @@ export class RegisterComponent implements OnInit {
       streetAddress2: [''],
       city: ['', Validators.required],
       state: [21, Validators.required], // defaults to MI
-      zipCode: ['', Validators.required]
+      zipCode: ['', Validators.required],
+      role: ['User', Validators.required]
     });
 
     this.stateService.getStates().subscribe((data) => {
