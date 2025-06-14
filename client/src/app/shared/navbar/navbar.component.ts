@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   userEmail: string | null = null;
   user: TokenUserDto | null = null;
   itemsInCart = 0;
+  isAdmin: boolean = false;
 
   constructor(
     private authService: AuthService, 
@@ -29,6 +30,8 @@ export class NavbarComponent implements OnInit {
       this.userEmail = status && this.user ? this.user.email : null;
       console.log(this.userEmail);
     });
+
+    this.isAdmin = this.authService.getUserRole() === 'Admin';
 
     if(this.user) {
       this.cartService.cartItemCount$.subscribe(count => {

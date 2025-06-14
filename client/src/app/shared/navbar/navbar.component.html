@@ -36,6 +36,21 @@
                         </a>
                     </li>
                 </ng-container>
+
+                <ng-container *ngIf="isAdmin">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="tourDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Tour
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="tourDropdown">
+                            <li>
+                                <a class="dropdown-item" routerLink="/admin/add-tour" routerLinkActive="active">Add
+                                    Tour</a>
+
+                            </li>
+                        </ul>
+                    </li>
+                </ng-container>
             </ul>
 
             <ul class="navbar-nav ms-auto">
