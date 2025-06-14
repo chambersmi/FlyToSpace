@@ -45,7 +45,10 @@ namespace API.Controllers
                     ModelState.AddModelError(error.Code, error.Description);
                 }
 
-                return BadRequest(result.Errors);
+                return BadRequest(new
+                {
+                    message = "Registration failed. An account with that email already exists.",                                        
+                });
             }
 
             return Ok("User successfully created.");

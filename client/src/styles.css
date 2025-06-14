@@ -16,17 +16,21 @@ html, body {
   font-size: 1rem;
 }
 
-/* Notifications / Snackbar */
-.success-snackbar {
+/* Success snackbar */
+.mat-mdc-snack-bar-container.success-snackbar .mdc-snackbar__surface {
   background-color: #4CAF50 !important;
-  color: rgb(53, 51, 51) !important;
+  color: #333 !important;
   font-weight: 500;
+  font-size: 1.4rem;
   text-align: center;
 }
 
-.error-snackbar {
+/* Error snackbar */
+.mat-mdc-snack-bar-container.error-snackbar .mdc-snackbar__surface {
   background-color: red !important;
   color: white !important;
+  font-size: 1.4rem;
+  text-align: center;
 }
 
 

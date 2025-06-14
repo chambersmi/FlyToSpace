@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { StateService } from '../../services/states/state.service';
@@ -6,30 +6,35 @@ import { RegisterUserDto } from '../../models/auth/register-user-dto.model';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
-  providers: [AuthService]
+  providers: [AuthService],
+  encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   apiUrl = environment.apiUrl;
-
   states: { [key: number]: string } = {};
   stateKeys: number[] = [];
+  error: string | null = null;
 
-  constructor(private fb:FormBuilder, 
+  constructor(private fb: FormBuilder,
     private authService: AuthService,
     private stateService: StateService,
-    private router: Router) {}
+    private router: Router,
+    private notificationService:NotificationService) { }
 
- ngOnInit(): void {
+  ngOnInit(): void {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required ]],
+      password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       firstName: ['', Validators.required],
       middleName: [''],
@@ -49,34 +54,39 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  onSubmit():void {
-    if(this.registerForm.invalid)
-      return;
+  onSubmit(): void {
+    if (this.registerForm.invalid) return;
 
     const formValue = this.registerForm.value;
 
-    //const dto: RegisterUserDto = this.registerForm.value;
     const dto: RegisterUserDto = {
       ...formValue,
       state: Number(formValue.state)
     };
 
     this.authService.register(dto).subscribe({
-      next: (data) => {
+      next: () => {
+        this.notificationService.success('Account successfully created!');
         this.router.navigate(['/login'], {
-          queryParams: {
-            email: dto.email
-          }
+          queryParams: { email: dto.email }          
         });
       },
       error: (err) => {
         console.error("Registration Failed:\n", err);
-        if (err.error && typeof err.error === 'object') {
-        alert('Error:\n' + JSON.stringify(err.error));
-      } else {
-        alert("Something went wrong.");
-      }
+
+        if (err.error) {
+          if (typeof err.error === 'object' && err.error.message) {
+            this.notificationService.error('Error: Something went wrong.');
+          } else if (typeof err.error === 'string') {
+            this.notificationService.error('Error: Account already exists with that email.');
+          } else {
+            this.notificationService.error('An unknown error occured.');
+          }
+        } else {
+          this.notificationService.error('Could not connect to the server.');
+        }
       }
     });
   }
+
 }

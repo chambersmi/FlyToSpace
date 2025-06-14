@@ -11,7 +11,7 @@ export class NotificationService {
 
   success(message:string): void {
     this.snackBar.open(message, 'X', {
-      duration: 1500,
+      duration: 3000,
       verticalPosition: 'top',
       horizontalPosition: 'center',
       panelClass: ['success-snackbar']
@@ -20,10 +20,10 @@ export class NotificationService {
 
     error(message:string): void {
     this.snackBar.open(message, 'X', {
-      duration: 1500,
+      duration: 3000,
       verticalPosition: 'top',
       horizontalPosition: 'center',
-      panelClass: ['error-snackbar']
+      panelClass: ['error-snackbar'] // I tried this with ['error-snackbar'] also. neither make a difference.
     });
   }
 }

@@ -54,6 +54,7 @@ namespace API.Infrastructure.Services
 
         public async Task<IdentityResult> RegisterAsync(RegisterUserDto dto)
         {
+            
             if(dto.Password != dto.ConfirmPassword)
             {
                 return IdentityResult.Failed(new IdentityError
@@ -62,6 +63,19 @@ namespace API.Infrastructure.Services
                     Description = "Passwords must match."
                 });
             }
+
+            if(!string.IsNullOrEmpty(dto.Email))
+            {
+                var emailExists = await _userManager.FindByEmailAsync(dto.Email);
+                if(emailExists != null)
+                {
+                    return IdentityResult.Failed(new IdentityError
+                    {
+                        Code = "DuplicateEmail",
+                        Description = "Invalid email in use."
+                    });
+                }
+            }          
 
             var user = _mapper.Map<ApplicationUser>(dto);
 
