@@ -1,1 +1,71 @@
-<p>add-tour works!</p>
+<div class="d-flex justify-content-center mt-5">
+  <div class="card w-50">
+    <div class="card-body card-styling">
+      <h4 class="card-title mb-4">Create New Tour</h4>
+
+      <form [formGroup]="tourForm" (ngSubmit)="submitTour()" enctype="multipart/form-data" novalidate>
+
+        <div class="mb-3 row align-items-center">
+          <label for="tourName" class="col-sm-3 col-form-label">Tour Name</label>
+          <div class="col-sm-9">
+            <input id="tourName" type="text" class="form-control" formControlName="tourName" />
+            <div *ngIf="tourForm.get('tourName')?.invalid && tourForm.get('tourName')?.touched" class="text-danger">
+              Tour Name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="tourDescription" class="col-sm-3 col-form-label">Tour Description</label>
+          <div class="col-sm-9">
+            <textarea id="tourDescription" class="form-control" formControlName="tourDescription"></textarea>
+            <div *ngIf="tourForm.get('tourDescription')?.invalid && tourForm.get('tourDescription')?.touched" class="text-danger">
+              Tour Description is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="tourPrice" class="col-sm-3 col-form-label">Tour Price</label>
+          <div class="col-sm-9">
+            <input id="tourPrice" type="number" min="0" step="0.01" class="form-control" formControlName="tourPrice" />
+            <div *ngIf="tourForm.get('tourPrice')?.invalid && tourForm.get('tourPrice')?.touched" class="text-danger">
+              Tour Price must be 0 or more.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="maxSeats" class="col-sm-3 col-form-label">Max Seats</label>
+          <div class="col-sm-9">
+            <input id="maxSeats" type="number" min="1" class="form-control" formControlName="maxSeats" />
+            <div *ngIf="tourForm.get('maxSeats')?.invalid && tourForm.get('maxSeats')?.touched" class="text-danger">
+              Max Seats must be 1 or more.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+          <label for="imageFile" class="col-sm-3 col-form-label">Tour Image</label>
+          <div class="col-sm-9">
+            <input
+              id="imageFile"
+              type="file"
+              accept="image/*"
+              class="form-control"
+              (change)="onFileChange($event)"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-primary" [disabled]="tourForm.invalid">Create Tour</button>
+            <button type="reset" class="btn btn-secondary" (click)="tourForm.reset()">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

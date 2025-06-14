@@ -45,11 +45,24 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateTourAsync([FromBody] CreateTourDto dto)
+        public async Task<IActionResult> CreateTourAsync([FromForm] CreateTourDto dto, IFormFile imageFile)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if(imageFile != null)
+            {
+                var fileName = Path.GetFileName(imageFile.FileName);
+                var filePath = Path.Combine("wwwroot/assets/tourImages", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                dto.ImageUrl = $"/assets/tourImages/{fileName}";
             }
 
             await _tourService.CreateTourAsync(dto);
@@ -57,7 +70,7 @@ namespace API.Controllers
             return Ok(dto);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateTourAsync(int id, [FromBody] UpdateTourDto dto)
         {
             if(!ModelState.IsValid)

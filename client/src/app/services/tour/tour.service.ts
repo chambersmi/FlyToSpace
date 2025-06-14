@@ -29,4 +29,8 @@ export class TourService {
     return this.httpClient.get<TourDto>(`${this.apiUrl}/api/tour/${id}`)
   }
 
+  createTour(formData:FormData): Observable<CreateTourDto> {
+    return this.httpClient.post<CreateTourDto>(`${this.apiUrl}/api/tour/create`, formData);
+  }
+
 }
