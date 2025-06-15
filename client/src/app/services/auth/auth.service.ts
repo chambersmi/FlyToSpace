@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = `${environment.apiUrl}/api/auth`;
+  private readonly apiUrl = `${environment.apiUrl}/auth`;
   private jwtHelper = new JwtHelperService();
   private readonly tokenKey = environment.getAuthToken;
   private isUserLoggedIn = new BehaviorSubject<boolean>(this.hasValidToken());

@@ -1,5 +1,5 @@
 export const environment = {
-    apiUrl: 'https://flytospace.io:5050',
+    apiUrl: '/api',
     production: true,
     getAuthToken: 'authToken',
     getUserId: 'userId',

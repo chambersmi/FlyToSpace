@@ -10,7 +10,7 @@ import { UpdateItineraryDto } from '../../models/itinerary/update-itinerary-dto.
   providedIn: 'root'
 })
 export class ItineraryService {
-  private readonly apiUrl = `${environment.apiUrl}/api/itinerary`;
+  private readonly apiUrl = `${environment.apiUrl}/itinerary`;
   
   constructor(private httpClient:HttpClient) { }
 

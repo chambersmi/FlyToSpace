@@ -20,7 +20,7 @@ export class CheckoutComponent implements OnInit {
   errorMessage = '';
   successMessage = '';
 
-  private readonly apiUrl = `${environment.apiUrl}/api/cart`;
+  private readonly apiUrl = `${environment.apiUrl}/cart`;
 
   constructor(
     private fb: FormBuilder,

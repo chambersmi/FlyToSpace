@@ -10,13 +10,13 @@ import { UpdateTourDto } from '../../models/tour/update-tour-dto.model';
   providedIn: 'root'
 })
 export class TourService {
-  private readonly apiUrl = `${environment.apiUrl}`;
+  private readonly apiUrl = `${environment.apiUrl}/tour`;
 
 
   constructor(private httpClient: HttpClient) { }
 
   getAllTours(): Observable<TourDto[]> {
-    return this.httpClient.get<TourDto[]>(`${this.apiUrl}/api/tour/all`).pipe(
+    return this.httpClient.get<TourDto[]>(`${this.apiUrl}/all`).pipe(
       map(tours =>
         tours.map(tour => ({
           ...tour,
@@ -27,19 +27,19 @@ export class TourService {
   }
 
   getTourById(id: number): Observable<TourDto> {
-    return this.httpClient.get<TourDto>(`${this.apiUrl}/api/tour/${id}`)
+    return this.httpClient.get<TourDto>(`${this.apiUrl}/${id}`)
   }
 
   createTour(formData:FormData): Observable<CreateTourDto> {
-    return this.httpClient.post<CreateTourDto>(`${this.apiUrl}/api/tour/create`, formData);
+    return this.httpClient.post<CreateTourDto>(`${this.apiUrl}/create`, formData);
   }
 
   removeTour(tourId:number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiUrl}/api/tour/delete/${tourId}`);
+    return this.httpClient.delete<void>(`${this.apiUrl}/delete/${tourId}`);
   }
 
   updateTour(tourId:number, formData:FormData): Observable<UpdateTourDto> {
-    return this.httpClient.put<UpdateTourDto>(`${this.apiUrl}/api/tour/update/${tourId}`, formData);
+    return this.httpClient.put<UpdateTourDto>(`${this.apiUrl}/update/${tourId}`, formData);
   }
 
 }

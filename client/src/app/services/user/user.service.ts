@@ -9,7 +9,7 @@ import { CheckoutDto } from '../../models/cart/checkout-dto.model';
   providedIn: 'root'
 })
 export class UserService {
-  private readonly apiUrl = `${environment.apiUrl}/api/user`;
+  private readonly apiUrl = `${environment.apiUrl}/user`;
 
   constructor(private httpClient:HttpClient) {}
   

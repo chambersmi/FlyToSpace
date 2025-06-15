@@ -10,7 +10,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class CartService {
-  private readonly apiUrl = `${environment.apiUrl}/api/cart`;
+  private readonly apiUrl = `${environment.apiUrl}/cart`;
   private cartItemCount = new BehaviorSubject<number>(0);
   cartItemCount$ = this.cartItemCount.asObservable();
 
