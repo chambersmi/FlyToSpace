@@ -110,7 +110,7 @@ namespace API
 
             app.UseStaticFiles();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseCors("AngularApp");
 
             app.UseAuthentication();
