@@ -18,7 +18,10 @@ RUN npm run build -- --configuration production
 # Stage 2: Serve with nginx
 FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html
-COPY --from=build /app/dist/client/browser /app
+# Remove the default.conf if it causes issues, before copying our own
+# This is a precaution; Nginx will pick up our new .conf file anyway.
+RUN rm -f /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/client/browser /app/ 
 RUN chown -R www-data:www-data /app && chmod -R 755 /app
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-RUN chmod -R 755 /app
+COPY flytospace-client.conf /etc/nginx/conf.d/flytospace-client.conf
+RUN chmod -R 755 /app 
