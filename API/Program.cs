@@ -56,6 +56,9 @@ namespace API
 
             // Redis
             builder.Services.AddRedisConnection(builder.Configuration);
+
+            // For Server
+            builder.WebHost.UseUrls("http://*:5050");
             
             // CORS Policy
             var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
