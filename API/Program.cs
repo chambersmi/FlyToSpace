@@ -104,13 +104,13 @@ namespace API
                     s.SwaggerEndpoint("/swagger/v1/swagger.json", "FlyToSpace API V1");
                     s.RoutePrefix = string.Empty;
                 });
-
+                app.UseHttpsRedirection();
                 app.UseSwagger();
             }
 
             app.UseStaticFiles();
 
-            app.UseHttpsRedirection();
+
             app.UseCors("AngularApp");
 
             app.UseAuthentication();
