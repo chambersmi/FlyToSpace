@@ -13,7 +13,7 @@ services:
     volumes:
       - /var/lib/flytospace:/data
     ports:
-      - "5050:5050"
+      - "5050:8080"
     container_name: flytospace-api
     restart: always
     depends_on:
