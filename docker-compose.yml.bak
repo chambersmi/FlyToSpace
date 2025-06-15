@@ -9,11 +9,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Data Source=/data/flytospace.db
       # Add Redis connection string env variable if you use one, e.g.:
-      - Redis__Connection=redis:6379
+      # - Redis__Connection=redis:6379
     volumes:
       - /var/lib/flytospace:/data
     ports:
-      - "5050:5050" 
+      - "5050:8080"
     container_name: flytospace-api
     restart: always
     depends_on:
@@ -24,7 +24,7 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "4200:80" # Host port 4200 maps to container port 80 (where Nginx serves Angular)
+      - "4200:80"
     container_name: flytospace-client
     restart: always
 
