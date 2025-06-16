@@ -20,7 +20,8 @@ export class TourService {
       map(tours =>
         tours.map(tour => ({
           ...tour,
-          imageUrl: `${environment.apiUrl}${tour.imageUrl}`
+          // may need to be changed in development
+          imageUrl: tour.imageUrl
         }))
       )
     );
