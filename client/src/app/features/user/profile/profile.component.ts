@@ -35,7 +35,6 @@ export class ProfileComponent implements OnInit {
     const user = this.authService.getUserFromToken();
 
     if (!user) {
-      console.log(`${user} not found.`);
       return;
     }
     
@@ -95,11 +94,9 @@ export class ProfileComponent implements OnInit {
 
     this.userService.updateUser(this.userId, updateDto).subscribe({
       next: () => {
-        console.log('Profile updated.');
         this.notification.success('Profile updated!');
       },
       error: (err) => {
-        console.log('Failed to update profile\n', err);
         this.notification.error('Error in updating profile.')
       }
     });

@@ -39,8 +39,6 @@ export class ItineraryComponent implements OnInit {
     this.itineraryService.getAllItinerariesByUserIdAsync().subscribe({
       next: (data) => {
         this.itinerary = data;
-        console.log("Users bookings:");
-        console.log(this.itinerary);
       },
       error: (err) => {
         console.error('Error loading bookings:\n', err)

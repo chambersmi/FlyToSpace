@@ -44,7 +44,6 @@ export class CreateItineraryComponent implements OnInit {
 
   addToCart(): void {
     if(this.itineraryForm.invalid) {
-      console.log("Invalid itinerary.");
       return;
     }
 
@@ -72,11 +71,9 @@ export class CreateItineraryComponent implements OnInit {
 
     this.cartService.addToCart(cartItem).subscribe({
       next: (data) => {
-        console.log('Item was added to cart');
         this.router.navigate(['/cart/']);
       },
       error: (err) => {
-        console.error('Failed to add to cart:\n', err);
         alert('Failed to add to cart.');
       }
     })

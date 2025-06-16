@@ -97,12 +97,10 @@ export class EditTourComponent implements OnInit {
 
     this.tourService.updateTour(this.tourId, formData).subscribe({
       next: (res) => {
-        console.log('Updated successfully:', res);
         this.router.navigate(['/tours']);
       },
       error: (err) => {
         this.error = 'Failed to update tour.';
-        console.error(err);
       }
     });
   }

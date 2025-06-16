@@ -50,7 +50,6 @@ export class ToursComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.log('Error with getting Tour data!\n', err);
         this.isLoading = false;
       }
     });
@@ -62,11 +61,9 @@ export class ToursComponent implements OnInit {
 
     this.tourService.removeTour(tourId).subscribe({
       next: () => {
-        console.log("Tour removed");
         this.loadTours();
       },
       error: (err) => {
-        console.log('Error deleting tour: ', err)
       }
     });
   }

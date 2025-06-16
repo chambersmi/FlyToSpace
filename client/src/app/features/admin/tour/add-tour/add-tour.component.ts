@@ -38,9 +38,8 @@ export class AddTourComponent {
     }
 
     submitTour() {
-      console.log("Submit clicked");
       if(this.tourForm.invalid) {
-        console.log("Form invalid");
+
         return;
       }
 
@@ -53,8 +52,6 @@ export class AddTourComponent {
         seatsOccupied: 0,
         imageUrl: ''
       };
-
-      console.log(createTourDto);
 
       const formData = new FormData();
 
@@ -70,7 +67,6 @@ export class AddTourComponent {
 
       this.tourService.createTour(formData).subscribe({
         next: (res) => {
-          console.log('Success', res);
           this.tourForm.reset();
           this.selectedFile = null;
         },

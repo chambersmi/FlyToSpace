@@ -46,7 +46,6 @@ export class AuthService {
   }
 
   logout(): void {
-    console.log('Logging out.');
     localStorage.removeItem(this.tokenKey);
     this.isUserLoggedIn.next(false);
     this.userSubject.next(null);
