@@ -80,7 +80,7 @@ namespace API.Infrastructure.Services
             var user = _mapper.Map<ApplicationUser>(dto);
 
             var result = await _userManager.CreateAsync(user, dto.Password);
-            await _userManager.AddToRoleAsync(user, dto.Role);
+            await _userManager.AddToRoleAsync(user, "User");
 
             return result;
         }

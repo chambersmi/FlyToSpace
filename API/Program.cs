@@ -17,7 +17,7 @@ namespace API
         public static async Task Main(string[] args)
         {
 
-            //PowerShellExecution.RunPowerShellScript();
+            
 
             var builder = WebApplication.CreateBuilder(args);
 
@@ -109,6 +109,7 @@ namespace API
                 });
                 app.UseHttpsRedirection();
                 app.UseSwagger();
+                PowerShellExecution.RunPowerShellScript();
             }
 
             app.UseStaticFiles();
