@@ -87,7 +87,7 @@ export class CreateItineraryComponent implements OnInit {
       this.tour = tour;
       this.seatsAvailable = tour.maxSeats - tour.seatsOccupied;
       this.maxSeats = Array.from({ length: this.seatsAvailable }, (_, i) => i + 1);
-      this.tour.imageUrl = `${environment.apiUrl}${this.tour.imageUrl}`;
+      this.tour.imageUrl = this.tour.imageUrl
     });
   }
 
