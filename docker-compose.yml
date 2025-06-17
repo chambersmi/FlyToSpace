@@ -6,8 +6,8 @@ services:
       dockerfile: API/Dockerfile
     environment:
       # --- ENVIRONMENT SWITCH: Uncomment ONE of the lines below ---
-      - ASPNETCORE_ENVIRONMENT=Development 
-      #- ASPNETCORE_ENVIRONMENT=Production 
+      #- ASPNETCORE_ENVIRONMENT=Development 
+      - ASPNETCORE_ENVIRONMENT=Production 
 
       # Connection strings and other environment variables for the API
       - ConnectionStrings__DefaultConnection=Data Source=/data/flytospace.db 
