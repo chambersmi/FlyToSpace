@@ -1,36 +1,49 @@
-version: '3.9'
-
+version: '3.9' 
 services:
   api:
     build:
-      context: .
+      context: . # Refers to the current directory (project root)
       dockerfile: API/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Data Source=/data/flytospace.db
-      # Add Redis connection string env variable if you use one, e.g.:
+      # --- ENVIRONMENT SWITCH: Uncomment ONE of the lines below ---
+      - ASPNETCORE_ENVIRONMENT=Development 
+      #- ASPNETCORE_ENVIRONMENT=Production 
+
+      # Connection strings and other environment variables for the API
+      - ConnectionStrings__DefaultConnection=Data Source=/data/flytospace.db 
       - Redis__Connection=redis:6379
     volumes:
+      # Mount a host directory to persist SQLite database data
+      # Ensure /var/lib/flytospace exists on your host and has write permissions for Docker
       - /var/lib/flytospace:/data
     ports:
-      - "5050:5050" 
+      # Host:Container port mapping
+      # For API: Host port 5050 maps to container port 8080 (where Kestrel listens by default)
+      # This mapping is useful for direct access/debugging from the host on both Dev and Prod.
+      - "5050:8080"
     container_name: flytospace-api
-    restart: always
+    restart: always # Always restart the container if it stops
     depends_on:
-      - redis
+      - redis # Ensure Redis starts before the API
 
   client:
     build:
-      context: ./client
+      context: ./client # Context for the Angular client's Dockerfile
       dockerfile: Dockerfile
     ports:
-      - "4200:80" # Host port 4200 maps to container port 80 (where Nginx serves Angular)
+      # Host:Container port mapping for the Angular client Nginx
+      # Host port 4200 maps to container port 80 (where Nginx serves Angular)
+      # Useful for direct access to the Angular app from the host on both Dev and Prod.
+      - "4200:80"
     container_name: flytospace-client
-    restart: always
+    restart: always # Always restart the container if it stops
 
   redis:
-    image: redis:7
+    image: redis:7 # Use the official Redis 7 Docker image
     container_name: redis
     ports:
+      # Host:Container port mapping for Redis
+      # Host port 6379 maps to container port 6379
+      # Useful for direct access to Redis from the host (e.g., for Redis CLI)
       - "6379:6379"
-    restart: unless-stopped
+    restart: unless-stopped # Restart unless explicitly stopped by user or Docker daemon

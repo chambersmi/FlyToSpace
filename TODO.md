@@ -20,3 +20,13 @@ FlyToSpace/
 cd /path/to/FlyToSpace
 docker-compose build
 docker-compose up -d
+
+
+Deployment Issues:
+[ ] Registration cancel doesn't redirect
+[ ] How to have the CSS on Register notice that the keypad for typing is covering up areas. 
+[ ] Why does the address not get recognized by google manager fr this site, but it does on others? it'll ask to save, but it doesn't recognize the address field
+[X] Also, when i try to submit a form and it says an account already exists, i try changing the email address and it doesn't recognize the new input
+[ ] Navbar, how to make the navbar automatically go up after a few seconds if they click a link
+[X] Spaceship doesn't align center in mobile view
+[X] New users are reportin the account already exists

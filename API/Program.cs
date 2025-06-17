@@ -17,16 +17,20 @@ namespace API
         public static async Task Main(string[] args)
         {
 
-            
-
             var builder = WebApplication.CreateBuilder(args);
+
+            //if(builder.Environment.IsDevelopment())
+            //{
+            //    Console.WriteLine("Running in development environment. Executing PowerShell script for Redis.");
+            //    //PowerShellExecution.RunPowerShellScript();
+            //}
 
             // Change appsettings based on environment
             builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
-
+            
             // Add services to the container.
 
             // AutoMapper
@@ -46,8 +50,7 @@ namespace API
             builder.Services.AddScoped<GetStatesService>();
             builder.Services.AddScoped<ITourService, TourService>();
             builder.Services.AddScoped<IItineraryService, ItineraryService>();
-            //builder.Services.AddScoped<IStripeService, StripeService>();
-           
+          
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -58,7 +61,10 @@ namespace API
             builder.Services.AddRedisConnection(builder.Configuration);
 
             // For Server
-            builder.WebHost.UseUrls("http://*:5050");
+            //if (builder.Environment.IsProduction())
+            //{
+            //    builder.WebHost.UseUrls("https://*:5050");
+            //}
             
             // CORS Policy
             var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
@@ -109,7 +115,6 @@ namespace API
                 });
                 app.UseHttpsRedirection();
                 app.UseSwagger();
-                PowerShellExecution.RunPowerShellScript();
             }
 
             app.UseStaticFiles();

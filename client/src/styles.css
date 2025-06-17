@@ -1,4 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+/* Add this to your global stylesheet (e.g., styles.css or a main component's CSS) */
+/* Target all interactive form elements */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+    scroll-margin-top: 150px; /* Start with this, add more as needed. */
+}
+
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select,
+    textarea {
+        scroll-margin-top: 200px; 
+    }
+}
 
 @font-face {
   font-family: 'Audiowide';

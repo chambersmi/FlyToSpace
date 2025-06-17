@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
 COPY . .
-RUN npm run build -- --configuration production
+RUN npm run build -- --configuration development
 
 FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html

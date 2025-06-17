@@ -1,5 +1,5 @@
 export const environment = {
-    apiUrl: 'https://localhost:5051',
+    apiUrl: 'http://localhost:5050/api',
     production: false,
     getAuthToken: 'authToken',
     getUserId: 'userId',

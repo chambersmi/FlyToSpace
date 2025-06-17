@@ -30,7 +30,6 @@ export class AuthService {
       tap((token: string) => {
         localStorage.setItem(this.tokenKey, token);
         this.isUserLoggedIn.next(true);
-        this.userSubject.next(this.getUserFromToken());
       })
     );
   }

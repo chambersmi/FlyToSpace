@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private stateService: StateService,
     private router: Router,
-    private notificationService:NotificationService) { }
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -53,6 +53,10 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  cancel(): void {
+    this.router.navigate(['/']);
+  }
+
   onSubmit(): void {
     if (this.registerForm.invalid) return;
 
@@ -67,19 +71,41 @@ export class RegisterComponent implements OnInit {
       next: () => {
         this.notificationService.success('Account successfully created!');
         this.router.navigate(['/login'], {
-          queryParams: { email: dto.email }          
+          queryParams: { email: dto.email }
         });
-      },
+      },      
       error: (err) => {
-        console.error("Registration Failed:\n", err);
+        console.error("Registration Failed:\n", err); 
 
         if (err.error) {
-          if (typeof err.error === 'object' && err.error.message) {
-            this.notificationService.error('Error: Something went wrong.');
-          } else if (typeof err.error === 'string') {
-            this.notificationService.error('Error: Account already exists with that email.');
-          } else {
-            this.notificationService.error('An unknown error occured.');
+          try {
+            // Parse if JSON
+            const parsedError = typeof err.error === 'string' ? JSON.parse(err.error) : err.error;
+
+            // Check validation errors.
+            if (parsedError.errors) {
+              let errorMessage = 'Validation Errors:';
+              for (const key in parsedError.errors) {
+                if (parsedError.errors.hasOwnProperty(key)) {
+                  const messages = parsedError.errors[key];
+                  errorMessage += `\n${key}: ${messages.join(', ')}`;
+                }
+              }
+              this.notificationService.error(errorMessage);
+            }
+            else if (parsedError.message) {
+              this.notificationService.error(`Error: ${parsedError.message}`);
+            }
+            else if (typeof parsedError === 'object') {
+              this.notificationService.error('Error: Something went wrong (check console for details).');
+            }
+            else if (typeof parsedError === 'string') {
+              this.notificationService.error(`Error: ${parsedError}`);
+            } else {
+              this.notificationService.error('An unknown error occurred.');
+            }
+          } catch (parseError) {            
+            this.notificationService.error(`Error: ${err.error}`);
           }
         } else {
           this.notificationService.error('Could not connect to the server.');
