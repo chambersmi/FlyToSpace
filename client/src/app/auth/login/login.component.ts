@@ -15,6 +15,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 export class LoginComponent implements OnInit {
   returnUrl: string = '/';
   loginForm!: FormGroup;
+  showPassword = false;
+  passwordFieldType: 'password' | 'text' = 'password';
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
@@ -25,6 +27,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.setValidators();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+    toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
+    this.passwordFieldType = this.showPassword ? 'text' : 'password';
   }
 
   setValidators(): void {

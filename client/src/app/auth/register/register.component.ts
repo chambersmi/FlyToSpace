@@ -24,6 +24,11 @@ export class RegisterComponent implements OnInit {
   states: { [key: number]: string } = {};
   stateKeys: number[] = [];
   error: string | null = null;
+  showPassword = false;
+  passwordFieldType: 'password' | 'text' = 'password';
+
+  showConfirmPassword = false;
+  confirmPasswordType: 'password' | 'text' = 'password';
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
@@ -57,6 +62,16 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
+    this.passwordFieldType = this.showPassword ? 'text' : 'password';
+  }
+
+  toggleShowConfirmPassword(): void {
+    this.showPassword = !this.showPassword;
+    this.passwordFieldType = this.showPassword ? 'text' : 'password';
+  }
+
   onSubmit(): void {
     if (this.registerForm.invalid) return;
 
@@ -73,9 +88,9 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/login'], {
           queryParams: { email: dto.email }
         });
-      },      
+      },
       error: (err) => {
-        console.error("Registration Failed:\n", err); 
+        console.error("Registration Failed:\n", err);
 
         if (err.error) {
           try {
@@ -104,7 +119,7 @@ export class RegisterComponent implements OnInit {
             } else {
               this.notificationService.error('An unknown error occurred.');
             }
-          } catch (parseError) {            
+          } catch (parseError) {
             this.notificationService.error(`Error: ${err.error}`);
           }
         } else {

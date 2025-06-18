@@ -9,6 +9,19 @@
                     <input formControlName="email" type="email" class="form-control" />
                 </div>
 
+                <div class="mb-3 row align-items-center">
+                    <label for="password" class="col-sm-3 col-form-label">Password</label>
+                    <div class="col-12 col-sm-9">
+                        <div class="input-group"> <input id="password" formControlName="password"
+                                [type]="passwordFieldType" class="form-control" />
+                            <button class="btn btn-outline-secondary" type="button" (click)="toggleShowPassword()"
+                                title="Toggle password visibility">
+                                <i class="fa" [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label>Password</label>
                     <input formControlName="password" type="password" class="form-control" />

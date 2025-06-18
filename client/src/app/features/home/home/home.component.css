@@ -1,28 +1,25 @@
 .spaceship-container {
     position: relative;
     width: 100%;
-    height: calc(100vh - 85px); 
-    overflow: hidden;
+    height: calc(100vh - 85px);
+    overflow: hidden;    
 }
 
 .spaceship {
     position: absolute;
-    top: -15%; 
-    left: 50%; 
-    transform: translateX(0) scale(0.2); 
-    animation: approach 5s ease-in-out forwards; 
-
+    top: -15%;
+    left: 50%;
+    transform: translateX(0) scale(0.2);
+    animation: approach 5s ease-in-out forwards;
 }
 
 @keyframes approach {
     0% {
-        top: -15%; 
-        transform: translate(-50%, -15%); 
+        transform: translateX(0) scale(0.2);
         opacity: 0.3;
     }
     100% {
-        top: 50%;
-        transform: translate(-50%, -50%) scale(0.9); 
+        transform: translateX(-50%) scale(.9);
         opacity: 1;
     }
 }
@@ -40,7 +37,8 @@
         }
         100% {
             top: 50%;
-            transform: translate(-50%, -50%) scale(0.5); 
+            /* transform: translate(-50%, -50%) scale(0.5);  */
+            transform: translate(-50%, -50%) scale(0.25); 
             opacity: 1;
         }
     }

@@ -42,7 +42,7 @@ namespace API.Data
             }
 
             // Seed database mock users
-            await SeedUserData(context, userManager);
+            //await SeedUserData(context, userManager);
             await SeedTourData(context);
             //await SeedBookingData(context, userManager);
         }
@@ -176,7 +176,7 @@ namespace API.Data
                         TourPrice = 1999.99m,
                         MaxSeats = 5,
                         SeatsOccupied = 0,
-                        ImageUrl = "/assets/tourImages/VolcanoViewsOfIo.png"
+                        ImageUrl = "/assets/tourImages/grandCircuit.png"
                         },
                     };
 

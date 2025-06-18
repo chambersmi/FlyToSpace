@@ -30,3 +30,5 @@ Deployment Issues:
 [ ] Navbar, how to make the navbar automatically go up after a few seconds if they click a link
 [X] Spaceship doesn't align center in mobile view
 [X] New users are reportin the account already exists
+[X] Incorporate 'Show Password'
+[ ] Its not saying incorrect/invalid login/password
