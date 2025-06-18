@@ -13,14 +13,14 @@
                     <label for="password" class="col-sm-3 col-form-label">Password</label>
                     <div class="col-12 col-sm-9">
                         <div class="row g-0 align-items-center">
-                            <div class="col-8">
+                            <div class="col-10">
                                 <input id="password" formControlName="password" [type]="passwordFieldType"
                                     class="form-control" />
                             </div>
-                            <div class="col-4">
+                            <div class="col-2">
                                 <button class="btn btn-outline-secondary w-100" type="button"
                                     (click)="toggleShowPassword()" title="Toggle password visibility">
-                                    <i class="fa"
+                                    <i class="fa text-white"
                                         [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
                                 </button>
                             </div>

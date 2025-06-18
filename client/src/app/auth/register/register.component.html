@@ -15,14 +15,14 @@
                     <label for="password" class="col-sm-3 col-form-label">Password</label>
                     <div class="col-12 col-sm-9">
                         <div class="row g-0 align-items-center">
-                            <div class="col-8">
+                            <div class="col-10">
                                 <input id="password" formControlName="password" [type]="passwordFieldType"
                                     class="form-control" />
                             </div>
-                            <div class="col-4">
+                            <div class="col-2">
                                 <button class="btn btn-outline-secondary w-100" type="button"
                                     (click)="toggleShowPassword()" title="Toggle password visibility">
-                                    <i class="fa"
+                                    <i class="fa text-white"
                                         [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
                                 </button>
                             </div>
@@ -34,14 +34,14 @@
                     <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password</label>
                     <div class="col-12 col-sm-9">
                         <div class="row g-0 align-items-center">
-                            <div class="col-8">
+                            <div class="col-10">
                                 <input id="confirmPassword" formControlName="confirmPassword"
                                     [type]="confirmPasswordType" class="form-control" />
                             </div>
-                            <div class="col-4">
+                            <div class="col-2">
                                 <button class="btn btn-outline-secondary w-100" type="button"
                                     (click)="toggleShowConfirmPassword()" title="Toggle confirm password visibility">
-                                    <i class="fa"
+                                    <i class="fa text-white"
                                         [ngClass]="{'fa-eye': !showConfirmPassword, 'fa-eye-slash': showConfirmPassword}"></i>
                                 </button>
                             </div>
@@ -92,33 +92,21 @@
                     </div>
                 </div>
 
-                <!-- <div class="mb-3 row"> 
-                    <label for="city" class="col-12 col-md-2 col-form-label">City</label>
-                    <div class="col-12 col-md-4">
-                        <input id="city" formControlName="city" class="form-control" />
-                    </div>
+                <div class="mb-3 row align-items-center">
+                    <label for="city" class="col-sm-3 col-form-label">City</label>
+                    <div class="col-12 col-sm-9">
+                        <div class="row g-2">
+                            <div class="col-12 col-md-8">
+                                <input id="city" formControlName="city" class="form-control" placeholder="City" />
+                            </div>
 
-                    <label for="state" class="col-12 col-md-2 col-form-label mt-3 mt-md-0 text-md-end">State</label>
-                    <div class="col-12 col-md-4 mt-3 mt-md-0">
-                        <select id="state" formControlName="state" class="form-select">
-                            <option [value]="0" disabled>Select State</option>
-                            <option *ngFor="let key of stateKeys" [value]="key">{{ states[key] }}</option>
-                        </select>
-                    </div>
-                </div> -->
-
-                <div class="mb-3 row">
-                    <label for="city" class="col-12 col-md-2 col-form-label">City</label>
-                    <div class="col-12 col-md-4">
-                        <input id="city" formControlName="city" class="form-control" />
-                    </div>
-
-                    <label for="state" class="col-12 col-md-2 col-form-label mt-3 mt-md-0 text-md-end">State</label>
-                    <div class="col-12 col-md-4 mt-3 mt-md-0">
-                        <select id="state" formControlName="state" class="form-select">
-                            <option [value]="0" disabled>Select State</option>
-                            <option *ngFor="let key of stateKeys" [value]="key">{{ states[key] }}</option>
-                        </select>
+                            <div class="col-12 col-md-4">
+                                <select id="state" formControlName="state" class="form-select">
+                                    <option [value]="0" disabled>Select State</option>
+                                    <option *ngFor="let key of stateKeys" [value]="key">{{ states[key] }}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
