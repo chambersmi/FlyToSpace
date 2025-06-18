@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
 
   toggleShowConfirmPassword(): void {
     this.showPassword = !this.showPassword;
-    this.passwordFieldType = this.showPassword ? 'text' : 'password';
+    this.confirmPasswordType = this.showPassword ? 'text' : 'password';
   }
 
   onSubmit(): void {

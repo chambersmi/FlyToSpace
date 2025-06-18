@@ -10,7 +10,7 @@
     top: -15%;
     left: 50%;
     transform: translateX(0) scale(0.2);
-    animation: approach 5s ease-in-out forwards;
+    animation: approach 3s ease-in-out forwards;
 }
 
 @keyframes approach {
@@ -32,13 +32,13 @@
     @keyframes approach {
         0% {
             top: -15%;
-            transform: translate(-50%, -15%) scale(0.15);
+            transform: translate(-50%, -15%) scale(0.05);
             opacity: 0.3;
         }
         100% {
             top: 50%;
             /* transform: translate(-50%, -50%) scale(0.5);  */
-            transform: translate(-50%, -50%) scale(0.25); 
+            transform: translate(-50%, -50%) scale(0.15); 
             opacity: 1;
         }
     }
