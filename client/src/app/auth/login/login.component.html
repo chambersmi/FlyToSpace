@@ -4,9 +4,17 @@
             <h4 class="card-title mb-4">Login</h4>
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div class="mb-3">
-                    <label>Login</label>
-                    <input formControlName="email" type="email" class="form-control" />
+                <div class="mb-3 row align-items-center">
+                    <label class="col-sm-3 col-form-label">Login</label>
+                    <div class="col-12 col-sm-9">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-10">
+                                <input formControlName="email" type="email" class="form-control" />
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3 row align-items-center">
