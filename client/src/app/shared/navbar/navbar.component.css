@@ -81,3 +81,13 @@ body {
   left: 100%;
   margin-top: -1px;
 }
+
+@media (min-width: 992px) { /* Bootstrap's 'lg' breakpoint */
+    .cart-badge {
+        position: relative; /* Reset for larger screens if desired, or keep absolute */
+        top: auto;
+        right: auto;
+        transform: none;
+        margin-left: 5px; /* Add some space if needed */
+    }
+}
