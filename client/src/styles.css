@@ -56,13 +56,22 @@ html, body {
 
 
 /* Card Styling */
-.card-styling {
+/* .card-styling {
     background: #1b2133 !important;
-}
+} */
+
+/* .card {
+    animation: slideUp 0.3s ease forwards;
+} */
 
 .card {
+    background-color: #1b2133; 
+    border: none; 
+    color: #e1e6ef; 
     animation: slideUp 0.3s ease forwards;
 }
+
+
 
 .card-body.card-styling input select {
   border-radius: 12px;
