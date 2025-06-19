@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
+  @ViewChild('navbarCollapse') navbarCollapse!: ElementRef;
+  
   constructor(
     private authService: AuthService,
     private cartService: CartService,
@@ -28,6 +30,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.addSubscriptions();
+  }
+
+  hideNavbarCollapse(): void {
+    if(this.navbarCollapse && this.navbarCollapse.nativeElement.classList.contains('show')) {
+      this.navbarCollapse.nativeElement.classList.remove('show');
+
+      const toggler = document.querySelector('.navbar-toggler[data-bs-target="#mainNavbar"]');
+
+      if(toggler) {
+        toggler.setAttribute('aria-expanded', 'false');
+      }
+    }
   }
 
   addSubscriptions(): void {

@@ -7,22 +7,22 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="mainNavbar">
+        <div class="collapse navbar-collapse" id="mainNavbar" #navbarCollapse>
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/tours" routerLinkActive="active"
-                       data-bs-toggle="collapse" data-bs-target="#mainNavbar">Tours</a>
+                       (click)="hideNavbarCollapse()">Tours</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/about-us" routerLinkActive="active"
-                       data-bs-toggle="collapse" data-bs-target="#mainNavbar">About Fly To Space!</a>
+                       (click)="hideNavbarCollapse()">About Fly To Space!</a>
                 </li>
 
                 <ng-container *ngIf="user">
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/itinerary" routerLinkActive="active"
-                           data-bs-toggle="collapse" data-bs-target="#mainNavbar">My Itinerary</a>
+                           (click)="hideNavbarCollapse()">My Itinerary</a>
                     </li>
                 </ng-container>
 
@@ -30,7 +30,7 @@
                 <ng-container *ngIf="user">
                     <li class="nav-item position-relative">
                         <a routerLink="/cart" class="nav-link d-flex align-items-center"
-                           data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                           (click)="hideNavbarCollapse()">
                             Cart<i class="bi bi-rocket-takeoff position-relative ms-2"></i>
                             <span *ngIf="itemsInCart > 0" class="cart-badge">{{itemsInCart}}</span>
                         </a>
@@ -52,7 +52,7 @@
                             <li>
                                 <a class="dropdown-item small" routerLink="/admin/add-tour"
                                     routerLinkActive="active"
-                                    data-bs-toggle="collapse" data-bs-target="#mainNavbar">Add Tour</a>
+                                    (click)="hideNavbarCollapse()">Add Tour</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -68,18 +68,18 @@
                 <ng-container *ngIf="!isLoggedIn; else loggedInTemplate">
                     <li class="nav-item">
                         <a class="nav-link me-3" routerLink="/register"
-                           data-bs-toggle="collapse" data-bs-target="#mainNavbar">Register</a>
+                           (click)="hideNavbarCollapse()">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/login"
-                           data-bs-toggle="collapse" data-bs-target="#mainNavbar">Login</a>
+                           (click)="hideNavbarCollapse()">Login</a>
                     </li>
                 </ng-container>
 
                 <ng-template #loggedInTemplate>
                     <li class="nav-item">
                         <span class="nav-link text-light" [routerLink]="['/profile']"
-                              data-bs-toggle="collapse" data-bs-target="#mainNavbar">{{userEmail}}</span>
+                              (click)="hideNavbarCollapse()">{{userEmail}}</span>
                     </li>
 
                     <li class="nav-item">
