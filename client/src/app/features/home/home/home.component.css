@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: calc(100vh - 85px);
-    overflow: hidden;    
+    overflow: hidden;
 }
 
 .spaceship {
@@ -26,19 +26,20 @@
 
 @media (max-width: 768px) {
     .spaceship {
-        animation-duration: 3s;
+        animation: approach 3s ease-in-out forwards;
     }
 
     @keyframes approach {
         0% {
-            top: -15%;
-            transform: translate(-50%, -15%) scale(0.05);
+            top: -5%;
+            left: 100%;
+            transform: translate(0, -15%) scale(0.15);
             opacity: 0.3;
         }
         100% {
             top: 50%;
-            /* transform: translate(-50%, -50%) scale(0.5);  */
-            transform: translate(-50%, -50%) scale(0.15); 
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.45);
             opacity: 1;
         }
     }

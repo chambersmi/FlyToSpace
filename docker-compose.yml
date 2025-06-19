@@ -21,6 +21,11 @@ services:
       # For API: Host port 5050 maps to container port 8080 (where Kestrel listens by default)
       # This mapping is useful for direct access/debugging from the host on both Dev and Prod.
       - "5050:8080"
+    logging: 
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     container_name: flytospace-api
     restart: always # Always restart the container if it stops
     depends_on:
@@ -35,6 +40,11 @@ services:
       # Host port 4200 maps to container port 80 (where Nginx serves Angular)
       # Useful for direct access to the Angular app from the host on both Dev and Prod.
       - "4200:80"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
     container_name: flytospace-client
     restart: always # Always restart the container if it stops
 

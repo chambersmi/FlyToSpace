@@ -1,12 +1,12 @@
 <div class="d-flex justify-content-center mt-5">
-    <div class="card w-75 s-sm-100 w-md-75">
+    <div class="card w-50 w-sm-75 w-md-75">
         <div class="card-body card-styling">
             <h4 class="card-title mb-4">Login</h4>
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="mb-3 row align-items-center">
                     <label class="col-sm-3 col-form-label">Login</label>
-                    <div class="col-12 col-sm-9">
+                    <div class="col-10 col-sm-9">
                         <div class="row g-0 align-items-center">
                             <div class="col-10">
                                 <input formControlName="email" type="email" class="form-control" />
@@ -19,7 +19,7 @@
 
                 <div class="mb-3 row align-items-center">
                     <label for="password" class="col-sm-3 col-form-label">Password</label>
-                    <div class="col-12 col-sm-9">
+                    <div class="col-10 col-sm-9">
                         <div class="row g-0 align-items-center">
                             <div class="col-10">
                                 <input id="password" formControlName="password" [type]="passwordFieldType"
